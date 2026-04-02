@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+/* ── Design tokens ── */
+:root {
+  --bg:           #090909;
+  --surface:      #111111;
+  --surface-2:    #181818;
+  --border:       #222222;
+  --border-hover: #333333;
+  --accent:       #e8ff3e;
+  --accent-dim:   rgba(232, 255, 62, 0.10);
+  --accent-glow:  rgba(232, 255, 62, 0.20);
+  --text:         #e2e2e2;
+  --text-2:       #888888;
+  --text-3:       #444444;
+  --danger:       #ff4444;
+  --success:      #44ff88;
+
+  --font-mono:    'IBM Plex Mono', monospace;
+  --font-sans:    'IBM Plex Sans', sans-serif;
+
+  --radius:       2px;
+  --gap:          16px;
+  --gap-sm:       8px;
+  --gap-lg:       32px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── Typography ── */
+.mono {
+  font-family: var(--font-mono);
+}
+
+.muted {
+  color: var(--text-2);
+}
+
+.strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+}
+
+/* ── Wordmark ── */
+.wordmark {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+  text-decoration: line-through;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  color: var(--text);
+}

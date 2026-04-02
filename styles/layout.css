@@ -1,0 +1,54 @@
+/* ── Layout ── */
+
+.app {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+/* ── Header ── */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 0 var(--gap-lg);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Main content ── */
+.main {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  padding: var(--gap-lg) var(--gap);
+}
+
+/* ── Feed ── */
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  border: 1px solid var(--border);
+}
+
+/* ── Divider ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--gap) 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .header {
+    padding: 0 var(--gap);
+  }
+  .main {
+    padding: var(--gap);
+  }
+}
