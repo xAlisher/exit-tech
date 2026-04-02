@@ -9,7 +9,7 @@ Validate the idea. Lock the founding circle. Don't build yet.
 - [x] Scaffold project — vanilla JS, modular structure
 - [x] Design system — dark, mono, strikethrough motif
 - [x] exit-card component built and specced
-- [ ] GitHub repo live
+- [x] GitHub repo live
 - [ ] Write 1-page vision doc
 - [x] Claim @exitdottech on X
 

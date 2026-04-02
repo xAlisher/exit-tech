@@ -64,6 +64,10 @@
   color: var(--accent);
 }
 
+.exit-card__alternative--empty {
+  font-style: italic;
+}
+
 .exit-card__alternative a {
   color: var(--text);
   border-bottom: 1px solid var(--border-hover);

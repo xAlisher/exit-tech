@@ -73,7 +73,7 @@ export const exits = [
     almostOut: false,
     privacy: "public",
     authorId: "u2",
-    authorHandle: "mykola",
+    authorHandle: "senty",
   },
   {
     id: "004",
@@ -87,7 +87,7 @@ export const exits = [
     almostOut: false,
     privacy: "community",
     authorId: "u3",
-    authorHandle: "pg",
+    authorHandle: "fergie",
   },
   {
     id: "005",
@@ -116,8 +116,8 @@ export const profiles = [
   },
   {
     id: "u2",
-    handle: "mykola",
-    bio: "Web3Privacy Now. Privacy is a human right.",
+    handle: "fergie",
+    bio: "Exit.tech builder",
     exitCount: 23,
     joinedDate: "2024-02",
   },

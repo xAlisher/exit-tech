@@ -64,7 +64,7 @@ export default function renderExitCard(exit, { onCounterClick, onShare } = {}) {
     }
   } else {
     altContent = document.createElement("span");
-    altContent.style.fontStyle = "italic";
+    altContent.className = "exit-card__alternative--empty";
     altContent.textContent = "nothing, and that's the point";
   }
 
