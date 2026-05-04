@@ -3,34 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EXIT — exit as culture</title>
-  <meta name="description" content="Log your exits from dependencies. Find your tribe. Build sovereignty.">
-
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/layout.css">
-  <link rel="stylesheet" href="styles/components.css">
+  <title>Exit</title>
 </head>
 <body>
-
-<div class="app">
-
-  <!-- Header -->
-  <header class="header">
-    <span class="wordmark">EXIT</span>
-    <nav style="display:flex;gap:16px;align-items:center;">
-      <a href="#" class="mono" style="font-size:12px;color:var(--text-2)">feed</a>
-      <a href="#" class="mono" style="font-size:12px;color:var(--text-2)">profile</a>
-      <button class="btn btn--primary" style="padding:4px 12px;">+ exit</button>
-    </nav>
-  </header>
-
-  <!-- Feed -->
-  <main class="main">
-    <div id="feed" class="feed"></div>
-  </main>
-
-</div>
-
-<script type="module" src="src/app.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: #000; }
+  .tag {
+    position: fixed;
+    bottom: 32px;
+    right: 40px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #fff;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  .cursor {
+    display: inline-block;
+    width: 7px;
+    height: 13px;
+    background: #fff;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+<div class="tag">Exit is culture<span class="cursor"></span></div>
 </body>
 </html>
