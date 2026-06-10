@@ -161,6 +161,7 @@ def page(title: str, body: str, depth: int = 0, header: bool = True) -> str:
     pre = "../" * depth
     header_html = (f'\n<header><a class="tag" href="{pre}index.html">Exit is culture'
                    '<span class="cursor"></span></a></header>') if header else ""
+    body_class = "" if header else ' class="home"'
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -169,7 +170,7 @@ def page(title: str, body: str, depth: int = 0, header: bool = True) -> str:
 <title>{esc(title)}</title>
 <link rel="stylesheet" href="{pre}style.css">
 </head>
-<body>{header_html}
+<body{body_class}>{header_html}
 <main>
 {body}
 </main>
@@ -334,7 +335,13 @@ h3 { font-size: 14px; margin: 24px 0 8px; font-weight: 600; }
 .tagline { color: var(--dim); margin-bottom: 8px; }
 ul, ol { padding-left: 20px; }
 li { margin: 6px 0; }
-.hero { margin: 38vh 0 24px; font-size: 20px; display: flex; align-items: baseline; }
+body.home { display: flex; flex-direction: column; min-height: 100vh; }
+body.home main { flex: 1; display: flex; flex-direction: column; justify-content: center;
+  width: 100%; padding: 20px; }
+body.home footer { padding-bottom: 32px; }
+.hero { font-size: 20px; display: flex; align-items: baseline; justify-content: center; }
+.hero .wrap { flex: 0 0 18ch; }
+#nohit { margin-top: 16px; color: var(--dim); text-align: center; }
 .promptline { white-space: pre; }
 .wrap { position: relative; flex: 1; }
 #q { background: none; border: none; outline: none; color: var(--acc);
