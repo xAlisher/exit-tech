@@ -6,6 +6,9 @@ on:
   schedule:
     - cron: "20 6 * * 1"   # Mondays 06:20 UTC
   workflow_dispatch:
+  push:
+    branches: [master]
+    paths: ["data/**", "build.py"]   # data-only merges (draft PRs) rebuild public/
 
 permissions:
   contents: write

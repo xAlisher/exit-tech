@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit Netflix — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body><header class="prompt"><a class="ptag" href="../index.html">Exit</a>&nbsp;<span class="pname">Netflix</span><span class="tcur"></span></header>
+<main>
+<p class="tagline">A catalog you rent that shrinks while the price grows.</p>
+<h2>// why</h2><ul>
+<li>Shows vanish mid-watch — it's licensing, not ownership. You're renting access to a rotating warehouse.</li>
+<li>Price hikes, password crackdowns, and autoplay engineered for one more episode.</li>
+</ul>
+<h2>// first, get your stuff out</h2><ol>
+<li>Download your viewing history — Account → Profiles → Viewing activity → Download all.</li>
+<li>Request your full personal data archive at netflix.com/account/getmyinfo.</li>
+</ol>
+<h2>// exit paths</h2>
+<h3><span class="ptype">[self-host]</span> Own your media, stream it yourself</h3>
+<div class="alt"><a class="alt-name" href="https://jellyfin.org">Jellyfin</a><p>A Netflix-grade interface for media you actually own. Free, open source, clients for every screen in the house.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-selfhosted" title="awesome-selfhosted">awesome-selfhosted</a></div></div>
+<h3><span class="ptype">[switch]</span> Change how you pay for stories</h3>
+<div class="alt"><a class="alt-name" href="https://www.kanopy.com">Your public library</a><p>Streaming (Kanopy and friends) comes free with most library cards — curated by librarians, not engagement metrics.</p></div>
+<div class="alt"><a class="alt-name" href="https://www.blu-ray.com">Physical media</a><p>A used Blu-ray costs less than a month of streaming and can't be pulled from your shelf.</p></div>
+<h2>// burn the bridge</h2>
+<p>Delete your account (difficulty: <strong>impossible</strong>) — <a href="https://support.netflix.com/en/node/407">direct link via JustDeleteMe</a></p>
+<h2>// take an agent with you</h2>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit Netflix. Act as my exit guide.
+
+First, help me get my data out:
+- Download your viewing history — Account → Profiles → Viewing activity → Download all.
+- Request your full personal data archive at netflix.com/account/getmyinfo.
+
+Own your media, stream it yourself: help me choose between Jellyfin based on my situation — ask me what matters before recommending.
+Change how you pay for stories: help me choose between Your public library, Physical media based on my situation — ask me what matters before recommending.
+When I'm ready, walk me through deleting my account (difficulty: impossible): https://support.netflix.com/en/node/407
+
+Before recommending anything, ask me what I actually watched last month — if the honest answer is &quot;background noise&quot;, the exit is about the habit, not the catalog.
+If I choose self-hosting, check my hardware and walk me through Jellyfin setup, and be straight with me about where legal media files come from.
+Cancelling the subscription is easy. Full account deletion is rated impossible by JustDeleteMe — help me decide whether cancelling plus a personal-data cleanup is enough for my goals.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
+<script>
+const NAME = "Netflix";
+document.addEventListener('keydown', e => {
+  if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    location.href = '../index.html?q=' + encodeURIComponent(NAME.slice(0, -1));
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+  e.preventDefault();
+  location.href = '../index.html?q=' + encodeURIComponent(e.key);
+});
+</script>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+  <span class="proto">prototype</span>
+</footer>
+</body>
+</html>

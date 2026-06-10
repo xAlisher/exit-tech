@@ -1,0 +1,54 @@
+name: draft
+# Label an exit-request issue 'draft' -> Claude researches the term, writes
+# data/exits/<id>.yaml following docs/skills/drafting-exits.md, validates,
+# and opens a PR for human review.
+#
+# One-time setup (maintainer):
+#   1. claude setup-token                       # local CLI, Pro/Max subscription
+#   2. gh secret set CLAUDE_CODE_OAUTH_TOKEN    # paste the token
+#   3. Repo Settings -> Actions -> General -> enable
+#      "Allow GitHub Actions to create and approve pull requests"
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  draft:
+    if: github.event.label.name == 'draft'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            You are drafting an exit page for exit.tech from a community request.
+
+            Issue #${{ github.event.issue.number }}: ${{ github.event.issue.title }}
+            ${{ github.event.issue.body }}
+
+            Follow docs/skills/drafting-exits.md exactly. In short:
+            1. python3 .github/scripts/research_exit.py --issue ${{ github.event.issue.number }}
+            2. Read data/exits/_template.yaml and 2-3 existing exits for voice.
+            3. Write data/exits/<id>.yaml — only claim enrichments and
+               recommendations the research pack confirms.
+            4. Validate with: python3 build.py --offline  (must exit 0;
+               do NOT commit changes to public/)
+            5. git checkout -b draft/<id>; commit ONLY the new data file;
+               push; then open a PR with gh pr create — title
+               "draft: exit <name>", body explaining choices made and ending
+               with "Closes #${{ github.event.issue.number }}".
+          claude_args: |
+            --max-turns 25
+            --allowedTools "Edit,Read,Write,Glob,Grep,Bash(python3:*),Bash(pip:*),Bash(git:*),Bash(gh:*)"

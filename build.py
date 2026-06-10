@@ -329,10 +329,11 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
             if live.get("securityAudited"):
                 flags.append("audited")
             flag_html = f' <span class="flags">{esc(" · ".join(flags))}</span>' if flags else ""
+            badges = badge_row(alt["recommended_by"], sources_by_id) if alt.get("recommended_by") else ""
             b.append('<div class="alt">'
                      f'<a class="alt-name" href="{esc(alt["url"])}">{esc(alt["name"])}</a>{flag_html}'
                      f'<p>{esc(desc)}</p>'
-                     f'{badge_row(alt.get("recommended_by", []), sources_by_id)}'
+                     f'{badges}'
                      "</div>")
 
     jdm = (ex.get("live") or {}).get("justdeleteme")
