@@ -48,7 +48,23 @@ function update() {
 
 // --- idle glitch: random service names scramble in and dissolve ---
 const GLYPHS = "!<>-_\\/[]{}=+*^?#░▒▓";
-let glitchTimer = null, glitchAnim = null, glitchTarget = null;
+let glitchTimer = null, glitchAnim = null, glitchTarget = null, deck = [];
+
+// shuffled deck: every exit shows once before any repeats
+function nextExit() {
+  if (!deck.length) {
+    deck = [...EXITS];
+    for (let i = deck.length - 1; i > 0; i--) {
+      const j = Math.random() * (i + 1) | 0;
+      [deck[i], deck[j]] = [deck[j], deck[i]];
+    }
+    // avoid back-to-back repeat across the reshuffle boundary
+    if (deck.length > 1 && glitchTarget && deck[deck.length - 1].id === glitchTarget.id) {
+      [deck[0], deck[deck.length - 1]] = [deck[deck.length - 1], deck[0]];
+    }
+  }
+  return deck.pop();
+}
 
 function acceptGlitch() {
   if (!glitchTarget || q.value) return false;
@@ -78,7 +94,7 @@ function scheduleGlitch(delay) {
 
 function fireGlitch() {
   if (q.value) return;
-  glitchTarget = EXITS[Math.random() * EXITS.length | 0];
+  glitchTarget = nextExit();
   const name = glitchTarget.name;
   const locks = [...name].map(() => 6 + (Math.random() * 14 | 0));
   const hold = 34, fadeStart = Math.max(...locks) + hold;

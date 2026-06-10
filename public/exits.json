@@ -524,6 +524,11 @@
         "Then help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen."
       ],
       "live": {
+        "tosdr": {
+          "name": "Spotify",
+          "rating": "D",
+          "url": "https://tosdr.org/en/service/225"
+        },
         "justdeleteme": {
           "url": "https://support.spotify.com/close/",
           "difficulty": "easy",
