@@ -623,6 +623,7 @@ pre { border: 1px solid var(--line); padding: 16px; white-space: pre-wrap;
   color: var(--dim); font-size: 12.5px; margin: 12px 0; }
 button, a.btn { background: none; border: 1px solid var(--acc); color: var(--acc);
   font: inherit; padding: 6px 16px; cursor: pointer; display: inline-block; }
+a.btn { margin-top: 16px; }
 button:hover, a.btn:hover { background: var(--acc); color: #000; text-decoration: none; }
 .fnref { color: var(--acc); }
 .footnote { color: #666; font-size: 12.5px; margin-top: 20px; }
