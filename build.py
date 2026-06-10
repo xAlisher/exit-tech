@@ -318,13 +318,13 @@ function fireGlitch() {{
     if (q.value) {{ stopGlitch(); return; }}
     let out = '';
     [...name].forEach((ch, i) => {{
-      if (f >= fadeStart) out += (f - fadeStart > locks[i]) ? '' : (Math.random() < 0.4 ? glyph() : ch);
+      if (f >= fadeStart) out += (f - fadeStart > 1) ? '' : glyph();
       else if (f >= locks[i]) out += ch;
       else out += glyph();
     }});
     grest.textContent = out;
     f++;
-    if (f > fadeStart + 24) {{
+    if (f > fadeStart + 3) {{
       clearInterval(glitchAnim); glitchAnim = null;
       grest.textContent = '';
       scheduleGlitch(900 + Math.random() * 2000);
