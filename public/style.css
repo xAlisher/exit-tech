@@ -22,11 +22,16 @@ ul, ol { padding-left: 20px; }
 li { margin: 6px 0; }
 .hero { margin: 18vh 0 64px; font-size: 20px; display: flex; align-items: baseline; }
 .promptline { white-space: pre; }
+.wrap { position: relative; flex: 1; }
 #q { background: none; border: none; outline: none; color: var(--acc);
-  font: inherit; caret-color: var(--acc); flex: 1; }
+  font: inherit; caret-color: var(--acc); width: 100%; position: relative; }
+.ghost { position: absolute; left: 0; top: 0; color: var(--dim); pointer-events: none;
+  white-space: pre; }
+.ghost i { visibility: hidden; font-style: normal; }
 .card { display: block; border: 1px solid var(--line); padding: 16px 20px; margin: 12px 0;
   color: var(--fg); }
 .card:hover { border-color: var(--acc); text-decoration: none; }
+.card[hidden] { display: none; }
 .card-cat { color: var(--dim); font-size: 12px; margin-right: 8px; }
 .card-name { font-weight: 600; }
 .card-meta { display: block; color: var(--dim); font-size: 12px; margin-top: 4px; }

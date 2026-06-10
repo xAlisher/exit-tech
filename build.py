@@ -254,14 +254,23 @@ def render_index(exits: list) -> str:
 <span class="card-name">{esc(ex["name"])}</span>
 <span class="card-meta">{n_alts} exit routes · {esc(types)}</span>
 </a>''')
+    targets = json.dumps([{"id": ex["id"], "name": ex["name"]} for ex in exits])
     body = f'''<div class="hero">
-<label for="q" class="promptline">&gt; I want to exit&nbsp;</label><input id="q" autocomplete="off" autofocus placeholder="_">
+<label for="q" class="promptline">&gt; I want to exit&nbsp;</label><span class="wrap">
+<span class="ghost" aria-hidden="true"><i id="gpad"></i><span id="grest"></span></span>
+<input id="q" autocomplete="off" autofocus placeholder="_" spellcheck="false">
+</span>
 </div>
 <div id="cards">{"".join(cards)}</div>
 <p id="nohit" hidden>Nothing here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
 <script>
-const q = document.getElementById('q');
-q.addEventListener('input', () => {{
+const EXITS = {targets};
+const q = document.getElementById('q'),
+      gpad = document.getElementById('gpad'),
+      grest = document.getElementById('grest');
+let match = null;
+
+function update() {{
   const v = q.value.trim().toLowerCase();
   let hits = 0;
   document.querySelectorAll('.card').forEach(c => {{
@@ -269,6 +278,33 @@ q.addEventListener('input', () => {{
     c.hidden = !show; if (show) hits++;
   }});
   document.getElementById('nohit').hidden = hits > 0;
+
+  match = v ? (EXITS.find(e => e.name.toLowerCase().startsWith(v))
+            || EXITS.find(e => e.name.toLowerCase().includes(v))) : null;
+  gpad.textContent = ''; grest.textContent = '';
+  if (match) {{
+    if (match.name.toLowerCase().startsWith(v)) {{
+      gpad.textContent = q.value;
+      grest.textContent = match.name.slice(q.value.length) + '  ⏎';
+    }} else {{
+      gpad.textContent = q.value;
+      grest.textContent = '  → ' + match.name + '  ⏎';
+    }}
+  }}
+}}
+
+q.addEventListener('input', update);
+q.addEventListener('keydown', e => {{
+  if (e.key === 'Tab' && match) {{
+    e.preventDefault();
+    q.value = match.name;
+    update();
+  }} else if (e.key === 'Enter' && match) {{
+    location.href = 'exit/' + match.id + '.html';
+  }} else if (e.key === 'Escape') {{
+    q.value = '';
+    update();
+  }}
 }});
 </script>'''
     return page("exit.tech — exit as culture", body)
@@ -314,11 +350,16 @@ ul, ol { padding-left: 20px; }
 li { margin: 6px 0; }
 .hero { margin: 18vh 0 64px; font-size: 20px; display: flex; align-items: baseline; }
 .promptline { white-space: pre; }
+.wrap { position: relative; flex: 1; }
 #q { background: none; border: none; outline: none; color: var(--acc);
-  font: inherit; caret-color: var(--acc); flex: 1; }
+  font: inherit; caret-color: var(--acc); width: 100%; position: relative; }
+.ghost { position: absolute; left: 0; top: 0; color: var(--dim); pointer-events: none;
+  white-space: pre; }
+.ghost i { visibility: hidden; font-style: normal; }
 .card { display: block; border: 1px solid var(--line); padding: 16px 20px; margin: 12px 0;
   color: var(--fg); }
 .card:hover { border-color: var(--acc); text-decoration: none; }
+.card[hidden] { display: none; }
 .card-cat { color: var(--dim); font-size: 12px; margin-right: 8px; }
 .card-name { font-weight: 600; }
 .card-meta { display: block; color: var(--dim); font-size: 12px; margin-top: 4px; }
