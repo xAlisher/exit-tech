@@ -16,7 +16,7 @@
 </div>
 <p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
 <script>
-const EXITS = [{"id": "whatsapp", "name": "WhatsApp"}, {"id": "google-photos", "name": "Google Photos"}, {"id": "supermarket-herbs", "name": "Supermarket herbs"}];
+const EXITS = [{"id": "whatsapp", "name": "WhatsApp"}, {"id": "google-photos", "name": "Google Photos"}, {"id": "supermarket-herbs", "name": "Supermarket herbs"}, {"id": "spotify", "name": "Spotify"}, {"id": "instagram", "name": "Instagram"}, {"id": "doomscrolling", "name": "Doomscrolling"}, {"id": "smoking", "name": "Smoking"}, {"id": "toxic-relationship", "name": "Toxic relationship"}, {"id": "oppressive-regime", "name": "Oppressive regime"}];
 const q = document.getElementById('q'),
       gpad = document.getElementById('gpad'),
       grest = document.getElementById('grest'),
@@ -81,16 +81,16 @@ function fireGlitch() {
     if (f > fadeStart + 24) {
       clearInterval(glitchAnim); glitchAnim = null;
       grest.textContent = '';
-      scheduleGlitch(2500 + Math.random() * 5500);
+      scheduleGlitch(900 + Math.random() * 2000);
     }
   }, 40);
 }
 
-scheduleGlitch(1200);
+scheduleGlitch(600);
 
 q.addEventListener('input', () => {
   if (q.value) stopGlitch();
-  else scheduleGlitch(1500 + Math.random() * 2500);
+  else scheduleGlitch(800 + Math.random() * 1500);
   update();
 });
 q.addEventListener('keydown', e => {

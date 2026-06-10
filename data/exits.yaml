@@ -117,3 +117,80 @@
   prompt:
     - Ask me about my light situation (window direction, hours of sun), space and climate, then give me a starter plan for a windowsill herb garden with the three easiest wins.
     - Tell me which herbs I can start from supermarket cuttings this week instead of waiting for seeds.
+
+# --- stubs: in the glitch pool and searchable, routes not yet mapped ---------
+
+- id: spotify
+  name: Spotify
+  category: digital
+  stub: true
+  tagline: Renting access to music you'll never own.
+  why:
+    - Your library evaporates the month you stop paying; artists get fractions of a cent.
+    - Two decades of listening history feeding a recommendation engine you can't inspect.
+  enrich:
+    tosdr: spotify
+    justdeleteme: Spotify
+    justgetmydata: spotify
+  prompt:
+    - Help me export my playlists and liked songs first (Exportify or similar).
+    - Then help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen.
+
+- id: instagram
+  name: Instagram
+  category: digital
+  stub: true
+  tagline: The highlight reel that bills you in attention.
+  why:
+    - An algorithmic feed engineered for time-on-app, owned by the same ad machine as Facebook.
+  enrich:
+    tosdr: instagram
+    justdeleteme: Instagram
+    justgetmydata: instagram
+  prompt:
+    - Help me download my archive first, then decide between deleting, deactivating, or downgrading to a lurker account with notifications off.
+    - If I still want to share photos, suggest calmer homes for that (Pixelfed, a shared album, a small group chat) based on who I actually want to reach.
+
+- id: doomscrolling
+  name: Doomscrolling
+  category: behavioral
+  stub: true
+  tagline: Exit the feed, keep the news.
+  why:
+    - Infinite feeds are designed to never let you finish; the anxiety is the engagement.
+  prompt:
+    - Interview me about when and why I scroll (boredom? anxiety? habit loops?), then design a one-week exit plan — RSS or newsletters for actual news, friction on the feed apps, and a replacement ritual for the trigger moments.
+
+- id: smoking
+  name: Smoking
+  category: substance
+  stub: true
+  tagline: The subscription with the worst cancellation flow.
+  why:
+    - The dependency that markets itself as a five-minute break.
+  prompt:
+    - Act as a supportive quit coach. Ask me about my smoking pattern, past quit attempts and what triggered relapses, then help me build a quit plan — date, nicotine replacement options to discuss with a doctor or pharmacist, trigger substitutions, and what to do in minute three of a craving.
+    - Be honest that relapse is part of most successful quits, and help me plan for it rather than be ashamed of it.
+
+- id: toxic-relationship
+  name: Toxic relationship
+  category: relational
+  stub: true
+  tagline: The exit nobody posts about.
+  why:
+    - Some dependencies are people. They are also the hardest ones to see from inside.
+  prompt:
+    - Help me think clearly. Ask me gentle, concrete questions about how this relationship actually functions day to day, and reflect back what I tell you without telling me what to do.
+    - If anything I describe suggests my safety is at risk, stop and point me to local professional support and emergency contacts first — an AI conversation is not a safety plan.
+    - If I decide to leave, help me plan the practical side — living situation, money, key conversations, and who in my life I can lean on.
+
+- id: oppressive-regime
+  name: Oppressive regime
+  category: institutional
+  stub: true
+  tagline: Some dependencies have armies.
+  why:
+    - The heaviest exit on this site — and the reason the privacy tools on it exist.
+  prompt:
+    - Start by asking me about my situation carefully — country, urgency, and whether I'm planning ahead or in immediate danger. If it's immediate danger, point me to organizations that do this professionally before anything else.
+    - Help me with the layers that exits like this share — digital safety first (secure communications, clean devices, what to carry across a border), then documents, money I can access from abroad, and legal pathways like visas and asylum where they apply.

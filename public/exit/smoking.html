@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit Smoking — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header><a class="tag" href="../index.html">Exit is culture<span class="cursor"></span></a></header>
+<main>
+<p class="crumb">~/exit/smoking</p>
+<h1>Exit Smoking</h1>
+<p class="tagline">The subscription with the worst cancellation flow.</p>
+<h2>// why</h2><ul>
+<li>The dependency that markets itself as a five-minute break.</li>
+</ul>
+<h2>// exit routes</h2>
+<p>This exit is still being mapped — no curated routes yet. The prompt below already works. Want this page to exist properly? <a href="https://github.com/xAlisher/exit-tech">Help chart it.</a></p>
+<h2>// take an agent with you</h2>
+<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit Smoking. Act as my exit guide.
+
+
+Act as a supportive quit coach. Ask me about my smoking pattern, past quit attempts and what triggered relapses, then help me build a quit plan — date, nicotine replacement options to discuss with a doctor or pharmacist, trigger substitutions, and what to do in minute three of a craving.
+Be honest that relapse is part of most successful quits, and help me plan for it rather than be ashamed of it.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit Instagram — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header><a class="tag" href="../index.html">Exit is culture<span class="cursor"></span></a></header>
+<main>
+<p class="crumb">~/exit/instagram</p>
+<h1>Exit Instagram</h1>
+<p class="tagline">The highlight reel that bills you in attention.</p>
+<h2>// why</h2><ul>
+<li>An algorithmic feed engineered for time-on-app, owned by the same ad machine as Facebook.</li>
+<li>Terms of service rated <strong>“E”</strong> — <a href="https://tosdr.org/en/service/219">see the documented points at ToS;DR</a></li>
+</ul>
+<h2>// first, get your stuff out</h2><ol>
+<li><a href="https://justgetmydata.com/#instagram">Data export links at JustGetMyData</a></li>
+</ol>
+<h2>// exit routes</h2>
+<p>This exit is still being mapped — no curated routes yet. The prompt below already works. Want this page to exist properly? <a href="https://github.com/xAlisher/exit-tech">Help chart it.</a></p>
+<h2>// burn the bridge</h2>
+<p>Delete your account (difficulty: <strong>easy</strong>) — <a href="https://instagram.com/accounts/remove/request/permanent/">direct link via JustDeleteMe</a></p>
+<h2>// take an agent with you</h2>
+<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit Instagram. Act as my exit guide.
+
+When I'm ready, walk me through deleting my account (difficulty: easy): https://instagram.com/accounts/remove/request/permanent/
+
+Help me download my archive first, then decide between deleting, deactivating, or downgrading to a lurker account with notifications off.
+If I still want to share photos, suggest calmer homes for that (Pixelfed, a shared album, a small group chat) based on who I actually want to reach.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+</footer>
+</body>
+</html>

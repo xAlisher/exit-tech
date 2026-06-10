@@ -214,7 +214,13 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
             b.append(f'<li><a href="{esc(jgmd["url"])}">Data export links at JustGetMyData</a></li>')
         b.append("</ol>")
 
-    b.append("<h2>// exit paths</h2>")
+    if ex.get("stub"):
+        b.append("<h2>// exit routes</h2>")
+        b.append('<p>This exit is still being mapped — no curated routes yet. The prompt '
+                 'below already works. Want this page to exist properly? '
+                 '<a href="https://github.com/xAlisher/exit-tech">Help chart it.</a></p>')
+    else:
+        b.append("<h2>// exit paths</h2>")
     for path in ex.get("paths", []):
         b.append(f'<h3><span class="ptype">[{esc(path["type"])}]</span> {esc(path["label"])}</h3>')
         for alt in path["alternatives"]:
@@ -321,16 +327,16 @@ function fireGlitch() {{
     if (f > fadeStart + 24) {{
       clearInterval(glitchAnim); glitchAnim = null;
       grest.textContent = '';
-      scheduleGlitch(2500 + Math.random() * 5500);
+      scheduleGlitch(900 + Math.random() * 2000);
     }}
   }}, 40);
 }}
 
-scheduleGlitch(1200);
+scheduleGlitch(600);
 
 q.addEventListener('input', () => {{
   if (q.value) stopGlitch();
-  else scheduleGlitch(1500 + Math.random() * 2500);
+  else scheduleGlitch(800 + Math.random() * 1500);
   update();
 }});
 q.addEventListener('keydown', e => {{
