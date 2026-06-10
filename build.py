@@ -157,11 +157,13 @@ def esc(s) -> str:
             .replace('"', "&quot;"))
 
 
-def page(title: str, body: str, depth: int = 0, header: bool = True) -> str:
+def page(title: str, body: str, depth: int = 0, header_html: str | None = None,
+         home: bool = False) -> str:
     pre = "../" * depth
-    header_html = (f'\n<header><a class="tag" href="{pre}index.html">Exit is culture'
-                   '<span class="cursor"></span></a></header>') if header else ""
-    body_class = "" if header else ' class="home"'
+    if header_html is None:
+        header_html = (f'\n<header><a class="tag" href="{pre}index.html">Exit is culture'
+                       '<span class="cursor"></span></a></header>')
+    body_class = ' class="home"' if home else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -193,9 +195,9 @@ def badge_row(refs: list, sources_by_id: dict) -> str:
 
 
 def render_exit(ex: dict, sources_by_id: dict) -> str:
-    b = [f'<p class="crumb">~/exit/{esc(ex["id"])}</p>',
-         f'<h1>Exit {esc(ex["name"])}</h1>',
-         f'<p class="tagline">{esc(ex["tagline"])}</p>']
+    head = ('<header class="prompt"><a class="ptag" href="../index.html">Exit</a>&nbsp;'
+            f'<span class="pname">{esc(ex["name"])}</span><span class="tcur"></span></header>')
+    b = [f'<p class="tagline">{esc(ex["tagline"])}</p>']
 
     b.append("<h2>// why</h2><ul>")
     b += [f"<li>{esc(w)}</li>" for w in ex.get("why", [])]
@@ -249,7 +251,7 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
     b.append("<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>")
     b.append(f'<pre id="prompt">{esc(ex["agent_prompt"])}</pre>')
     b.append('<button onclick="navigator.clipboard.writeText(document.getElementById(\'prompt\').innerText).then(()=>{this.innerText=\'copied ✓\'})">copy prompt</button>')
-    return page(f"Exit {ex['name']} — exit.tech", "\n".join(b), depth=1)
+    return page(f"Exit {ex['name']} — exit.tech", "\n".join(b), depth=1, header_html=head)
 
 
 def render_index(exits: list) -> str:
@@ -353,7 +355,7 @@ q.addEventListener('keydown', e => {{
   }}
 }});
 </script>'''
-    return page("exit.tech", body, header=False)
+    return page("exit.tech", body, header_html="", home=True)
 
 
 def render_sources(sources: list) -> str:
@@ -382,6 +384,12 @@ header { position: fixed; top: 32px; left: 40px; }
   display: flex; align-items: center; gap: 2px; }
 .cursor { display: inline-block; width: 7px; height: 13px; background: var(--fg);
   animation: blink 1s step-end infinite; }
+header.prompt { font-size: 20px; }
+.ptag { color: var(--fg); }
+.ptag:hover { color: var(--acc); text-decoration: none; }
+.pname { color: var(--acc); }
+.tcur { display: inline-block; width: 3px; height: 19px; background: var(--acc);
+  animation: blink 1s step-end infinite; vertical-align: -2px; margin-left: 2px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 a { color: var(--acc); text-decoration: none; }
 a:hover { text-decoration: underline; }

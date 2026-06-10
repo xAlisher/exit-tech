@@ -8,6 +8,12 @@ header { position: fixed; top: 32px; left: 40px; }
   display: flex; align-items: center; gap: 2px; }
 .cursor { display: inline-block; width: 7px; height: 13px; background: var(--fg);
   animation: blink 1s step-end infinite; }
+header.prompt { font-size: 20px; }
+.ptag { color: var(--fg); }
+.ptag:hover { color: var(--acc); text-decoration: none; }
+.pname { color: var(--acc); }
+.tcur { display: inline-block; width: 3px; height: 19px; background: var(--acc);
+  animation: blink 1s step-end infinite; vertical-align: -2px; margin-left: 2px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 a { color: var(--acc); text-decoration: none; }
 a:hover { text-decoration: underline; }
