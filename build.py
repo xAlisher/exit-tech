@@ -528,6 +528,7 @@ def main():
         print(f"  {ex['id']}: live={list((ex.get('live') or {}).keys())}")
 
     (PUBLIC / "exit").mkdir(parents=True, exist_ok=True)
+    (PUBLIC / "CNAME").write_text("exit.tech\n")
     (PUBLIC / "style.css").write_text(CSS.strip() + "\n")
     (PUBLIC / "index.html").write_text(render_index(exits))
     (PUBLIC / "sources.html").write_text(render_sources(sources))
