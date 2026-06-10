@@ -272,13 +272,7 @@
         "Check my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.",
         "Walk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes."
       ],
-      "live": {
-        "tosdr": {
-          "name": "OpenAI",
-          "rating": "D",
-          "url": "https://tosdr.org/en/service/7108"
-        }
-      },
+      "live": {},
       "agent_prompt": "I want to exit ChatGPT. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.\nCheck my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.\nWalk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
@@ -299,13 +293,7 @@
         "Check my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.",
         "Help me export anything I want to keep from my account before I go."
       ],
-      "live": {
-        "tosdr": {
-          "name": "Anthropic, PBC",
-          "rating": "N/A",
-          "url": "https://tosdr.org/en/service/11619"
-        }
-      },
+      "live": {},
       "agent_prompt": "I want to exit Claude. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.\nCheck my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.\nHelp me export anything I want to keep from my account before I go.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
@@ -367,11 +355,6 @@
         "If I still want to share photos, suggest calmer homes for that (Pixelfed, a shared album, a small group chat) based on who I actually want to reach."
       ],
       "live": {
-        "tosdr": {
-          "name": "Instagram",
-          "rating": "E",
-          "url": "https://tosdr.org/en/service/219"
-        },
         "justdeleteme": {
           "url": "https://instagram.com/accounts/remove/request/permanent/",
           "difficulty": "easy",
@@ -435,11 +418,6 @@
         "Then help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen."
       ],
       "live": {
-        "tosdr": {
-          "name": "Spotify",
-          "rating": "D",
-          "url": "https://tosdr.org/en/service/225"
-        },
         "justdeleteme": {
           "url": "https://support.spotify.com/close/",
           "difficulty": "easy",
