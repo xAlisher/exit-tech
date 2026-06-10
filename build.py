@@ -378,13 +378,14 @@ CSS = """
 :root { --fg: #fff; --dim: #888; --line: #2a2a2a; --acc: #6f6; }
 html, body { background: #000; color: var(--fg);
   font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: 14px; line-height: 1.6; }
-main { max-width: 720px; margin: 0 auto; padding: 96px 20px 64px; }
+main { max-width: 720px; margin: 0; padding: 110px 40px 64px; }
 header { position: fixed; top: 32px; left: 40px; }
 .tag { font-size: 13px; color: var(--fg); letter-spacing: 0.04em; text-decoration: none;
   display: flex; align-items: center; gap: 2px; }
 .cursor { display: inline-block; width: 7px; height: 13px; background: var(--fg);
   animation: blink 1s step-end infinite; }
-header.prompt { font-size: 20px; }
+header.prompt { font-size: 20px; top: 0; left: 0; right: 0; background: #000;
+  padding: 32px 40px 14px; z-index: 10; }
 .ptag { color: var(--fg); }
 .ptag:hover { color: var(--acc); text-decoration: none; }
 .pname { color: var(--acc); }
@@ -432,7 +433,7 @@ pre { border: 1px solid var(--line); padding: 16px; white-space: pre-wrap;
 button { background: none; border: 1px solid var(--acc); color: var(--acc); font: inherit;
   padding: 6px 16px; cursor: pointer; }
 button:hover { background: var(--acc); color: #000; }
-footer { max-width: 720px; margin: 0 auto; padding: 0 20px 48px; color: #444;
+footer { max-width: 720px; margin: 0; padding: 0 40px 48px; color: #444;
   font-size: 12px; }
 footer a { color: #444; }
 footer a:hover { color: var(--dim); }
