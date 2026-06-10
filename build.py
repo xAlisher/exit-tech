@@ -419,9 +419,10 @@ pre { border: 1px solid var(--line); padding: 16px; white-space: pre-wrap;
 button { background: none; border: 1px solid var(--acc); color: var(--acc); font: inherit;
   padding: 6px 16px; cursor: pointer; }
 button:hover { background: var(--acc); color: #000; }
-footer { max-width: 720px; margin: 0 auto; padding: 0 20px 48px; color: var(--dim);
+footer { max-width: 720px; margin: 0 auto; padding: 0 20px 48px; color: #444;
   font-size: 12px; }
-footer a { color: var(--dim); }
+footer a { color: #444; }
+footer a:hover { color: var(--dim); }
 """
 
 
