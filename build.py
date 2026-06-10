@@ -642,6 +642,13 @@ def main():
         print(f"  {ex['id']}: live={list((ex.get('live') or {}).keys())}")
 
     (PUBLIC / "exit").mkdir(parents=True, exist_ok=True)
+    # remove stale pages for exits that no longer exist — without this,
+    # deleted/renamed exits linger in public/ and get deployed as ghosts
+    current = {f"{ex['id']}.html" for ex in exits}
+    for page_file in (PUBLIC / "exit").glob("*.html"):
+        if page_file.name not in current:
+            page_file.unlink()
+            print(f"  removed stale page: exit/{page_file.name}")
     (PUBLIC / "CNAME").write_text("exit.tech\n")
     (PUBLIC / "style.css").write_text(CSS.strip() + "\n")
     (PUBLIC / "index.html").write_text(render_index(exits))

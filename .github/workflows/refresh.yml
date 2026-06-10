@@ -1,7 +1,9 @@
 name: refresh
-# Weekly live rebuild: re-fetches ToS;DR ratings, deletion links and source
-# datasets, commits the regenerated public/ if anything changed. The commit
-# to master then triggers the deploy workflow.
+# Live rebuild (weekly + on data merges): re-fetches ToS;DR ratings, deletion
+# links and source datasets, commits the regenerated public/ if anything
+# changed, then deploys directly. (It must deploy itself: pushes made with
+# GITHUB_TOKEN do not trigger other workflows, so deploy.yml never fires
+# on the refresh commit.)
 on:
   schedule:
     - cron: "20 6 * * 1"   # Mondays 06:20 UTC
@@ -12,10 +14,19 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,5 +43,11 @@ jobs:
           git config user.email "noreply@exit.tech"
           git add public/
           git diff --cached --quiet && echo "no changes" && exit 0
-          git commit -m "refresh: weekly live data rebuild"
+          git commit -m "refresh: live data rebuild"
           git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deployment
+        uses: actions/deploy-pages@v4
