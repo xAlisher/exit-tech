@@ -1,0 +1,45 @@
+id: google-photos
+name: Google Photos
+category: digital
+tagline: Your memories, their training data, rented back to you monthly.
+why:
+- Storage rent that only goes up — your library grows, so does the bill.
+- Photos are scanned and analyzed; lock-in deepens with every album.
+enrich:
+  tosdr: google
+  justdeleteme: Google
+  justgetmydata: google
+extract:
+- step: >-
+    Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives;
+    originals + metadata in JSON sidecars.
+paths:
+- type: self-host
+  label: Self-host your library
+  alternatives:
+  - name: Immich
+    url: https://immich.app
+    enrich:
+      awesome_selfhosted: immich
+    recommended_by:
+    - awesome-selfhosted
+    note: The Google Photos experience, on your own hardware. immich-go imports Takeout archives directly.
+  - name: PhotoPrism
+    url: https://www.photoprism.app
+    enrich:
+      awesome_selfhosted: photoprism
+    recommended_by:
+    - awesome-selfhosted
+    note: AI-powered library with strong search; single Docker container.
+- type: switch
+  label: Switch to an encrypted service
+  alternatives:
+  - name: Ente Photos
+    url: https://ente.io
+    recommended_by:
+    - privacy-guides
+    note: End-to-end encrypted, open source, imports from Takeout. Paying with money instead of data.
+prompt:
+- >-
+  I have a Google Takeout archive of my photo library. Walk me through importing it into my chosen alternative
+  (immich-go for Immich, web importer for Ente), including the metadata JSON sidecars.

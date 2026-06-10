@@ -1,0 +1,17 @@
+id: gemini
+name: Gemini
+category: digital
+stub: true
+tagline: One more thread tying you to the Google account.
+why:
+- >-
+  Bundled into search, mail and your phone — the exit is really from the account that holds them together.
+enrich:
+  tosdr: google
+prompt:
+- >-
+  Help me move my AI usage to locally hosted models — ask what I use Gemini for and how deep my Google
+  account dependency goes, since this exit is usually part of that bigger one.
+- >-
+  Check my hardware and recommend a local stack (Ollama or llama.cpp) with a realistic starting model,
+  and tell me honestly what I'd lose.

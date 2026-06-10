@@ -9,12 +9,14 @@ copy-paste prompt that turns any AI agent into your personal exit guide.
 
 ## How it works
 
-- `data/exits.yaml` — the dependency → exit-paths mapping. This is the only
-  original dataset; everything else is aggregated and credited.
+- `data/exits/<id>.yaml` — one file per exit: the dependency → exit-paths
+  mapping. This is the only original dataset; everything else is aggregated
+  and credited.
 - `data/sources.yaml` — every external source, with license and role.
-- `build.py` — fetches live data (ToS;DR ratings, JustDeleteMe deletion
-  links, awesome-privacy / awesome-selfhosted / web3privacy descriptions),
-  caches it in `data/cache/`, renders the static site to `public/`.
+- `build.py` — validates every exit file, fetches live data (ToS;DR ratings,
+  JustDeleteMe deletion links, awesome-privacy / awesome-selfhosted /
+  web3privacy descriptions), caches it in `data/cache/`, renders the static
+  site to `public/`.
 
 ```sh
 python3 build.py            # fetch + build (needs PyYAML)
@@ -27,7 +29,21 @@ honored, sources credited at `/sources.html`.
 
 ## Adding an exit
 
-Add an entry to `data/exits.yaml` (schema documented at the top of the
-file), rebuild. Enrichment keys (`tosdr`, `justdeleteme`, `awesome_privacy`,
-`awesome_selfhosted`, `web3privacy`) are optional — physical-world exits
-work fine without them.
+Copy `data/exits/_template.yaml` to `data/exits/<id>.yaml`, fill it in,
+rebuild. The build validates every file (required fields, known categories
+and path types, `recommended_by` ids must exist in `data/sources.yaml`) and
+fails loudly on errors. Enrichment keys are optional — physical-world exits
+work fine without them. Set `stub: true` for a page without curated routes;
+it still gets a working agent prompt.
+
+Requests land as GitHub issues: typing something unknown on the landing page
+offers a prefilled `exit: <query>` issue.
+
+## Automation
+
+- `deploy.yml` — every push to master publishes `public/` to GitHub Pages
+  (exit.tech)
+- `validate.yml` — PRs and branches run the offline build as a schema check
+- `refresh.yml` — weekly live rebuild (Mondays): re-fetches ratings and
+  links, commits regenerated `public/` if anything changed, which triggers
+  a deploy

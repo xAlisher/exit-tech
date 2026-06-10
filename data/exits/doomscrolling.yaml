@@ -1,0 +1,12 @@
+id: doomscrolling
+name: Doomscrolling
+category: behavioral
+stub: true
+tagline: Exit the feed, keep the news.
+why:
+- Infinite feeds are designed to never let you finish; the anxiety is the engagement.
+prompt:
+- >-
+  Interview me about when and why I scroll (boredom? anxiety? habit loops?), then design a one-week exit
+  plan — RSS or newsletters for actual news, friction on the feed apps, and a replacement ritual for the
+  trigger moments.

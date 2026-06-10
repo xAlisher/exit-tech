@@ -1,0 +1,34 @@
+id: supermarket-herbs
+name: Supermarket herbs
+category: food
+tagline: €2.49 for wilted basil in plastic, forever. Or one pot, once.
+why:
+- Fresh herbs are the highest-markup, lowest-effort thing to grow yourself.
+- >-
+  Plastic clamshells, cold-chain logistics and supermarket pricing — for a plant that wants to live on
+  your windowsill.
+paths:
+- type: grow
+  label: Grow them on a windowsill
+  alternatives:
+  - name: Basil
+    url: https://www.appropedia.org/Special:Search?search=growing+basil
+    recommended_by:
+    - appropedia
+    note: >-
+      Supermarket basil pots are many seedlings crammed together — split one pot into four and they thrive.
+  - name: Mint
+    url: https://www.appropedia.org/Special:Search?search=growing+mint
+    recommended_by:
+    - appropedia
+    note: Nearly unkillable. Grows from cuttings — one supermarket bunch can root in a glass of water.
+  - name: Chives
+    url: https://www.appropedia.org/Special:Search?search=growing+chives
+    recommended_by:
+    - appropedia
+    note: Perennial — cut and they regrow, for years.
+prompt:
+- >-
+  Ask me about my light situation (window direction, hours of sun), space and climate, then give me a
+  starter plan for a windowsill herb garden with the three easiest wins.
+- Tell me which herbs I can start from supermarket cuttings this week instead of waiting for seeds.

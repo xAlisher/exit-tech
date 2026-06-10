@@ -1,0 +1,17 @@
+id: spotify
+name: Spotify
+category: digital
+stub: true
+tagline: Renting access to music you'll never own.
+why:
+- Your library evaporates the month you stop paying; artists get fractions of a cent.
+- Two decades of listening history feeding a recommendation engine you can't inspect.
+enrich:
+  tosdr: spotify
+  justdeleteme: Spotify
+  justgetmydata: spotify
+prompt:
+- Help me export my playlists and liked songs first (Exportify or similar).
+- >-
+  Then help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin)
+  fed by my own files, or a fairer streaming service — based on how I actually listen.

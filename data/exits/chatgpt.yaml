@@ -1,0 +1,21 @@
+id: chatgpt
+name: ChatGPT
+category: digital
+stub: true
+tagline: The default brain. Defaults are dependencies.
+why:
+- >-
+  The fastest-adopted consumer product in history — which is exactly what a dependency looks like from
+  inside.
+enrich:
+  tosdr: chatgpt
+prompt:
+- >-
+  Help me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest
+  about what local open-weight models do well and where I'd feel the gap.
+- >-
+  Check my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and
+  one model to start with.
+- >-
+  Walk me through exporting my ChatGPT history before deleting, and what deleting the account actually
+  removes.

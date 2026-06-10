@@ -1,0 +1,33 @@
+name: refresh
+# Weekly live rebuild: re-fetches ToS;DR ratings, deletion links and source
+# datasets, commits the regenerated public/ if anything changed. The commit
+# to master then triggers the deploy workflow.
+on:
+  schedule:
+    - cron: "20 6 * * 1"   # Mondays 06:20 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Rebuild with fresh data
+        run: |
+          rm -rf data/cache
+          python3 build.py
+      - name: Commit if changed
+        run: |
+          git config user.name "exit-tech-refresh[bot]"
+          git config user.email "noreply@exit.tech"
+          git add public/
+          git diff --cached --quiet && echo "no changes" && exit 0
+          git commit -m "refresh: weekly live data rebuild"
+          git push

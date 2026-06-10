@@ -1,0 +1,18 @@
+id: instagram
+name: Instagram
+category: digital
+stub: true
+tagline: The highlight reel that bills you in attention.
+why:
+- An algorithmic feed engineered for time-on-app, owned by the same ad machine as Facebook.
+enrich:
+  tosdr: instagram
+  justdeleteme: Instagram
+  justgetmydata: instagram
+prompt:
+- >-
+  Help me download my archive first, then decide between deleting, deactivating, or downgrading to a lurker
+  account with notifications off.
+- >-
+  If I still want to share photos, suggest calmer homes for that (Pixelfed, a shared album, a small group
+  chat) based on who I actually want to reach.

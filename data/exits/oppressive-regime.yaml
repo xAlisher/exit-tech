@@ -1,0 +1,16 @@
+id: oppressive-regime
+name: Oppressive regime
+category: institutional
+stub: true
+tagline: Some dependencies have armies.
+why:
+- The heaviest exit on this site — and the reason the privacy tools on it exist.
+prompt:
+- >-
+  Start by asking me about my situation carefully — country, urgency, and whether I'm planning ahead or
+  in immediate danger. If it's immediate danger, point me to organizations that do this professionally
+  before anything else.
+- >-
+  Help me with the layers that exits like this share — digital safety first (secure communications, clean
+  devices, what to carry across a border), then documents, money I can access from abroad, and legal pathways
+  like visas and asylum where they apply.

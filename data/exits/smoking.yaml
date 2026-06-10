@@ -1,0 +1,15 @@
+id: smoking
+name: Smoking
+category: substance
+stub: true
+tagline: The subscription with the worst cancellation flow.
+why:
+- The dependency that markets itself as a five-minute break.
+prompt:
+- >-
+  Act as a supportive quit coach. Ask me about my smoking pattern, past quit attempts and what triggered
+  relapses, then help me build a quit plan — date, nicotine replacement options to discuss with a doctor
+  or pharmacist, trigger substitutions, and what to do in minute three of a craving.
+- >-
+  Be honest that relapse is part of most successful quits, and help me plan for it rather than be ashamed
+  of it.

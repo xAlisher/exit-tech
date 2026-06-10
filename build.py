@@ -105,6 +105,75 @@ def web3privacy(slug: str) -> dict | None:
             "openSource": (d.get("blockchain_features") or {}).get("opensource")}
 
 
+# --- validation ----------------------------------------------------------------
+
+CATEGORIES = {"digital", "physical", "food", "financial", "relational",
+              "institutional", "substance", "behavioral"}
+PATH_TYPES = {"switch", "self-host", "grow", "print", "repair"}
+ENRICH_KEYS = {"tosdr", "justdeleteme", "justgetmydata"}
+ALT_ENRICH_KEYS = {"awesome_privacy", "awesome_selfhosted", "web3privacy"}
+
+
+def validate_exit(ex: dict, fname: str, source_ids: set) -> list[str]:
+    errs = []
+    def err(msg): errs.append(f"{fname}: {msg}")
+
+    for field in ("id", "name", "category", "tagline"):
+        if not isinstance(ex.get(field), str) or not ex[field].strip():
+            err(f"missing or empty required field '{field}'")
+    if ex.get("id") and fname != f"{ex['id']}.yaml":
+        err(f"filename must match id '{ex['id']}'")
+    if ex.get("id") and not re.fullmatch(r"[a-z0-9][a-z0-9-]*", ex["id"]):
+        err(f"id '{ex['id']}' must be lowercase-hyphen slug")
+    if ex.get("category") not in CATEGORIES:
+        err(f"unknown category '{ex.get('category')}' (allowed: {sorted(CATEGORIES)})")
+    if unknown := set(ex.get("enrich") or {}) - ENRICH_KEYS:
+        err(f"unknown enrich keys {sorted(unknown)}")
+    for s in ex.get("extract") or []:
+        if not isinstance(s, dict) or "step" not in s:
+            err("extract entries must be {step: ...}")
+    for p in ex.get("paths") or []:
+        if p.get("type") not in PATH_TYPES:
+            err(f"unknown path type '{p.get('type')}' (allowed: {sorted(PATH_TYPES)})")
+        if not p.get("label"):
+            err("path missing label")
+        for a in p.get("alternatives") or []:
+            if not a.get("name") or not a.get("url"):
+                err(f"alternative missing name/url in path '{p.get('label')}'")
+            if unknown := set(a.get("enrich") or {}) - ALT_ENRICH_KEYS:
+                err(f"unknown alternative enrich keys {sorted(unknown)}")
+            for ref in a.get("recommended_by") or []:
+                if ref not in source_ids:
+                    err(f"recommended_by '{ref}' not in data/sources.yaml")
+    return errs
+
+
+def load_exits(source_ids: set) -> list:
+    exits, errors = [], []
+    files = sorted((ROOT / "data" / "exits").glob("*.yaml"))
+    for f in files:
+        if f.name.startswith("_"):
+            continue
+        try:
+            ex = yaml.safe_load(f.read_text())
+        except yaml.YAMLError as e:
+            errors.append(f"{f.name}: invalid YAML — {e}")
+            continue
+        errors += validate_exit(ex, f.name, source_ids)
+        exits.append(ex)
+    ids = [e.get("id") for e in exits]
+    if len(ids) != len(set(ids)):
+        errors.append("duplicate exit ids")
+    if errors:
+        print("validation failed:", file=sys.stderr)
+        for e in errors:
+            print(f"  {e}", file=sys.stderr)
+        sys.exit(1)
+    # curated exits first, then stubs, alphabetical within each
+    exits.sort(key=lambda e: (bool(e.get("stub")), e["name"].lower()))
+    return exits
+
+
 # --- enrichment ---------------------------------------------------------------
 
 def enrich_exit(ex: dict) -> dict:
@@ -294,7 +363,7 @@ def render_index(exits: list) -> str:
 <input id="q" class="empty" autocomplete="off" spellcheck="false" aria-label="what do you want to exit">
 </span>
 </div>
-<p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
+<p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a id="ask" href="https://github.com/xAlisher/exit-tech/issues/new">ask for it</a>.</p>
 <script>
 const EXITS = {targets};
 const q = document.getElementById('q'),
@@ -311,6 +380,12 @@ function update() {{
   match = v ? (EXITS.find(e => e.name.toLowerCase().startsWith(v))
             || EXITS.find(e => e.name.toLowerCase().includes(v))) : null;
   document.getElementById('nohit').hidden = !(v && !match);
+  if (v && !match) {{
+    document.getElementById('ask').href =
+      'https://github.com/xAlisher/exit-tech/issues/new?labels=exit-request&title=' +
+      encodeURIComponent('exit: ' + q.value.trim()) +
+      '&body=' + encodeURIComponent('Requested via the landing input on exit.tech.');
+  }}
   gpad.textContent = ''; grest.textContent = '';
   if (match) {{
     if (match.name.toLowerCase().startsWith(v)) {{
@@ -517,9 +592,9 @@ footer a:hover { color: var(--dim); }
 
 
 def main():
-    exits = yaml.safe_load((ROOT / "data" / "exits.yaml").read_text())
     sources = yaml.safe_load((ROOT / "data" / "sources.yaml").read_text())
     sources_by_id = {s["id"]: s for s in sources}
+    exits = load_exits(set(sources_by_id))
 
     print(f"building {len(exits)} exits...")
     for ex in exits:

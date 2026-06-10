@@ -2,108 +2,6 @@
   "about": "exit.tech merged exit dataset. Aggregated from credited open sources — see /sources.html.",
   "exits": [
     {
-      "id": "whatsapp",
-      "name": "WhatsApp",
-      "category": "digital",
-      "tagline": "Meta reads the metadata of everyone you love.",
-      "why": [
-        "Owned by Meta — contact graph and metadata feed the same ad machine as Facebook and Instagram.",
-        "Phone number required, contacts uploaded, message metadata retained."
-      ],
-      "enrich": {
-        "tosdr": "whatsapp",
-        "justdeleteme": "WhatsApp",
-        "justgetmydata": "whatsapp"
-      },
-      "extract": [
-        {
-          "step": "Export your chats — Settings → Chats → Export chat (per conversation, with or without media)."
-        },
-        {
-          "step": "Request your account info — Settings → Account → Request account info."
-        }
-      ],
-      "paths": [
-        {
-          "type": "switch",
-          "label": "Switch to a private messenger",
-          "alternatives": [
-            {
-              "name": "Signal",
-              "url": "https://signal.org",
-              "enrich": {
-                "awesome_privacy": "Signal"
-              },
-              "recommended_by": [
-                "awesome-privacy",
-                "privacy-guides",
-                "switching-software"
-              ],
-              "note": "The default answer. Same UX as WhatsApp, E2EE by default, nonprofit.",
-              "live": {
-                "description": "Probably one of the most popular, secure private messaging apps that combines\nstrong encryption (see [Signal Protocol](https://en.wikipedia.org/wiki/Signal_Protocol))\nwith a simple UI and plenty of features. It's widely used across the world, and\neasy-to-use, functioning similar to WhatsApp - with instant messaging, read-receipts,\nsupport for media attachments and allows for high-quality voice and video calls.\nIt's cross-platform, open-source and totally free. Signal is\n[recommended](https://twitter.com/Snowden/status/661313394906161152)\nby Edward Snowden, and is a perfect solution for most users.\n",
-                "openSource": true,
-                "securityAudited": null
-              }
-            },
-            {
-              "name": "SimpleX Chat",
-              "url": "https://simplex.chat",
-              "enrich": {
-                "awesome_privacy": "SimpleX"
-              },
-              "recommended_by": [
-                "awesome-privacy",
-                "privacy-guides"
-              ],
-              "note": "No identifiers at all — not even a phone number.",
-              "live": {
-                "description": "Simplex is gaining popularity as a secure and private messaging app renowned\nfor its robust encryption protocol without user IDs or phone numbers and this improves your privacy.\nSimplex offers instant messaging, supports media attachments and voice and video calls.\nAdditionally, it is cross-platform, open-source, and completely free, aligning with the modern user's\npreferences for convenience, security, and accessibility.\nLearn more about the [Security Policy](https://simplex.chat/security/).\n",
-                "openSource": true,
-                "securityAudited": null
-              }
-            },
-            {
-              "name": "Session",
-              "url": "https://getsession.org",
-              "enrich": {
-                "web3privacy": "session"
-              },
-              "recommended_by": [
-                "web3privacy",
-                "awesome-privacy"
-              ],
-              "note": "Decentralized, no phone number, onion-routed.",
-              "live": {
-                "description": "An end-to-end encrypted messenger that minimizes sensitive metadata, designed and built for people who want absolute privacy and freedom from any form of surveillance",
-                "openSource": true
-              }
-            }
-          ]
-        }
-      ],
-      "prompt": [
-        "The hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.",
-        "Help me decide between Signal, SimpleX and Session based on who I actually talk to."
-      ],
-      "live": {
-        "tosdr": {
-          "name": "WhatsApp",
-          "rating": "C",
-          "url": "https://tosdr.org/en/service/198"
-        },
-        "justdeleteme": {
-          "url": "https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop",
-          "difficulty": "medium",
-          "notes": "From the app: Settings → Account → Delete your account."
-        },
-        "justgetmydata": {
-          "url": "https://justgetmydata.com/#whatsapp"
-        }
-      },
-      "agent_prompt": "I want to exit WhatsApp. Act as my exit guide.\n\nFirst, help me get my data out:\n- Export your chats — Settings → Chats → Export chat (per conversation, with or without media).\n- Request your account info — Settings → Account → Request account info.\n\nSwitch to a private messenger: help me choose between Signal, SimpleX Chat, Session based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: medium): https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop\n\nThe hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.\nHelp me decide between Signal, SimpleX and Session based on who I actually talk to.\n\nGo step by step. One thing at a time. I want to actually finish this."
-    },
-    {
       "id": "google-photos",
       "name": "Google Photos",
       "category": "digital",
@@ -256,40 +154,199 @@
       "agent_prompt": "I want to exit Supermarket herbs. Act as my exit guide.\n\nGrow them on a windowsill: help me choose between Basil, Mint, Chives based on my situation — ask me what matters before recommending.\n\nAsk me about my light situation (window direction, hours of sun), space and climate, then give me a starter plan for a windowsill herb garden with the three easiest wins.\nTell me which herbs I can start from supermarket cuttings this week instead of waiting for seeds.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
-      "id": "spotify",
-      "name": "Spotify",
+      "id": "whatsapp",
+      "name": "WhatsApp",
       "category": "digital",
-      "stub": true,
-      "tagline": "Renting access to music you'll never own.",
+      "tagline": "Meta reads the metadata of everyone you love.",
       "why": [
-        "Your library evaporates the month you stop paying; artists get fractions of a cent.",
-        "Two decades of listening history feeding a recommendation engine you can't inspect."
+        "Owned by Meta — contact graph and metadata feed the same ad machine as Facebook and Instagram.",
+        "Phone number required, contacts uploaded, message metadata retained."
       ],
       "enrich": {
-        "tosdr": "spotify",
-        "justdeleteme": "Spotify",
-        "justgetmydata": "spotify"
+        "tosdr": "whatsapp",
+        "justdeleteme": "WhatsApp",
+        "justgetmydata": "whatsapp"
       },
+      "extract": [
+        {
+          "step": "Export your chats — Settings → Chats → Export chat (per conversation, with or without media)."
+        },
+        {
+          "step": "Request your account info — Settings → Account → Request account info."
+        }
+      ],
+      "paths": [
+        {
+          "type": "switch",
+          "label": "Switch to a private messenger",
+          "alternatives": [
+            {
+              "name": "Signal",
+              "url": "https://signal.org",
+              "enrich": {
+                "awesome_privacy": "Signal"
+              },
+              "recommended_by": [
+                "awesome-privacy",
+                "privacy-guides",
+                "switching-software"
+              ],
+              "note": "The default answer. Same UX as WhatsApp, E2EE by default, nonprofit.",
+              "live": {
+                "description": "Probably one of the most popular, secure private messaging apps that combines\nstrong encryption (see [Signal Protocol](https://en.wikipedia.org/wiki/Signal_Protocol))\nwith a simple UI and plenty of features. It's widely used across the world, and\neasy-to-use, functioning similar to WhatsApp - with instant messaging, read-receipts,\nsupport for media attachments and allows for high-quality voice and video calls.\nIt's cross-platform, open-source and totally free. Signal is\n[recommended](https://twitter.com/Snowden/status/661313394906161152)\nby Edward Snowden, and is a perfect solution for most users.\n",
+                "openSource": true,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "SimpleX Chat",
+              "url": "https://simplex.chat",
+              "enrich": {
+                "awesome_privacy": "SimpleX"
+              },
+              "recommended_by": [
+                "awesome-privacy",
+                "privacy-guides"
+              ],
+              "note": "No identifiers at all — not even a phone number.",
+              "live": {
+                "description": "Simplex is gaining popularity as a secure and private messaging app renowned\nfor its robust encryption protocol without user IDs or phone numbers and this improves your privacy.\nSimplex offers instant messaging, supports media attachments and voice and video calls.\nAdditionally, it is cross-platform, open-source, and completely free, aligning with the modern user's\npreferences for convenience, security, and accessibility.\nLearn more about the [Security Policy](https://simplex.chat/security/).\n",
+                "openSource": true,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Session",
+              "url": "https://getsession.org",
+              "enrich": {
+                "web3privacy": "session"
+              },
+              "recommended_by": [
+                "web3privacy",
+                "awesome-privacy"
+              ],
+              "note": "Decentralized, no phone number, onion-routed.",
+              "live": {
+                "description": "An end-to-end encrypted messenger that minimizes sensitive metadata, designed and built for people who want absolute privacy and freedom from any form of surveillance",
+                "openSource": true
+              }
+            }
+          ]
+        }
+      ],
       "prompt": [
-        "Help me export my playlists and liked songs first (Exportify or similar).",
-        "Then help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen."
+        "The hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.",
+        "Help me decide between Signal, SimpleX and Session based on who I actually talk to."
       ],
       "live": {
         "tosdr": {
-          "name": "Spotify",
-          "rating": "D",
-          "url": "https://tosdr.org/en/service/225"
+          "name": "WhatsApp",
+          "rating": "C",
+          "url": "https://tosdr.org/en/service/198"
         },
         "justdeleteme": {
-          "url": "https://support.spotify.com/close/",
-          "difficulty": "easy",
-          "notes": null
+          "url": "https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop",
+          "difficulty": "medium",
+          "notes": "From the app: Settings → Account → Delete your account."
         },
         "justgetmydata": {
-          "url": "https://justgetmydata.com/#spotify"
+          "url": "https://justgetmydata.com/#whatsapp"
         }
       },
-      "agent_prompt": "I want to exit Spotify. Act as my exit guide.\n\nWhen I'm ready, walk me through deleting my account (difficulty: easy): https://support.spotify.com/close/\n\nHelp me export my playlists and liked songs first (Exportify or similar).\nThen help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen.\n\nGo step by step. One thing at a time. I want to actually finish this."
+      "agent_prompt": "I want to exit WhatsApp. Act as my exit guide.\n\nFirst, help me get my data out:\n- Export your chats — Settings → Chats → Export chat (per conversation, with or without media).\n- Request your account info — Settings → Account → Request account info.\n\nSwitch to a private messenger: help me choose between Signal, SimpleX Chat, Session based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: medium): https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop\n\nThe hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.\nHelp me decide between Signal, SimpleX and Session based on who I actually talk to.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "category": "digital",
+      "stub": true,
+      "tagline": "The default brain. Defaults are dependencies.",
+      "why": [
+        "The fastest-adopted consumer product in history — which is exactly what a dependency looks like from inside."
+      ],
+      "enrich": {
+        "tosdr": "chatgpt"
+      },
+      "prompt": [
+        "Help me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.",
+        "Check my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.",
+        "Walk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "OpenAI",
+          "rating": "D",
+          "url": "https://tosdr.org/en/service/7108"
+        }
+      },
+      "agent_prompt": "I want to exit ChatGPT. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.\nCheck my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.\nWalk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "category": "digital",
+      "stub": true,
+      "tagline": "Your second brain, rented from a first party.",
+      "why": [
+        "Every conversation routes through a US cloud provider; capability you increasingly rely on, priced monthly and revocable.",
+        "Full disclosure — this exit page was drafted by Claude. Exits apply to everyone."
+      ],
+      "enrich": {
+        "tosdr": "anthropic"
+      },
+      "prompt": [
+        "Help me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.",
+        "Check my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.",
+        "Help me export anything I want to keep from my account before I go."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "Anthropic, PBC",
+          "rating": "N/A",
+          "url": "https://tosdr.org/en/service/11619"
+        }
+      },
+      "agent_prompt": "I want to exit Claude. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.\nCheck my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.\nHelp me export anything I want to keep from my account before I go.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
+      "id": "doomscrolling",
+      "name": "Doomscrolling",
+      "category": "behavioral",
+      "stub": true,
+      "tagline": "Exit the feed, keep the news.",
+      "why": [
+        "Infinite feeds are designed to never let you finish; the anxiety is the engagement."
+      ],
+      "prompt": [
+        "Interview me about when and why I scroll (boredom? anxiety? habit loops?), then design a one-week exit plan — RSS or newsletters for actual news, friction on the feed apps, and a replacement ritual for the trigger moments."
+      ],
+      "live": {},
+      "agent_prompt": "I want to exit Doomscrolling. Act as my exit guide.\n\n\nInterview me about when and why I scroll (boredom? anxiety? habit loops?), then design a one-week exit plan — RSS or newsletters for actual news, friction on the feed apps, and a replacement ritual for the trigger moments.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "category": "digital",
+      "stub": true,
+      "tagline": "One more thread tying you to the Google account.",
+      "why": [
+        "Bundled into search, mail and your phone — the exit is really from the account that holds them together."
+      ],
+      "enrich": {
+        "tosdr": "google"
+      },
+      "prompt": [
+        "Help me move my AI usage to locally hosted models — ask what I use Gemini for and how deep my Google account dependency goes, since this exit is usually part of that bigger one.",
+        "Check my hardware and recommend a local stack (Ollama or llama.cpp) with a realistic starting model, and tell me honestly what I'd lose."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "Google",
+          "rating": "E",
+          "url": "https://tosdr.org/en/service/217"
+        }
+      },
+      "agent_prompt": "I want to exit Gemini. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models — ask what I use Gemini for and how deep my Google account dependency goes, since this exit is usually part of that bigger one.\nCheck my hardware and recommend a local stack (Ollama or llama.cpp) with a realistic starting model, and tell me honestly what I'd lose.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
       "id": "instagram",
@@ -327,19 +384,20 @@
       "agent_prompt": "I want to exit Instagram. Act as my exit guide.\n\nWhen I'm ready, walk me through deleting my account (difficulty: easy): https://instagram.com/accounts/remove/request/permanent/\n\nHelp me download my archive first, then decide between deleting, deactivating, or downgrading to a lurker account with notifications off.\nIf I still want to share photos, suggest calmer homes for that (Pixelfed, a shared album, a small group chat) based on who I actually want to reach.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
-      "id": "doomscrolling",
-      "name": "Doomscrolling",
-      "category": "behavioral",
+      "id": "oppressive-regime",
+      "name": "Oppressive regime",
+      "category": "institutional",
       "stub": true,
-      "tagline": "Exit the feed, keep the news.",
+      "tagline": "Some dependencies have armies.",
       "why": [
-        "Infinite feeds are designed to never let you finish; the anxiety is the engagement."
+        "The heaviest exit on this site — and the reason the privacy tools on it exist."
       ],
       "prompt": [
-        "Interview me about when and why I scroll (boredom? anxiety? habit loops?), then design a one-week exit plan — RSS or newsletters for actual news, friction on the feed apps, and a replacement ritual for the trigger moments."
+        "Start by asking me about my situation carefully — country, urgency, and whether I'm planning ahead or in immediate danger. If it's immediate danger, point me to organizations that do this professionally before anything else.",
+        "Help me with the layers that exits like this share — digital safety first (secure communications, clean devices, what to carry across a border), then documents, money I can access from abroad, and legal pathways like visas and asylum where they apply."
       ],
       "live": {},
-      "agent_prompt": "I want to exit Doomscrolling. Act as my exit guide.\n\n\nInterview me about when and why I scroll (boredom? anxiety? habit loops?), then design a one-week exit plan — RSS or newsletters for actual news, friction on the feed apps, and a replacement ritual for the trigger moments.\n\nGo step by step. One thing at a time. I want to actually finish this."
+      "agent_prompt": "I want to exit Oppressive regime. Act as my exit guide.\n\n\nStart by asking me about my situation carefully — country, urgency, and whether I'm planning ahead or in immediate danger. If it's immediate danger, point me to organizations that do this professionally before anything else.\nHelp me with the layers that exits like this share — digital safety first (secure communications, clean devices, what to carry across a border), then documents, money I can access from abroad, and legal pathways like visas and asylum where they apply.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
       "id": "smoking",
@@ -358,6 +416,42 @@
       "agent_prompt": "I want to exit Smoking. Act as my exit guide.\n\n\nAct as a supportive quit coach. Ask me about my smoking pattern, past quit attempts and what triggered relapses, then help me build a quit plan — date, nicotine replacement options to discuss with a doctor or pharmacist, trigger substitutions, and what to do in minute three of a craving.\nBe honest that relapse is part of most successful quits, and help me plan for it rather than be ashamed of it.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
+      "id": "spotify",
+      "name": "Spotify",
+      "category": "digital",
+      "stub": true,
+      "tagline": "Renting access to music you'll never own.",
+      "why": [
+        "Your library evaporates the month you stop paying; artists get fractions of a cent.",
+        "Two decades of listening history feeding a recommendation engine you can't inspect."
+      ],
+      "enrich": {
+        "tosdr": "spotify",
+        "justdeleteme": "Spotify",
+        "justgetmydata": "spotify"
+      },
+      "prompt": [
+        "Help me export my playlists and liked songs first (Exportify or similar).",
+        "Then help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "Spotify",
+          "rating": "D",
+          "url": "https://tosdr.org/en/service/225"
+        },
+        "justdeleteme": {
+          "url": "https://support.spotify.com/close/",
+          "difficulty": "easy",
+          "notes": null
+        },
+        "justgetmydata": {
+          "url": "https://justgetmydata.com/#spotify"
+        }
+      },
+      "agent_prompt": "I want to exit Spotify. Act as my exit guide.\n\nWhen I'm ready, walk me through deleting my account (difficulty: easy): https://support.spotify.com/close/\n\nHelp me export my playlists and liked songs first (Exportify or similar).\nThen help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
       "id": "toxic-relationship",
       "name": "Toxic relationship",
       "category": "relational",
@@ -373,100 +467,6 @@
       ],
       "live": {},
       "agent_prompt": "I want to exit Toxic relationship. Act as my exit guide.\n\n\nHelp me think clearly. Ask me gentle, concrete questions about how this relationship actually functions day to day, and reflect back what I tell you without telling me what to do.\nIf anything I describe suggests my safety is at risk, stop and point me to local professional support and emergency contacts first — an AI conversation is not a safety plan.\nIf I decide to leave, help me plan the practical side — living situation, money, key conversations, and who in my life I can lean on.\n\nGo step by step. One thing at a time. I want to actually finish this."
-    },
-    {
-      "id": "claude",
-      "name": "Claude",
-      "category": "digital",
-      "stub": true,
-      "tagline": "Your second brain, rented from a first party.",
-      "why": [
-        "Every conversation routes through a US cloud provider; capability you increasingly rely on, priced monthly and revocable.",
-        "Full disclosure — this exit page was drafted by Claude. Exits apply to everyone."
-      ],
-      "enrich": {
-        "tosdr": "anthropic"
-      },
-      "prompt": [
-        "Help me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.",
-        "Check my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.",
-        "Help me export anything I want to keep from my account before I go."
-      ],
-      "live": {
-        "tosdr": {
-          "name": "Anthropic, PBC",
-          "rating": "N/A",
-          "url": "https://tosdr.org/en/service/11619"
-        }
-      },
-      "agent_prompt": "I want to exit Claude. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.\nCheck my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.\nHelp me export anything I want to keep from my account before I go.\n\nGo step by step. One thing at a time. I want to actually finish this."
-    },
-    {
-      "id": "chatgpt",
-      "name": "ChatGPT",
-      "category": "digital",
-      "stub": true,
-      "tagline": "The default brain. Defaults are dependencies.",
-      "why": [
-        "The fastest-adopted consumer product in history — which is exactly what a dependency looks like from inside."
-      ],
-      "enrich": {
-        "tosdr": "chatgpt"
-      },
-      "prompt": [
-        "Help me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.",
-        "Check my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.",
-        "Walk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes."
-      ],
-      "live": {
-        "tosdr": {
-          "name": "OpenAI",
-          "rating": "D",
-          "url": "https://tosdr.org/en/service/7108"
-        }
-      },
-      "agent_prompt": "I want to exit ChatGPT. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.\nCheck my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.\nWalk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes.\n\nGo step by step. One thing at a time. I want to actually finish this."
-    },
-    {
-      "id": "gemini",
-      "name": "Gemini",
-      "category": "digital",
-      "stub": true,
-      "tagline": "One more thread tying you to the Google account.",
-      "why": [
-        "Bundled into search, mail and your phone — the exit is really from the account that holds them together."
-      ],
-      "enrich": {
-        "tosdr": "google"
-      },
-      "prompt": [
-        "Help me move my AI usage to locally hosted models — ask what I use Gemini for and how deep my Google account dependency goes, since this exit is usually part of that bigger one.",
-        "Check my hardware and recommend a local stack (Ollama or llama.cpp) with a realistic starting model, and tell me honestly what I'd lose."
-      ],
-      "live": {
-        "tosdr": {
-          "name": "Google",
-          "rating": "E",
-          "url": "https://tosdr.org/en/service/217"
-        }
-      },
-      "agent_prompt": "I want to exit Gemini. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models — ask what I use Gemini for and how deep my Google account dependency goes, since this exit is usually part of that bigger one.\nCheck my hardware and recommend a local stack (Ollama or llama.cpp) with a realistic starting model, and tell me honestly what I'd lose.\n\nGo step by step. One thing at a time. I want to actually finish this."
-    },
-    {
-      "id": "oppressive-regime",
-      "name": "Oppressive regime",
-      "category": "institutional",
-      "stub": true,
-      "tagline": "Some dependencies have armies.",
-      "why": [
-        "The heaviest exit on this site — and the reason the privacy tools on it exist."
-      ],
-      "prompt": [
-        "Start by asking me about my situation carefully — country, urgency, and whether I'm planning ahead or in immediate danger. If it's immediate danger, point me to organizations that do this professionally before anything else.",
-        "Help me with the layers that exits like this share — digital safety first (secure communications, clean devices, what to carry across a border), then documents, money I can access from abroad, and legal pathways like visas and asylum where they apply."
-      ],
-      "live": {},
-      "agent_prompt": "I want to exit Oppressive regime. Act as my exit guide.\n\n\nStart by asking me about my situation carefully — country, urgency, and whether I'm planning ahead or in immediate danger. If it's immediate danger, point me to organizations that do this professionally before anything else.\nHelp me with the layers that exits like this share — digital safety first (secure communications, clean devices, what to carry across a border), then documents, money I can access from abroad, and legal pathways like visas and asylum where they apply.\n\nGo step by step. One thing at a time. I want to actually finish this."
     }
   ],
   "sources": [

@@ -1,0 +1,17 @@
+id: toxic-relationship
+name: Toxic relationship
+category: relational
+stub: true
+tagline: The exit nobody posts about.
+why:
+- Some dependencies are people. They are also the hardest ones to see from inside.
+prompt:
+- >-
+  Help me think clearly. Ask me gentle, concrete questions about how this relationship actually functions
+  day to day, and reflect back what I tell you without telling me what to do.
+- >-
+  If anything I describe suggests my safety is at risk, stop and point me to local professional support
+  and emergency contacts first — an AI conversation is not a safety plan.
+- >-
+  If I decide to leave, help me plan the practical side — living situation, money, key conversations,
+  and who in my life I can lean on.

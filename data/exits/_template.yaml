@@ -1,0 +1,36 @@
+# Template for a new exit. Copy to <id>.yaml (filename must equal id).
+# Files starting with _ are ignored by the build.
+# Delete comments and unused optional sections before submitting.
+
+id: example-service          # slug: lowercase, hyphens; becomes /exit/<id>.html
+name: Example Service        # display name; what users type to find it
+category: digital            # digital | physical | food | financial | relational | institutional | substance | behavioral
+tagline: One sharp line on why this exit matters.
+
+# stub: true                 # uncomment if you're only adding the page, not curated routes
+
+why:                         # bullets; live ToS;DR rating is appended automatically when enrich.tosdr is set
+  - First reason this is a dependency worth leaving.
+
+enrich:                      # all optional — keys into live data sources (see build.py)
+  tosdr: example             # search slug at api.tosdr.org -> terms-of-service rating
+  justdeleteme: Example      # exact name in JustDeleteMe sites.json -> delete link + difficulty
+  justgetmydata: example     # slug at justgetmydata.com -> data export link
+
+extract:                     # how to get your data/assets out BEFORE exiting
+  - step: Where the export button is and what to expect.
+
+paths:                       # the exit routes; omit entirely for stubs
+  - type: switch             # switch | self-host | grow | print | repair
+    label: Switch to something better
+    alternatives:
+      - name: Alternative
+        url: https://example.org
+        enrich:                       # optional; pulls description + flags
+          awesome_privacy: Alternative    # or awesome_selfhosted: <slug> / web3privacy: <slug>
+        recommended_by: [awesome-privacy] # source ids from data/sources.yaml — only claim real ones
+        note: One line on when this alternative is the right pick.
+
+prompt:                      # extra lines for the generated copy-paste agent prompt
+  - Exit-specific guidance for the user's agent. Sensitive topics: tell the
+    agent to defer to professional help where appropriate.

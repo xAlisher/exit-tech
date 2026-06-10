@@ -14,9 +14,9 @@
 <input id="q" class="empty" autocomplete="off" spellcheck="false" aria-label="what do you want to exit">
 </span>
 </div>
-<p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
+<p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a id="ask" href="https://github.com/xAlisher/exit-tech/issues/new">ask for it</a>.</p>
 <script>
-const EXITS = [{"id": "whatsapp", "name": "WhatsApp"}, {"id": "google-photos", "name": "Google Photos"}, {"id": "supermarket-herbs", "name": "Supermarket herbs"}, {"id": "spotify", "name": "Spotify"}, {"id": "instagram", "name": "Instagram"}, {"id": "doomscrolling", "name": "Doomscrolling"}, {"id": "smoking", "name": "Smoking"}, {"id": "toxic-relationship", "name": "Toxic relationship"}, {"id": "claude", "name": "Claude"}, {"id": "chatgpt", "name": "ChatGPT"}, {"id": "gemini", "name": "Gemini"}, {"id": "oppressive-regime", "name": "Oppressive regime"}];
+const EXITS = [{"id": "google-photos", "name": "Google Photos"}, {"id": "supermarket-herbs", "name": "Supermarket herbs"}, {"id": "whatsapp", "name": "WhatsApp"}, {"id": "chatgpt", "name": "ChatGPT"}, {"id": "claude", "name": "Claude"}, {"id": "doomscrolling", "name": "Doomscrolling"}, {"id": "gemini", "name": "Gemini"}, {"id": "instagram", "name": "Instagram"}, {"id": "oppressive-regime", "name": "Oppressive regime"}, {"id": "smoking", "name": "Smoking"}, {"id": "spotify", "name": "Spotify"}, {"id": "toxic-relationship", "name": "Toxic relationship"}];
 const q = document.getElementById('q'),
       gpad = document.getElementById('gpad'),
       grest = document.getElementById('grest'),
@@ -31,6 +31,12 @@ function update() {
   match = v ? (EXITS.find(e => e.name.toLowerCase().startsWith(v))
             || EXITS.find(e => e.name.toLowerCase().includes(v))) : null;
   document.getElementById('nohit').hidden = !(v && !match);
+  if (v && !match) {
+    document.getElementById('ask').href =
+      'https://github.com/xAlisher/exit-tech/issues/new?labels=exit-request&title=' +
+      encodeURIComponent('exit: ' + q.value.trim()) +
+      '&body=' + encodeURIComponent('Requested via the landing input on exit.tech.');
+  }
   gpad.textContent = ''; grest.textContent = '';
   if (match) {
     if (match.name.toLowerCase().startsWith(v)) {

@@ -1,0 +1,48 @@
+id: whatsapp
+name: WhatsApp
+category: digital
+tagline: Meta reads the metadata of everyone you love.
+why:
+- Owned by Meta — contact graph and metadata feed the same ad machine as Facebook and Instagram.
+- Phone number required, contacts uploaded, message metadata retained.
+enrich:
+  tosdr: whatsapp
+  justdeleteme: WhatsApp
+  justgetmydata: whatsapp
+extract:
+- step: Export your chats — Settings → Chats → Export chat (per conversation, with or without media).
+- step: Request your account info — Settings → Account → Request account info.
+paths:
+- type: switch
+  label: Switch to a private messenger
+  alternatives:
+  - name: Signal
+    url: https://signal.org
+    enrich:
+      awesome_privacy: Signal
+    recommended_by:
+    - awesome-privacy
+    - privacy-guides
+    - switching-software
+    note: The default answer. Same UX as WhatsApp, E2EE by default, nonprofit.
+  - name: SimpleX Chat
+    url: https://simplex.chat
+    enrich:
+      awesome_privacy: SimpleX
+    recommended_by:
+    - awesome-privacy
+    - privacy-guides
+    note: No identifiers at all — not even a phone number.
+  - name: Session
+    url: https://getsession.org
+    enrich:
+      web3privacy: session
+    recommended_by:
+    - web3privacy
+    - awesome-privacy
+    note: Decentralized, no phone number, onion-routed.
+prompt:
+- >-
+  The hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my
+  groups explaining where I went.
+- Help me decide between Signal, SimpleX and Session based on who I actually talk to.
