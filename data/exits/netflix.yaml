@@ -1,0 +1,39 @@
+# drafted by qwen3.6-27b (local, Sneg) — reviewed by Claude
+id: netflix
+name: Netflix
+category: digital
+tagline: You don't own anything, and they know what makes you cry.
+why:
+- Subscription model for content you can't keep; the catalog rotates beneath you and the algorithm optimizes for retention, not satisfaction.
+- Price hikes, password crackdowns, and autoplay engineered for one more episode.
+enrich:
+  tosdr: netflix
+  justdeleteme: Netflix
+extract:
+- step: 'Download your viewing activity — Account → Viewing activity. Note: this export is often incomplete.'
+- step: Request your full data archive at netflix.com/account/getmyinfo — arrives by email as a zip.
+paths:
+- type: self-host
+  label: Own your media, stream it yourself
+  alternatives:
+  - name: Jellyfin
+    url: https://jellyfin.org
+    enrich:
+      awesome_selfhosted: jellyfin
+    recommended_by: [awesome-selfhosted]
+    note: A Netflix-grade interface for media you actually own. Free, open source, clients for every screen in the house.
+- type: switch
+  label: Change how you pay for stories
+  alternatives:
+  - name: Your public library
+    url: https://www.kanopy.com
+    note: Streaming (Kanopy, Hoopla) comes free with most library cards — curated by librarians, not engagement metrics.
+  - name: Physical media
+    url: https://www.blu-ray.com
+    note: A used Blu-ray costs less than a month of streaming and can't be pulled from your shelf.
+prompt:
+- Before recommending anything, ask me what I actually watched last month — if the honest answer is "background noise", the exit is about the habit, not the catalog.
+- Help me export my viewing history and profile preferences before I cancel.
+- If I choose self-hosting, check my hardware and walk me through Jellyfin setup, and be straight with me about where legal media files come from.
+- Cancelling the subscription is easy. Full account deletion is rated impossible by JustDeleteMe — help me decide whether cancelling plus a personal-data cleanup is enough.
+- Suggest ways to break the habit of mindless scrolling through menus without a clear target.
