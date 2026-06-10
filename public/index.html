@@ -61,7 +61,8 @@ function update() {
 
 q.addEventListener('input', update);
 q.addEventListener('keydown', e => {
-  if (e.key === 'Tab' && match) {
+  const caretAtEnd = q.selectionStart === q.value.length && q.selectionEnd === q.value.length;
+  if ((e.key === 'Tab' || (e.key === 'ArrowRight' && caretAtEnd)) && match && q.value) {
     e.preventDefault();
     q.value = match.name;
     update();
