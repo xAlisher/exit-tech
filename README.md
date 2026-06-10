@@ -1,6 +1,6 @@
 # exit.tech
 
-**Exit as culture.** One line in, one exit out.
+**Exit is culture.** One line in, one exit out.
 
 Type what you want to exit — WhatsApp, Google Photos, supermarket herbs —
 and get a page with: why, how to get your stuff out first, where to go
