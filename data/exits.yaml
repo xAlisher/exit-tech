@@ -1,0 +1,119 @@
+# exit.tech — dependency → exit-paths mapping
+# This file is the original dataset of exit.tech. Everything else is
+# aggregated from credited open sources at build time (see build.py).
+#
+# Schema per exit:
+#   id           — slug, becomes /exit/<id>.html
+#   name         — what you're exiting
+#   category     — digital | physical | food | financial | ...
+#   tagline      — one line on why this exit matters
+#   why          — manual bullets (enriched with live ToS;DR data when available)
+#   enrich       — keys into external sources (resolved by build.py)
+#     tosdr            — ToS;DR search slug (rating, points)
+#     justdeleteme     — name in JDM sites.json (deletion url + difficulty)
+#     justgetmydata    — slug on justgetmydata.com
+#   extract      — how to get your data/assets out BEFORE you exit
+#   paths        — the exit paths; type: switch | self-host | grow | print | repair
+#     alternatives — name + enrich keys + which sources recommend it
+#   prompt       — extra context lines for the generated agent prompt
+
+- id: whatsapp
+  name: WhatsApp
+  category: digital
+  tagline: Meta reads the metadata of everyone you love.
+  why:
+    - Owned by Meta — contact graph and metadata feed the same ad machine as Facebook and Instagram.
+    - Phone number required, contacts uploaded, message metadata retained.
+  enrich:
+    tosdr: whatsapp
+    justdeleteme: WhatsApp
+    justgetmydata: whatsapp
+  extract:
+    - step: Export your chats — Settings → Chats → Export chat (per conversation, with or without media).
+    - step: Request your account info — Settings → Account → Request account info.
+  paths:
+    - type: switch
+      label: Switch to a private messenger
+      alternatives:
+        - name: Signal
+          url: https://signal.org
+          enrich: { awesome_privacy: Signal }
+          recommended_by: [awesome-privacy, privacy-guides, switching-software]
+          note: The default answer. Same UX as WhatsApp, E2EE by default, nonprofit.
+        - name: SimpleX Chat
+          url: https://simplex.chat
+          enrich: { awesome_privacy: SimpleX }
+          recommended_by: [awesome-privacy, privacy-guides]
+          note: No identifiers at all — not even a phone number.
+        - name: Session
+          url: https://getsession.org
+          enrich: { web3privacy: session }
+          recommended_by: [web3privacy, awesome-privacy]
+          note: Decentralized, no phone number, onion-routed.
+  prompt:
+    - The hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.
+    - Help me decide between Signal, SimpleX and Session based on who I actually talk to.
+
+- id: google-photos
+  name: Google Photos
+  category: digital
+  tagline: Your memories, their training data, rented back to you monthly.
+  why:
+    - Storage rent that only goes up — your library grows, so does the bill.
+    - Photos are scanned and analyzed; lock-in deepens with every album.
+  enrich:
+    tosdr: google
+    justdeleteme: Google
+    justgetmydata: google
+  extract:
+    - step: Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives; originals + metadata in JSON sidecars.
+  paths:
+    - type: self-host
+      label: Self-host your library
+      alternatives:
+        - name: Immich
+          url: https://immich.app
+          enrich: { awesome_selfhosted: immich }
+          recommended_by: [awesome-selfhosted]
+          note: The Google Photos experience, on your own hardware. immich-go imports Takeout archives directly.
+        - name: PhotoPrism
+          url: https://www.photoprism.app
+          enrich: { awesome_selfhosted: photoprism }
+          recommended_by: [awesome-selfhosted]
+          note: AI-powered library with strong search; single Docker container.
+    - type: switch
+      label: Switch to an encrypted service
+      alternatives:
+        - name: Ente Photos
+          url: https://ente.io
+          recommended_by: [privacy-guides]
+          note: End-to-end encrypted, open source, imports from Takeout. Paying with money instead of data.
+  prompt:
+    - I have a Google Takeout archive of my photo library. Walk me through importing it into my chosen alternative (immich-go for Immich, web importer for Ente), including the metadata JSON sidecars.
+
+- id: supermarket-herbs
+  name: Supermarket herbs
+  category: food
+  tagline: "€2.49 for wilted basil in plastic, forever. Or one pot, once."
+  why:
+    - Fresh herbs are the highest-markup, lowest-effort thing to grow yourself.
+    - Plastic clamshells, cold-chain logistics and supermarket pricing — for a plant that wants to live on your windowsill.
+  paths:
+    - type: grow
+      label: Grow them on a windowsill
+      alternatives:
+        - name: Basil
+          url: https://www.appropedia.org/Special:Search?search=growing+basil
+          recommended_by: [appropedia]
+          note: Supermarket basil pots are many seedlings crammed together — split one pot into four and they thrive.
+        - name: Mint
+          url: https://www.appropedia.org/Special:Search?search=growing+mint
+          recommended_by: [appropedia]
+          note: Nearly unkillable. Grows from cuttings — one supermarket bunch can root in a glass of water.
+        - name: Chives
+          url: https://www.appropedia.org/Special:Search?search=growing+chives
+          recommended_by: [appropedia]
+          note: Perennial — cut and they regrow, for years.
+  prompt:
+    - Ask me about my light situation (window direction, hours of sun), space and climate, then give me a starter plan for a windowsill herb garden with the three easiest wins.
+    - Tell me which herbs I can start from supermarket cuttings this week instead of waiting for seeds.

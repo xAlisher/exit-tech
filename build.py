@@ -1,0 +1,369 @@
+#!/usr/bin/env python3
+"""exit.tech static site builder.
+
+Reads data/exits.yaml (our dependency -> exit-paths mapping) and
+data/sources.yaml (credited external sources), enriches exits with live
+data from those sources (cached in data/cache/), renders public/.
+
+Usage: python3 build.py [--offline]   (--offline: cache only, no network)
+"""
+
+import json
+import re
+import sys
+import urllib.request
+from pathlib import Path
+
+import yaml
+
+ROOT = Path(__file__).parent
+CACHE = ROOT / "data" / "cache"
+PUBLIC = ROOT / "public"
+OFFLINE = "--offline" in sys.argv
+
+UA = {"User-Agent": "exit.tech-builder/0.1 (https://github.com/xAlisher/exit-tech)"}
+
+
+def fetch(key: str, url: str) -> str | None:
+    """Fetch url, caching body under data/cache/<key>. Returns None on failure."""
+    CACHE.mkdir(parents=True, exist_ok=True)
+    path = CACHE / key
+    if path.exists():
+        return path.read_text()
+    if OFFLINE:
+        return None
+    try:
+        req = urllib.request.Request(url, headers=UA)
+        with urllib.request.urlopen(req, timeout=20) as r:
+            body = r.read().decode("utf-8", "replace")
+        path.write_text(body)
+        return body
+    except Exception as e:
+        print(f"  warn: fetch failed for {key}: {e}", file=sys.stderr)
+        return None
+
+
+# --- source fetchers ----------------------------------------------------------
+
+def tosdr_rating(slug: str) -> dict | None:
+    body = fetch(f"tosdr-{slug}.json", f"https://api.tosdr.org/search/v5/?query={slug}")
+    if not body:
+        return None
+    services = json.loads(body).get("services") or []
+    if not services:
+        return None
+    s = services[0]
+    return {"name": s["name"], "rating": s.get("rating"),
+            "url": f"https://tosdr.org/en/service/{s['id']}"}
+
+
+def justdeleteme(name: str) -> dict | None:
+    body = fetch("justdeleteme-sites.json",
+                 "https://raw.githubusercontent.com/justdeleteme/justdelete.me/master/sites.json")
+    if not body:
+        return None
+    for site in json.loads(body):
+        if site["name"].lower() == name.lower():
+            return {"url": site.get("url"), "difficulty": site.get("difficulty"),
+                    "notes": site.get("notes")}
+    return None
+
+
+def awesome_privacy(name: str) -> dict | None:
+    body = fetch("awesome-privacy.yml",
+                 "https://raw.githubusercontent.com/Lissy93/awesome-privacy/main/awesome-privacy.yml")
+    if not body:
+        return None
+    data = yaml.safe_load(body)
+    for cat in data.get("categories", []):
+        for sec in cat.get("sections", []):
+            for svc in sec.get("services", []) or []:
+                if svc.get("name", "").lower() == name.lower():
+                    return {"description": svc.get("description"),
+                            "openSource": svc.get("openSource"),
+                            "securityAudited": svc.get("securityAudited")}
+    return None
+
+
+def awesome_selfhosted(slug: str) -> dict | None:
+    body = fetch(f"awesome-selfhosted-{slug}.yml",
+                 f"https://raw.githubusercontent.com/awesome-selfhosted/awesome-selfhosted-data/master/software/{slug}.yml")
+    if not body:
+        return None
+    d = yaml.safe_load(body)
+    return {"description": d.get("description"), "license": d.get("licenses"),
+            "language": d.get("platforms"), "source": d.get("source_code_url")}
+
+
+def web3privacy(slug: str) -> dict | None:
+    body = fetch(f"web3privacy-{slug}.yml",
+                 f"https://raw.githubusercontent.com/web3privacy/explorer-data/main/src/projects/{slug}/index.yaml")
+    if not body:
+        return None
+    d = yaml.safe_load(body)
+    return {"description": d.get("description"),
+            "openSource": (d.get("blockchain_features") or {}).get("opensource")}
+
+
+# --- enrichment ---------------------------------------------------------------
+
+def enrich_exit(ex: dict) -> dict:
+    keys = ex.get("enrich") or {}
+    live = {}
+    if "tosdr" in keys:
+        live["tosdr"] = tosdr_rating(keys["tosdr"])
+    if "justdeleteme" in keys:
+        live["justdeleteme"] = justdeleteme(keys["justdeleteme"])
+    if "justgetmydata" in keys:
+        live["justgetmydata"] = {"url": f"https://justgetmydata.com/#{keys['justgetmydata']}"}
+    ex["live"] = {k: v for k, v in live.items() if v}
+
+    for path in ex.get("paths", []):
+        for alt in path.get("alternatives", []):
+            akeys = alt.get("enrich") or {}
+            if "awesome_privacy" in akeys:
+                alt["live"] = awesome_privacy(akeys["awesome_privacy"])
+            elif "awesome_selfhosted" in akeys:
+                alt["live"] = awesome_selfhosted(akeys["awesome_selfhosted"])
+            elif "web3privacy" in akeys:
+                alt["live"] = web3privacy(akeys["web3privacy"])
+    return ex
+
+
+def build_prompt(ex: dict) -> str:
+    """Assemble the copy-paste agent prompt for an exit from its data."""
+    lines = [f"I want to exit {ex['name']}. Act as my exit guide.", ""]
+    if ex.get("extract"):
+        lines.append("First, help me get my data out:")
+        lines += [f"- {s['step']}" for s in ex["extract"]]
+        lines.append("")
+    for path in ex.get("paths", []):
+        alts = ", ".join(a["name"] for a in path["alternatives"])
+        lines.append(f"{path['label']}: help me choose between {alts} based on my situation — ask me what matters before recommending.")
+    jdm = (ex.get("live") or {}).get("justdeleteme")
+    if jdm and jdm.get("url"):
+        lines.append(f"When I'm ready, walk me through deleting my account "
+                     f"(difficulty: {jdm.get('difficulty', 'unknown')}): {jdm['url']}")
+    lines.append("")
+    lines += ex.get("prompt", [])
+    lines += ["", "Go step by step. One thing at a time. I want to actually finish this."]
+    return "\n".join(lines)
+
+
+# --- rendering ----------------------------------------------------------------
+
+def esc(s) -> str:
+    return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            .replace('"', "&quot;"))
+
+
+def page(title: str, body: str, depth: int = 0) -> str:
+    pre = "../" * depth
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{esc(title)}</title>
+<link rel="stylesheet" href="{pre}style.css">
+</head>
+<body>
+<header><a class="tag" href="{pre}index.html">Exit is culture<span class="cursor"></span></a></header>
+<main>
+{body}
+</main>
+<footer>
+  <a href="{pre}sources.html">sources &amp; credits</a> ·
+  <a href="{pre}exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+</footer>
+</body>
+</html>"""
+
+
+def badge_row(refs: list, sources_by_id: dict) -> str:
+    out = []
+    for r in refs:
+        s = sources_by_id.get(r)
+        label = s["name"] if s else r
+        out.append(f'<a class="badge" href="../sources.html#{esc(r)}" title="{esc(label)}">{esc(r)}</a>')
+    return f'<div class="badges">via {" ".join(out)}</div>'
+
+
+def render_exit(ex: dict, sources_by_id: dict) -> str:
+    b = [f'<p class="crumb">~/exit/{esc(ex["id"])}</p>',
+         f'<h1>Exit {esc(ex["name"])}</h1>',
+         f'<p class="tagline">{esc(ex["tagline"])}</p>']
+
+    b.append("<h2>// why</h2><ul>")
+    b += [f"<li>{esc(w)}</li>" for w in ex.get("why", [])]
+    tosdr = (ex.get("live") or {}).get("tosdr")
+    if tosdr and tosdr.get("rating"):
+        b.append(f'<li>Terms of service rated <strong>“{esc(tosdr["rating"])}”</strong> '
+                 f'— <a href="{esc(tosdr["url"])}">see the documented points at ToS;DR</a></li>')
+    b.append("</ul>")
+
+    extract = list(ex.get("extract") or [])
+    jgmd = (ex.get("live") or {}).get("justgetmydata")
+    if extract or jgmd:
+        b.append("<h2>// first, get your stuff out</h2><ol>")
+        b += [f"<li>{esc(s['step'])}</li>" for s in extract]
+        if jgmd:
+            b.append(f'<li><a href="{esc(jgmd["url"])}">Data export links at JustGetMyData</a></li>')
+        b.append("</ol>")
+
+    b.append("<h2>// exit paths</h2>")
+    for path in ex.get("paths", []):
+        b.append(f'<h3><span class="ptype">[{esc(path["type"])}]</span> {esc(path["label"])}</h3>')
+        for alt in path["alternatives"]:
+            live = alt.get("live") or {}
+            desc = alt.get("note") or live.get("description") or ""
+            flags = []
+            if live.get("openSource"):
+                flags.append("open source")
+            if live.get("securityAudited"):
+                flags.append("audited")
+            flag_html = f' <span class="flags">{esc(" · ".join(flags))}</span>' if flags else ""
+            b.append('<div class="alt">'
+                     f'<a class="alt-name" href="{esc(alt["url"])}">{esc(alt["name"])}</a>{flag_html}'
+                     f'<p>{esc(desc)}</p>'
+                     f'{badge_row(alt.get("recommended_by", []), sources_by_id)}'
+                     "</div>")
+
+    jdm = (ex.get("live") or {}).get("justdeleteme")
+    if jdm and jdm.get("url"):
+        b.append("<h2>// burn the bridge</h2>")
+        diff = jdm.get("difficulty", "unknown")
+        b.append(f'<p>Delete your account (difficulty: <strong>{esc(diff)}</strong>) — '
+                 f'<a href="{esc(jdm["url"])}">direct link via JustDeleteMe</a></p>')
+
+    b.append("<h2>// take an agent with you</h2>")
+    b.append("<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>")
+    b.append(f'<pre id="prompt">{esc(ex["agent_prompt"])}</pre>')
+    b.append('<button onclick="navigator.clipboard.writeText(document.getElementById(\'prompt\').innerText).then(()=>{this.innerText=\'copied ✓\'})">copy prompt</button>')
+    return page(f"Exit {ex['name']} — exit.tech", "\n".join(b), depth=1)
+
+
+def render_index(exits: list) -> str:
+    cards = []
+    for ex in exits:
+        n_alts = sum(len(p["alternatives"]) for p in ex.get("paths", []))
+        types = ", ".join(sorted({p["type"] for p in ex.get("paths", [])}))
+        cards.append(f'''<a class="card" href="exit/{esc(ex["id"])}.html" data-name="{esc(ex["name"].lower())}">
+<span class="card-cat">[{esc(ex["category"])}]</span>
+<span class="card-name">{esc(ex["name"])}</span>
+<span class="card-meta">{n_alts} exit routes · {esc(types)}</span>
+</a>''')
+    body = f'''<div class="hero">
+<label for="q" class="promptline">&gt; I want to exit&nbsp;</label><input id="q" autocomplete="off" autofocus placeholder="_">
+</div>
+<div id="cards">{"".join(cards)}</div>
+<p id="nohit" hidden>Nothing here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
+<script>
+const q = document.getElementById('q');
+q.addEventListener('input', () => {{
+  const v = q.value.trim().toLowerCase();
+  let hits = 0;
+  document.querySelectorAll('.card').forEach(c => {{
+    const show = !v || c.dataset.name.includes(v);
+    c.hidden = !show; if (show) hits++;
+  }});
+  document.getElementById('nohit').hidden = hits > 0;
+}});
+</script>'''
+    return page("exit.tech — exit as culture", body)
+
+
+def render_sources(sources: list) -> str:
+    b = ["<h1>Sources &amp; credits</h1>",
+         "<p>exit.tech is an index over the existing exit ecosystem. Every recommendation "
+         "is aggregated from these open projects — visit them, contribute to them, fund them. "
+         "Our merged dataset is published openly at <a href='exits.json'>exits.json</a>.</p>"]
+    for s in sources:
+        status = "" if s["status"] == "wired" else ' <span class="flags">(integration planned)</span>'
+        b.append(f'''<div class="alt" id="{esc(s["id"])}">
+<a class="alt-name" href="{esc(s["url"])}">{esc(s["name"])}</a>{status}
+<p>{esc(s["role"])}</p>
+<div class="badges">license: {esc(s["license"])} · <a href="{esc(s["data"])}">data</a></div>
+</div>''')
+    return page("Sources & credits — exit.tech", "\n".join(b))
+
+
+CSS = """
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --fg: #fff; --dim: #888; --line: #2a2a2a; --acc: #6f6; }
+html, body { background: #000; color: var(--fg);
+  font-family: ui-monospace, "JetBrains Mono", Menlo, monospace; font-size: 14px; line-height: 1.6; }
+main { max-width: 720px; margin: 0 auto; padding: 96px 20px 64px; }
+header { position: fixed; top: 32px; left: 40px; }
+.tag { font-size: 13px; color: var(--fg); letter-spacing: 0.04em; text-decoration: none;
+  display: flex; align-items: center; gap: 2px; }
+.cursor { display: inline-block; width: 7px; height: 13px; background: var(--fg);
+  animation: blink 1s step-end infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+a { color: var(--acc); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1 { font-size: 22px; margin: 8px 0 4px; font-weight: 600; }
+h2 { font-size: 13px; color: var(--dim); margin: 40px 0 12px; font-weight: 400;
+  letter-spacing: 0.06em; }
+h3 { font-size: 14px; margin: 24px 0 8px; font-weight: 600; }
+.ptype { color: var(--acc); font-weight: 400; }
+.crumb { color: var(--dim); font-size: 12px; }
+.tagline { color: var(--dim); margin-bottom: 8px; }
+ul, ol { padding-left: 20px; }
+li { margin: 6px 0; }
+.hero { margin: 18vh 0 64px; font-size: 20px; display: flex; align-items: baseline; }
+.promptline { white-space: pre; }
+#q { background: none; border: none; outline: none; color: var(--acc);
+  font: inherit; caret-color: var(--acc); flex: 1; }
+.card { display: block; border: 1px solid var(--line); padding: 16px 20px; margin: 12px 0;
+  color: var(--fg); }
+.card:hover { border-color: var(--acc); text-decoration: none; }
+.card-cat { color: var(--dim); font-size: 12px; margin-right: 8px; }
+.card-name { font-weight: 600; }
+.card-meta { display: block; color: var(--dim); font-size: 12px; margin-top: 4px; }
+.alt { border: 1px solid var(--line); padding: 14px 18px; margin: 10px 0; }
+.alt-name { font-weight: 600; color: var(--fg); }
+.alt p { color: var(--dim); margin: 4px 0; }
+.flags { color: var(--acc); font-size: 12px; }
+.badges { font-size: 11px; color: var(--dim); margin-top: 6px; }
+.badge { color: var(--dim); border: 1px solid var(--line); padding: 1px 6px; margin-right: 4px; }
+.badge:hover { color: var(--acc); border-color: var(--acc); text-decoration: none; }
+pre { border: 1px solid var(--line); padding: 16px; white-space: pre-wrap;
+  color: var(--dim); font-size: 12.5px; margin: 12px 0; }
+button { background: none; border: 1px solid var(--acc); color: var(--acc); font: inherit;
+  padding: 6px 16px; cursor: pointer; }
+button:hover { background: var(--acc); color: #000; }
+footer { max-width: 720px; margin: 0 auto; padding: 0 20px 48px; color: var(--dim);
+  font-size: 12px; }
+footer a { color: var(--dim); }
+"""
+
+
+def main():
+    exits = yaml.safe_load((ROOT / "data" / "exits.yaml").read_text())
+    sources = yaml.safe_load((ROOT / "data" / "sources.yaml").read_text())
+    sources_by_id = {s["id"]: s for s in sources}
+
+    print(f"building {len(exits)} exits...")
+    for ex in exits:
+        enrich_exit(ex)
+        ex["agent_prompt"] = build_prompt(ex)
+        print(f"  {ex['id']}: live={list((ex.get('live') or {}).keys())}")
+
+    (PUBLIC / "exit").mkdir(parents=True, exist_ok=True)
+    (PUBLIC / "style.css").write_text(CSS.strip() + "\n")
+    (PUBLIC / "index.html").write_text(render_index(exits))
+    (PUBLIC / "sources.html").write_text(render_sources(sources))
+    for ex in exits:
+        (PUBLIC / "exit" / f"{ex['id']}.html").write_text(render_exit(ex, sources_by_id))
+
+    # published merged dataset (the share-alike obligation, honored)
+    (PUBLIC / "exits.json").write_text(json.dumps(
+        {"about": "exit.tech merged exit dataset. Aggregated from credited open sources — see /sources.html.",
+         "exits": exits, "sources": sources}, indent=2, ensure_ascii=False))
+    print(f"done → {PUBLIC}/")
+
+
+if __name__ == "__main__":
+    main()

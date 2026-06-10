@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit Google Photos — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header><a class="tag" href="../index.html">Exit is culture<span class="cursor"></span></a></header>
+<main>
+<p class="crumb">~/exit/google-photos</p>
+<h1>Exit Google Photos</h1>
+<p class="tagline">Your memories, their training data, rented back to you monthly.</p>
+<h2>// why</h2><ul>
+<li>Storage rent that only goes up — your library grows, so does the bill.</li>
+<li>Photos are scanned and analyzed; lock-in deepens with every album.</li>
+<li>Terms of service rated <strong>“E”</strong> — <a href="https://tosdr.org/en/service/217">see the documented points at ToS;DR</a></li>
+</ul>
+<h2>// first, get your stuff out</h2><ol>
+<li>Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives; originals + metadata in JSON sidecars.</li>
+<li><a href="https://justgetmydata.com/#google">Data export links at JustGetMyData</a></li>
+</ol>
+<h2>// exit paths</h2>
+<h3><span class="ptype">[self-host]</span> Self-host your library</h3>
+<div class="alt"><a class="alt-name" href="https://immich.app">Immich</a><p>The Google Photos experience, on your own hardware. immich-go imports Takeout archives directly.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-selfhosted" title="awesome-selfhosted">awesome-selfhosted</a></div></div>
+<div class="alt"><a class="alt-name" href="https://www.photoprism.app">PhotoPrism</a><p>AI-powered library with strong search; single Docker container.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-selfhosted" title="awesome-selfhosted">awesome-selfhosted</a></div></div>
+<h3><span class="ptype">[switch]</span> Switch to an encrypted service</h3>
+<div class="alt"><a class="alt-name" href="https://ente.io">Ente Photos</a><p>End-to-end encrypted, open source, imports from Takeout. Paying with money instead of data.</p><div class="badges">via <a class="badge" href="../sources.html#privacy-guides" title="Privacy Guides">privacy-guides</a></div></div>
+<h2>// burn the bridge</h2>
+<p>Delete your account (difficulty: <strong>easy</strong>) — <a href="https://www.google.com/accounts/Login">direct link via JustDeleteMe</a></p>
+<h2>// take an agent with you</h2>
+<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit Google Photos. Act as my exit guide.
+
+First, help me get my data out:
+- Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives; originals + metadata in JSON sidecars.
+
+Self-host your library: help me choose between Immich, PhotoPrism based on my situation — ask me what matters before recommending.
+Switch to an encrypted service: help me choose between Ente Photos based on my situation — ask me what matters before recommending.
+When I'm ready, walk me through deleting my account (difficulty: easy): https://www.google.com/accounts/Login
+
+I have a Google Takeout archive of my photo library. Walk me through importing it into my chosen alternative (immich-go for Immich, web importer for Ente), including the metadata JSON sidecars.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+</footer>
+</body>
+</html>

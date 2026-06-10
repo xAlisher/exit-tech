@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit WhatsApp — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header><a class="tag" href="../index.html">Exit is culture<span class="cursor"></span></a></header>
+<main>
+<p class="crumb">~/exit/whatsapp</p>
+<h1>Exit WhatsApp</h1>
+<p class="tagline">Meta reads the metadata of everyone you love.</p>
+<h2>// why</h2><ul>
+<li>Owned by Meta — contact graph and metadata feed the same ad machine as Facebook and Instagram.</li>
+<li>Phone number required, contacts uploaded, message metadata retained.</li>
+<li>Terms of service rated <strong>“C”</strong> — <a href="https://tosdr.org/en/service/198">see the documented points at ToS;DR</a></li>
+</ul>
+<h2>// first, get your stuff out</h2><ol>
+<li>Export your chats — Settings → Chats → Export chat (per conversation, with or without media).</li>
+<li>Request your account info — Settings → Account → Request account info.</li>
+<li><a href="https://justgetmydata.com/#whatsapp">Data export links at JustGetMyData</a></li>
+</ol>
+<h2>// exit paths</h2>
+<h3><span class="ptype">[switch]</span> Switch to a private messenger</h3>
+<div class="alt"><a class="alt-name" href="https://signal.org">Signal</a> <span class="flags">open source</span><p>The default answer. Same UX as WhatsApp, E2EE by default, nonprofit.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a> <a class="badge" href="../sources.html#privacy-guides" title="Privacy Guides">privacy-guides</a> <a class="badge" href="../sources.html#switching-software" title="switching.software">switching-software</a></div></div>
+<div class="alt"><a class="alt-name" href="https://simplex.chat">SimpleX Chat</a> <span class="flags">open source</span><p>No identifiers at all — not even a phone number.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a> <a class="badge" href="../sources.html#privacy-guides" title="Privacy Guides">privacy-guides</a></div></div>
+<div class="alt"><a class="alt-name" href="https://getsession.org">Session</a> <span class="flags">open source</span><p>Decentralized, no phone number, onion-routed.</p><div class="badges">via <a class="badge" href="../sources.html#web3privacy" title="Web3Privacy Now Explorer">web3privacy</a> <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a></div></div>
+<h2>// burn the bridge</h2>
+<p>Delete your account (difficulty: <strong>medium</strong>) — <a href="https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&amp;p=desktop">direct link via JustDeleteMe</a></p>
+<h2>// take an agent with you</h2>
+<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit WhatsApp. Act as my exit guide.
+
+First, help me get my data out:
+- Export your chats — Settings → Chats → Export chat (per conversation, with or without media).
+- Request your account info — Settings → Account → Request account info.
+
+Switch to a private messenger: help me choose between Signal, SimpleX Chat, Session based on my situation — ask me what matters before recommending.
+When I'm ready, walk me through deleting my account (difficulty: medium): https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&amp;p=desktop
+
+The hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.
+Help me decide between Signal, SimpleX and Session based on who I actually talk to.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+</footer>
+</body>
+</html>

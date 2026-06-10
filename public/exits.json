@@ -1,0 +1,387 @@
+{
+  "about": "exit.tech merged exit dataset. Aggregated from credited open sources — see /sources.html.",
+  "exits": [
+    {
+      "id": "whatsapp",
+      "name": "WhatsApp",
+      "category": "digital",
+      "tagline": "Meta reads the metadata of everyone you love.",
+      "why": [
+        "Owned by Meta — contact graph and metadata feed the same ad machine as Facebook and Instagram.",
+        "Phone number required, contacts uploaded, message metadata retained."
+      ],
+      "enrich": {
+        "tosdr": "whatsapp",
+        "justdeleteme": "WhatsApp",
+        "justgetmydata": "whatsapp"
+      },
+      "extract": [
+        {
+          "step": "Export your chats — Settings → Chats → Export chat (per conversation, with or without media)."
+        },
+        {
+          "step": "Request your account info — Settings → Account → Request account info."
+        }
+      ],
+      "paths": [
+        {
+          "type": "switch",
+          "label": "Switch to a private messenger",
+          "alternatives": [
+            {
+              "name": "Signal",
+              "url": "https://signal.org",
+              "enrich": {
+                "awesome_privacy": "Signal"
+              },
+              "recommended_by": [
+                "awesome-privacy",
+                "privacy-guides",
+                "switching-software"
+              ],
+              "note": "The default answer. Same UX as WhatsApp, E2EE by default, nonprofit.",
+              "live": {
+                "description": "Probably one of the most popular, secure private messaging apps that combines\nstrong encryption (see [Signal Protocol](https://en.wikipedia.org/wiki/Signal_Protocol))\nwith a simple UI and plenty of features. It's widely used across the world, and\neasy-to-use, functioning similar to WhatsApp - with instant messaging, read-receipts,\nsupport for media attachments and allows for high-quality voice and video calls.\nIt's cross-platform, open-source and totally free. Signal is\n[recommended](https://twitter.com/Snowden/status/661313394906161152)\nby Edward Snowden, and is a perfect solution for most users.\n",
+                "openSource": true,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "SimpleX Chat",
+              "url": "https://simplex.chat",
+              "enrich": {
+                "awesome_privacy": "SimpleX"
+              },
+              "recommended_by": [
+                "awesome-privacy",
+                "privacy-guides"
+              ],
+              "note": "No identifiers at all — not even a phone number.",
+              "live": {
+                "description": "Simplex is gaining popularity as a secure and private messaging app renowned\nfor its robust encryption protocol without user IDs or phone numbers and this improves your privacy.\nSimplex offers instant messaging, supports media attachments and voice and video calls.\nAdditionally, it is cross-platform, open-source, and completely free, aligning with the modern user's\npreferences for convenience, security, and accessibility.\nLearn more about the [Security Policy](https://simplex.chat/security/).\n",
+                "openSource": true,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Session",
+              "url": "https://getsession.org",
+              "enrich": {
+                "web3privacy": "session"
+              },
+              "recommended_by": [
+                "web3privacy",
+                "awesome-privacy"
+              ],
+              "note": "Decentralized, no phone number, onion-routed.",
+              "live": {
+                "description": "An end-to-end encrypted messenger that minimizes sensitive metadata, designed and built for people who want absolute privacy and freedom from any form of surveillance",
+                "openSource": true
+              }
+            }
+          ]
+        }
+      ],
+      "prompt": [
+        "The hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.",
+        "Help me decide between Signal, SimpleX and Session based on who I actually talk to."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "WhatsApp",
+          "rating": "C",
+          "url": "https://tosdr.org/en/service/198"
+        },
+        "justdeleteme": {
+          "url": "https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop",
+          "difficulty": "medium",
+          "notes": "From the app: Settings → Account → Delete your account."
+        },
+        "justgetmydata": {
+          "url": "https://justgetmydata.com/#whatsapp"
+        }
+      },
+      "agent_prompt": "I want to exit WhatsApp. Act as my exit guide.\n\nFirst, help me get my data out:\n- Export your chats — Settings → Chats → Export chat (per conversation, with or without media).\n- Request your account info — Settings → Account → Request account info.\n\nSwitch to a private messenger: help me choose between Signal, SimpleX Chat, Session based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: medium): https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop\n\nThe hardest part of leaving WhatsApp is the people. Help me write a short, non-preachy message to my groups explaining where I went.\nHelp me decide between Signal, SimpleX and Session based on who I actually talk to.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
+      "id": "google-photos",
+      "name": "Google Photos",
+      "category": "digital",
+      "tagline": "Your memories, their training data, rented back to you monthly.",
+      "why": [
+        "Storage rent that only goes up — your library grows, so does the bill.",
+        "Photos are scanned and analyzed; lock-in deepens with every album."
+      ],
+      "enrich": {
+        "tosdr": "google",
+        "justdeleteme": "Google",
+        "justgetmydata": "google"
+      },
+      "extract": [
+        {
+          "step": "Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives; originals + metadata in JSON sidecars."
+        }
+      ],
+      "paths": [
+        {
+          "type": "self-host",
+          "label": "Self-host your library",
+          "alternatives": [
+            {
+              "name": "Immich",
+              "url": "https://immich.app",
+              "enrich": {
+                "awesome_selfhosted": "immich"
+              },
+              "recommended_by": [
+                "awesome-selfhosted"
+              ],
+              "note": "The Google Photos experience, on your own hardware. immich-go imports Takeout archives directly.",
+              "live": {
+                "description": "Photo and video backup solution directly from your mobile phone (alternative to Google Photos).",
+                "license": [
+                  "AGPL-3.0"
+                ],
+                "language": [
+                  "Docker"
+                ],
+                "source": "https://github.com/immich-app/immich"
+              }
+            },
+            {
+              "name": "PhotoPrism",
+              "url": "https://www.photoprism.app",
+              "enrich": {
+                "awesome_selfhosted": "photoprism"
+              },
+              "recommended_by": [
+                "awesome-selfhosted"
+              ],
+              "note": "AI-powered library with strong search; single Docker container.",
+              "live": {
+                "description": "Personal photo management powered by Go and Google TensorFlow.  Browse, organize, and share your personal photo collection, using the latest technologies to automatically tag and find pictures.",
+                "license": [
+                  "AGPL-3.0"
+                ],
+                "language": [
+                  "Go",
+                  "Docker"
+                ],
+                "source": "https://github.com/photoprism/photoprism"
+              }
+            }
+          ]
+        },
+        {
+          "type": "switch",
+          "label": "Switch to an encrypted service",
+          "alternatives": [
+            {
+              "name": "Ente Photos",
+              "url": "https://ente.io",
+              "recommended_by": [
+                "privacy-guides"
+              ],
+              "note": "End-to-end encrypted, open source, imports from Takeout. Paying with money instead of data."
+            }
+          ]
+        }
+      ],
+      "prompt": [
+        "I have a Google Takeout archive of my photo library. Walk me through importing it into my chosen alternative (immich-go for Immich, web importer for Ente), including the metadata JSON sidecars."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "Google",
+          "rating": "E",
+          "url": "https://tosdr.org/en/service/217"
+        },
+        "justdeleteme": {
+          "url": "https://www.google.com/accounts/Login",
+          "difficulty": "easy",
+          "notes": null
+        },
+        "justgetmydata": {
+          "url": "https://justgetmydata.com/#google"
+        }
+      },
+      "agent_prompt": "I want to exit Google Photos. Act as my exit guide.\n\nFirst, help me get my data out:\n- Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives; originals + metadata in JSON sidecars.\n\nSelf-host your library: help me choose between Immich, PhotoPrism based on my situation — ask me what matters before recommending.\nSwitch to an encrypted service: help me choose between Ente Photos based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: easy): https://www.google.com/accounts/Login\n\nI have a Google Takeout archive of my photo library. Walk me through importing it into my chosen alternative (immich-go for Immich, web importer for Ente), including the metadata JSON sidecars.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
+      "id": "supermarket-herbs",
+      "name": "Supermarket herbs",
+      "category": "food",
+      "tagline": "€2.49 for wilted basil in plastic, forever. Or one pot, once.",
+      "why": [
+        "Fresh herbs are the highest-markup, lowest-effort thing to grow yourself.",
+        "Plastic clamshells, cold-chain logistics and supermarket pricing — for a plant that wants to live on your windowsill."
+      ],
+      "paths": [
+        {
+          "type": "grow",
+          "label": "Grow them on a windowsill",
+          "alternatives": [
+            {
+              "name": "Basil",
+              "url": "https://www.appropedia.org/Special:Search?search=growing+basil",
+              "recommended_by": [
+                "appropedia"
+              ],
+              "note": "Supermarket basil pots are many seedlings crammed together — split one pot into four and they thrive."
+            },
+            {
+              "name": "Mint",
+              "url": "https://www.appropedia.org/Special:Search?search=growing+mint",
+              "recommended_by": [
+                "appropedia"
+              ],
+              "note": "Nearly unkillable. Grows from cuttings — one supermarket bunch can root in a glass of water."
+            },
+            {
+              "name": "Chives",
+              "url": "https://www.appropedia.org/Special:Search?search=growing+chives",
+              "recommended_by": [
+                "appropedia"
+              ],
+              "note": "Perennial — cut and they regrow, for years."
+            }
+          ]
+        }
+      ],
+      "prompt": [
+        "Ask me about my light situation (window direction, hours of sun), space and climate, then give me a starter plan for a windowsill herb garden with the three easiest wins.",
+        "Tell me which herbs I can start from supermarket cuttings this week instead of waiting for seeds."
+      ],
+      "live": {},
+      "agent_prompt": "I want to exit Supermarket herbs. Act as my exit guide.\n\nGrow them on a windowsill: help me choose between Basil, Mint, Chives based on my situation — ask me what matters before recommending.\n\nAsk me about my light situation (window direction, hours of sun), space and climate, then give me a starter plan for a windowsill herb garden with the three easiest wins.\nTell me which herbs I can start from supermarket cuttings this week instead of waiting for seeds.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    }
+  ],
+  "sources": [
+    {
+      "id": "tosdr",
+      "name": "ToS;DR — Terms of Service; Didn't Read",
+      "url": "https://tosdr.org",
+      "data": "https://api.tosdr.org",
+      "license": "CC BY-SA 3.0",
+      "role": "Terms-of-service ratings — the documented \"why\" behind digital exits.",
+      "status": "wired"
+    },
+    {
+      "id": "justdeleteme",
+      "name": "JustDeleteMe",
+      "url": "https://justdeleteme.xyz",
+      "data": "https://github.com/justdeleteme/justdelete.me",
+      "license": "MIT",
+      "role": "Account deletion links and difficulty ratings.",
+      "status": "wired"
+    },
+    {
+      "id": "justgetmydata",
+      "name": "JustGetMyData",
+      "url": "https://justgetmydata.com",
+      "data": "https://github.com/justgetmydata/justgetmydata.com",
+      "license": "MIT",
+      "role": "Direct links to data export / takeout pages — get your stuff out first.",
+      "status": "wired"
+    },
+    {
+      "id": "awesome-privacy",
+      "name": "Awesome Privacy",
+      "url": "https://awesome-privacy.xyz",
+      "data": "https://github.com/Lissy93/awesome-privacy",
+      "license": "MIT",
+      "role": "Curated privacy-respecting alternatives with open-source and audit flags.",
+      "status": "wired"
+    },
+    {
+      "id": "awesome-selfhosted",
+      "name": "awesome-selfhosted",
+      "url": "https://awesome-selfhosted.net",
+      "data": "https://github.com/awesome-selfhosted/awesome-selfhosted-data",
+      "license": "CC BY-SA 3.0",
+      "role": "1,000+ self-hostable applications — the \"host it yourself\" exit path.",
+      "status": "wired"
+    },
+    {
+      "id": "web3privacy",
+      "name": "Web3Privacy Now Explorer",
+      "url": "https://explorer.web3privacy.info",
+      "data": "https://github.com/web3privacy/explorer-data",
+      "license": "MIT",
+      "role": "Privacy project directory — decentralized and crypto-native alternatives.",
+      "status": "wired"
+    },
+    {
+      "id": "privacy-guides",
+      "name": "Privacy Guides",
+      "url": "https://www.privacyguides.org",
+      "data": "https://github.com/privacyguides/privacyguides.org",
+      "license": "CC BY-ND 4.0",
+      "role": "Strict-methodology privacy recommendations; credited where they back an alternative.",
+      "status": "wired"
+    },
+    {
+      "id": "switching-software",
+      "name": "switching.software",
+      "url": "https://switching.software",
+      "data": "https://codeberg.org/swiso/website",
+      "license": "AGPL / CC BY-SA",
+      "role": "Ethical, FOSS alternatives to mainstream services.",
+      "status": "wired"
+    },
+    {
+      "id": "appropedia",
+      "name": "Appropedia",
+      "url": "https://www.appropedia.org",
+      "data": "https://www.appropedia.org/w/api.php",
+      "license": "CC BY-SA 4.0",
+      "role": "Appropriate-technology and self-sufficiency wiki — grow, build, repair guides.",
+      "status": "wired"
+    },
+    {
+      "id": "permapeople",
+      "name": "Permapeople",
+      "url": "https://permapeople.org",
+      "data": "https://permapeople.org/knowledgebase/api-docs.html",
+      "license": "Open database, API key required",
+      "role": "Structured plant database — companion planting, zones, propagation.",
+      "status": "planned"
+    },
+    {
+      "id": "ifixit",
+      "name": "iFixit",
+      "url": "https://www.ifixit.com",
+      "data": "https://www.ifixit.com/api/2.0/doc",
+      "license": "CC BY-NC-SA 3.0",
+      "role": "Repair guides — the \"fix it instead of replacing it\" exit path.",
+      "status": "planned"
+    },
+    {
+      "id": "oshwa",
+      "name": "OSHWA Certification Directory",
+      "url": "https://certification.oshwa.org",
+      "data": "https://certificationapi.oshwa.org",
+      "license": "API, free token",
+      "role": "Certified open-source hardware — the \"make it yourself\" exit path.",
+      "status": "planned"
+    },
+    {
+      "id": "openfoodfacts",
+      "name": "Open Food Facts",
+      "url": "https://world.openfoodfacts.org",
+      "data": "https://world.openfoodfacts.org/data",
+      "license": "ODbL",
+      "role": "Open food product database — exits from industrial food brands.",
+      "status": "planned"
+    },
+    {
+      "id": "european-alternatives",
+      "name": "European Alternatives",
+      "url": "https://european-alternatives.eu",
+      "data": "https://european-alternatives.eu",
+      "license": "site content",
+      "role": "EU-based alternatives to US cloud services — digital-sovereignty lens.",
+      "status": "planned"
+    }
+  ]
+}
