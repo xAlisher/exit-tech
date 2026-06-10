@@ -106,6 +106,95 @@
       "agent_prompt": "I want to exit Google Photos. Act as my exit guide.\n\nFirst, help me get my data out:\n- Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives; originals + metadata in JSON sidecars.\n\nSelf-host your library: help me choose between Immich, PhotoPrism based on my situation — ask me what matters before recommending.\nSwitch to an encrypted service: help me choose between Ente Photos based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: easy): https://www.google.com/accounts/Login\n\nI have a Google Takeout archive of my photo library. Walk me through importing it into my chosen alternative (immich-go for Immich, web importer for Ente), including the metadata JSON sidecars.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
+      "id": "netflix",
+      "name": "Netflix",
+      "category": "digital",
+      "tagline": "You don't own anything, and they know what makes you cry.",
+      "why": [
+        "Subscription model for content you can't keep; the catalog rotates beneath you and the algorithm optimizes for retention, not satisfaction.",
+        "Price hikes, password crackdowns, and autoplay engineered for one more episode."
+      ],
+      "enrich": {
+        "tosdr": "netflix",
+        "justdeleteme": "Netflix"
+      },
+      "extract": [
+        {
+          "step": "Download your viewing activity — Account → Viewing activity. Note: this export is often incomplete."
+        },
+        {
+          "step": "Request your full data archive at netflix.com/account/getmyinfo — arrives by email as a zip."
+        }
+      ],
+      "paths": [
+        {
+          "type": "self-host",
+          "label": "Own your media, stream it yourself",
+          "alternatives": [
+            {
+              "name": "Jellyfin",
+              "url": "https://jellyfin.org",
+              "enrich": {
+                "awesome_selfhosted": "jellyfin"
+              },
+              "recommended_by": [
+                "awesome-selfhosted"
+              ],
+              "note": "A Netflix-grade interface for media you actually own. Free, open source, clients for every screen in the house.",
+              "live": {
+                "description": "Media server for audio, video, books, comics, and photos with a sleek interface and robust transcoding capabilities. Almost all modern platforms have clients, including Roku, Android TV, iOS, and Kodi.",
+                "license": [
+                  "GPL-2.0"
+                ],
+                "language": [
+                  "C#",
+                  "deb",
+                  "Docker"
+                ],
+                "source": "https://github.com/jellyfin/jellyfin"
+              }
+            }
+          ]
+        },
+        {
+          "type": "switch",
+          "label": "Change how you pay for stories",
+          "alternatives": [
+            {
+              "name": "Your public library",
+              "url": "https://www.kanopy.com",
+              "note": "Streaming (Kanopy, Hoopla) comes free with most library cards — curated by librarians, not engagement metrics."
+            },
+            {
+              "name": "Physical media",
+              "url": "https://www.blu-ray.com",
+              "note": "A used Blu-ray costs less than a month of streaming and can't be pulled from your shelf."
+            }
+          ]
+        }
+      ],
+      "prompt": [
+        "Before recommending anything, ask me what I actually watched last month — if the honest answer is \"background noise\", the exit is about the habit, not the catalog.",
+        "Help me export my viewing history and profile preferences before I cancel.",
+        "If I choose self-hosting, check my hardware and walk me through Jellyfin setup, and be straight with me about where legal media files come from.",
+        "Cancelling the subscription is easy. Full account deletion is rated impossible by JustDeleteMe — help me decide whether cancelling plus a personal-data cleanup is enough.",
+        "Suggest ways to break the habit of mindless scrolling through menus without a clear target."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "Netflix",
+          "rating": "D",
+          "url": "https://tosdr.org/en/service/185"
+        },
+        "justdeleteme": {
+          "url": "https://support.netflix.com/en/node/407",
+          "difficulty": "impossible",
+          "notes": "Contact customer services. Even then they may not delete your account under the premise that you might want to rejoin and keep your history and recommendations."
+        }
+      },
+      "agent_prompt": "I want to exit Netflix. Act as my exit guide.\n\nFirst, help me get my data out:\n- Download your viewing activity — Account → Viewing activity. Note: this export is often incomplete.\n- Request your full data archive at netflix.com/account/getmyinfo — arrives by email as a zip.\n\nOwn your media, stream it yourself: help me choose between Jellyfin based on my situation — ask me what matters before recommending.\nChange how you pay for stories: help me choose between Your public library, Physical media based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: impossible): https://support.netflix.com/en/node/407\n\nBefore recommending anything, ask me what I actually watched last month — if the honest answer is \"background noise\", the exit is about the habit, not the catalog.\nHelp me export my viewing history and profile preferences before I cancel.\nIf I choose self-hosting, check my hardware and walk me through Jellyfin setup, and be straight with me about where legal media files come from.\nCancelling the subscription is easy. Full account deletion is rated impossible by JustDeleteMe — help me decide whether cancelling plus a personal-data cleanup is enough.\nSuggest ways to break the habit of mindless scrolling through menus without a clear target.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
       "id": "supermarket-herbs",
       "name": "Supermarket herbs",
       "category": "food",
@@ -272,7 +361,13 @@
         "Check my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.",
         "Walk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes."
       ],
-      "live": {},
+      "live": {
+        "tosdr": {
+          "name": "OpenAI",
+          "rating": "D",
+          "url": "https://tosdr.org/en/service/7108"
+        }
+      },
       "agent_prompt": "I want to exit ChatGPT. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.\nCheck my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.\nWalk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
@@ -293,7 +388,13 @@
         "Check my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.",
         "Help me export anything I want to keep from my account before I go."
       ],
-      "live": {},
+      "live": {
+        "tosdr": {
+          "name": "Anthropic, PBC",
+          "rating": "N/A",
+          "url": "https://tosdr.org/en/service/11619"
+        }
+      },
       "agent_prompt": "I want to exit Claude. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.\nCheck my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.\nHelp me export anything I want to keep from my account before I go.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
@@ -355,6 +456,11 @@
         "If I still want to share photos, suggest calmer homes for that (Pixelfed, a shared album, a small group chat) based on who I actually want to reach."
       ],
       "live": {
+        "tosdr": {
+          "name": "Instagram",
+          "rating": "E",
+          "url": "https://tosdr.org/en/service/219"
+        },
         "justdeleteme": {
           "url": "https://instagram.com/accounts/remove/request/permanent/",
           "difficulty": "easy",
