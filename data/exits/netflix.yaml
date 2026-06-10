@@ -1,0 +1,35 @@
+id: netflix
+name: Netflix
+category: digital
+tagline: A catalog you rent that shrinks while the price grows.
+why:
+  - Shows vanish mid-watch — it's licensing, not ownership. You're renting access to a rotating warehouse.
+  - Price hikes, password crackdowns, and autoplay engineered for one more episode.
+enrich:
+  justdeleteme: Netflix
+extract:
+  - step: Download your viewing history — Account → Profiles → Viewing activity → Download all.
+  - step: Request your full personal data archive at netflix.com/account/getmyinfo.
+paths:
+  - type: self-host
+    label: Own your media, stream it yourself
+    alternatives:
+      - name: Jellyfin
+        url: https://jellyfin.org
+        enrich:
+          awesome_selfhosted: jellyfin
+        recommended_by: [awesome-selfhosted]
+        note: A Netflix-grade interface for media you actually own. Free, open source, clients for every screen in the house.
+  - type: switch
+    label: Change how you pay for stories
+    alternatives:
+      - name: Your public library
+        url: https://www.kanopy.com
+        note: Streaming (Kanopy and friends) comes free with most library cards — curated by librarians, not engagement metrics.
+      - name: Physical media
+        url: https://www.blu-ray.com
+        note: A used Blu-ray costs less than a month of streaming and can't be pulled from your shelf.
+prompt:
+  - Before recommending anything, ask me what I actually watched last month — if the honest answer is "background noise", the exit is about the habit, not the catalog.
+  - If I choose self-hosting, check my hardware and walk me through Jellyfin setup, and be straight with me about where legal media files come from.
+  - Cancelling the subscription is easy. Full account deletion is rated impossible by JustDeleteMe — help me decide whether cancelling plus a personal-data cleanup is enough for my goals.
