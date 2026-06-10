@@ -1,0 +1,20 @@
+name: triage
+# Daily: merge duplicate exit-request issues into the oldest one and keep
+# a weight counter (×N) in its title.
+on:
+  schedule:
+    - cron: "40 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 .github/scripts/triage_requests.py

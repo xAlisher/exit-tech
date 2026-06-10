@@ -32,10 +32,7 @@ function update() {
             || EXITS.find(e => e.name.toLowerCase().includes(v))) : null;
   document.getElementById('nohit').hidden = !(v && !match);
   if (v && !match) {
-    document.getElementById('ask').href =
-      'https://github.com/xAlisher/exit-tech/issues/new?labels=exit-request&title=' +
-      encodeURIComponent('exit: ' + q.value.trim()) +
-      '&body=' + encodeURIComponent('Requested via the landing input on exit.tech.');
+    document.getElementById('ask').href = newIssueUrl(q.value.trim());
   }
   gpad.textContent = ''; grest.textContent = '';
   if (match) {
@@ -112,6 +109,31 @@ q.addEventListener('input', () => {
   else scheduleGlitch(800 + Math.random() * 1500);
   update();
 });
+function newIssueUrl(term) {
+  return 'https://github.com/xAlisher/exit-tech/issues/new?labels=exit-request&title=' +
+    encodeURIComponent('exit: ' + term) +
+    '&body=' + encodeURIComponent('Requested via the landing input on exit.tech.');
+}
+
+// If this exit was already requested, send the visitor to the existing issue
+// (a thumbs-up there is the weight) instead of opening a duplicate.
+document.getElementById('ask').addEventListener('click', async e => {
+  e.preventDefault();
+  const term = q.value.trim();
+  const norm = term.toLowerCase();
+  let url = newIssueUrl(term);
+  try {
+    const qs = encodeURIComponent(
+      `repo:xAlisher/exit-tech is:issue is:open label:exit-request "${norm}" in:title`);
+    const r = await fetch('https://api.github.com/search/issues?q=' + qs);
+    const d = await r.json();
+    const hit = (d.items || []).find(i =>
+      i.title.toLowerCase().replace(/^exit:\s*/, '').replace(/\s*\(×\d+\)$/, '') === norm);
+    if (hit) url = hit.html_url;
+  } catch {}
+  location.href = url;
+});
+
 const seed = new URLSearchParams(location.search).get('q');
 if (seed) {
   q.value = seed;
