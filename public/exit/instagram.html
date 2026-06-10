@@ -31,6 +31,14 @@ If I still want to share photos, suggest calmer homes for that (Pixelfed, a shar
 
 Go step by step. One thing at a time. I want to actually finish this.</pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<script>
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+  if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  e.preventDefault();
+  location.href = '../index.html?q=' + encodeURIComponent(e.key);
+});
+</script>
 </main>
 <footer>
   <a href="../sources.html">sources &amp; credits</a> ·

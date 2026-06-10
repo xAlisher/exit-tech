@@ -93,6 +93,21 @@ q.addEventListener('input', () => {
   else scheduleGlitch(800 + Math.random() * 1500);
   update();
 });
+const seed = new URLSearchParams(location.search).get('q');
+if (seed) {
+  q.value = seed;
+  stopGlitch();
+  update();
+}
+q.focus();
+
+document.addEventListener('keydown', e => {
+  if (document.activeElement === q) return;
+  if ((e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) || e.key === 'Backspace') {
+    q.focus();
+  }
+});
+
 q.addEventListener('keydown', e => {
   const caretAtEnd = q.selectionStart === q.value.length && q.selectionEnd === q.value.length;
   if ((e.key === 'Tab' || (e.key === 'ArrowRight' && caretAtEnd)) && match && q.value) {
