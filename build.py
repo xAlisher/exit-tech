@@ -13,6 +13,7 @@ import re
 import sys
 import urllib.request
 from pathlib import Path
+from urllib.parse import quote
 
 import yaml
 
@@ -352,6 +353,14 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
     doors = " or ".join([", ".join(dl[:-1]), dl[-1]]) if len(dl) > 1 else dl[0]
     b.append(f'<p class="footnote">* Just a reminder — you can also exit {doors} '
              'in favor of locally hosted agents.</p>')
+
+    contrib = ("https://github.com/xAlisher/exit-tech/issues/new"
+               "?template=page-feedback.yml"
+               f"&title={quote('feedback: ' + ex['name'])}"
+               f"&page={quote('https://exit.tech/exit/' + ex['id'] + '.html')}")
+    b.append("<h2>// are we missing something?</h2>")
+    b.append("<p>Wrong facts, missed alternative, better sources?</p>")
+    b.append(f'<a class="btn" href="{esc(contrib)}">contribute</a>')
     b.append(type_anywhere(depth=1, name=ex["name"]))
     return page(f"Exit {ex['name']} — exit.tech", "\n".join(b), depth=1, header_html=head)
 
@@ -612,9 +621,9 @@ body.home footer { max-width: none; margin: 0; padding: 0 40px 32px; }
 .badge:hover { color: var(--acc); border-color: var(--acc); text-decoration: none; }
 pre { border: 1px solid var(--line); padding: 16px; white-space: pre-wrap;
   color: var(--dim); font-size: 12.5px; margin: 12px 0; }
-button { background: none; border: 1px solid var(--acc); color: var(--acc); font: inherit;
-  padding: 6px 16px; cursor: pointer; }
-button:hover { background: var(--acc); color: #000; }
+button, a.btn { background: none; border: 1px solid var(--acc); color: var(--acc);
+  font: inherit; padding: 6px 16px; cursor: pointer; display: inline-block; }
+button:hover, a.btn:hover { background: var(--acc); color: #000; text-decoration: none; }
 .fnref { color: var(--acc); }
 .footnote { color: #666; font-size: 12.5px; margin-top: 20px; }
 a.door { color: #888; white-space: nowrap; }
