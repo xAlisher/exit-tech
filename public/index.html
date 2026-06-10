@@ -81,7 +81,7 @@ function fireGlitch() {
     if (f > fadeStart + 3) {
       clearInterval(glitchAnim); glitchAnim = null;
       grest.textContent = '';
-      scheduleGlitch(900 + Math.random() * 2000);
+      scheduleGlitch(200 + Math.random() * 500);
     }
   }, 40);
 }
