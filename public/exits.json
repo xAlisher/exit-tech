@@ -243,6 +243,70 @@
       "agent_prompt": "I want to exit Supermarket herbs. Act as my exit guide.\n\nGrow them on a windowsill: help me choose between Basil, Mint, Chives based on my situation — ask me what matters before recommending.\n\nAsk me about my light situation (window direction, hours of sun), space and climate, then give me a starter plan for a windowsill herb garden with the three easiest wins.\nTell me which herbs I can start from supermarket cuttings this week instead of waiting for seeds.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
+      "id": "tiktok",
+      "name": "TikTok",
+      "category": "digital",
+      "tagline": "Three hours gone, and you can't name one video.",
+      "why": [
+        "The For You page knows your psychology better than you do, and it optimizes for retention, not well-being.",
+        "Terms of service among the worst graded anywhere; data practices under scrutiny on both sides of the Atlantic."
+      ],
+      "enrich": {
+        "tosdr": "tiktok"
+      },
+      "extract": [
+        {
+          "step": "Export your data — Settings and privacy → Account → Download your data."
+        },
+        {
+          "step": "Export your drafts — There is no bulk export for drafts; screenshot or screen-record before deletion."
+        }
+      ],
+      "paths": [
+        {
+          "type": "switch",
+          "label": "Switch — knowing that nothing replaces the dopamine drip, which is the point",
+          "alternatives": [
+            {
+              "name": "PeerTube",
+              "url": "https://joinpeertube.org",
+              "enrich": {
+                "awesome_privacy": "PeerTube"
+              },
+              "recommended_by": [
+                "awesome-privacy"
+              ],
+              "note": "Federated video without tracking or an addiction engine. It will feel slower. That's what video feels like without one.",
+              "live": {
+                "description": "A federated video platform leveraging peer-to-peer technology to decrease server\nload during video streaming. Supports self-hosting or joining existing instances,\nenabling video viewing from any PeerTube server.\n",
+                "openSource": null,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Nothing",
+              "url": "https://exit.tech/exit/doomscrolling.html",
+              "note": "The honest alternative. The hours come back and they are real hours — the prompt below helps you decide what they're for."
+            }
+          ]
+        }
+      ],
+      "prompt": [
+        "Ask me what I usually scroll for (humor, tutorials, politics) so I can find non-algorithmic replacements.",
+        "Help me break the habit of mindless scrolling. Suggest a 3-day \"dopamine detox\" plan for my phone.",
+        "Draft a message to friends explaining I'm taking a break from TikTok, without sounding preachy.",
+        "If I'm using TikTok for news or niche hobbies, help me find RSS feeds or newsletters that serve that need without the algorithmic manipulation."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "TikTok",
+          "rating": "E",
+          "url": "https://tosdr.org/en/service/1448"
+        }
+      },
+      "agent_prompt": "I want to exit TikTok. Act as my exit guide.\n\nFirst, help me get my data out:\n- Export your data — Settings and privacy → Account → Download your data.\n- Export your drafts — There is no bulk export for drafts; screenshot or screen-record before deletion.\n\nSwitch — knowing that nothing replaces the dopamine drip, which is the point: help me choose between PeerTube, Nothing based on my situation — ask me what matters before recommending.\n\nAsk me what I usually scroll for (humor, tutorials, politics) so I can find non-algorithmic replacements.\nHelp me break the habit of mindless scrolling. Suggest a 3-day \"dopamine detox\" plan for my phone.\nDraft a message to friends explaining I'm taking a break from TikTok, without sounding preachy.\nIf I'm using TikTok for news or niche hobbies, help me find RSS feeds or newsletters that serve that need without the algorithmic manipulation.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
       "id": "whatsapp",
       "name": "WhatsApp",
       "category": "digital",
@@ -456,6 +520,11 @@
         "If I still want to share photos, suggest calmer homes for that (Pixelfed, a shared album, a small group chat) based on who I actually want to reach."
       ],
       "live": {
+        "tosdr": {
+          "name": "Instagram",
+          "rating": "E",
+          "url": "https://tosdr.org/en/service/219"
+        },
         "justdeleteme": {
           "url": "https://instagram.com/accounts/remove/request/permanent/",
           "difficulty": "easy",
@@ -519,6 +588,11 @@
         "Then help me pick a route — buying music I love (Bandcamp), a self-hosted library (Navidrome, Jellyfin) fed by my own files, or a fairer streaming service — based on how I actually listen."
       ],
       "live": {
+        "tosdr": {
+          "name": "Spotify",
+          "rating": "D",
+          "url": "https://tosdr.org/en/service/225"
+        },
         "justdeleteme": {
           "url": "https://support.spotify.com/close/",
           "difficulty": "easy",
