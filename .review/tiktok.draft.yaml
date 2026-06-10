@@ -1,0 +1,40 @@
+# drafted by qwen3.6-27b (local, Sneg) — pending review
+id: tiktok
+name: TikTok
+category: digital
+tagline: You are the product, optimized for maximum retention.
+why:
+- The algorithm knows your psychology better than you do; it optimizes for engagement, not well-being.
+- Owned by ByteDance; data practices under scrutiny regarding surveillance and influence operations.
+enrich:
+  tosdr: tiktok
+extract:
+- step: Export your data — Settings and privacy → Account → Download your data.
+- step: Export your drafts — There is no bulk export for drafts; screenshot or screen-record before deletion.
+paths:
+- type: switch
+  label: Switch to a decentralized video platform
+  alternatives:
+  - name: PeerTube
+    url: https://joinpeertube.org
+    enrich:
+      awesome_privacy: PeerTube
+    recommended_by:
+    - awesome-privacy
+    note: Federated, no tracking, community-run instances.
+  - name: DTube
+    url: https://d.tube
+    enrich:
+      awesome_privacy: DTube
+    recommended_by:
+    - awesome-privacy
+    note: Blockchain-based video sharing; censorship-resistant but high energy cost.
+- type: grow
+  label: Reclaim your attention
+  alternatives: []
+prompt:
+- Ask me what I usually scroll for (humor, tutorials, politics) so I can find non-algorithmic replacements.
+- Help me break the habit of mindless scrolling. Suggest a 3-day "dopamine detox" plan for my phone.
+- Draft a message to friends explaining I'm taking a break from TikTok, without sounding preachy.
+- If I'm using TikTok for news or niche hobbies, help me find RSS feeds or newsletters that serve that
+  need without the algorithmic manipulation.

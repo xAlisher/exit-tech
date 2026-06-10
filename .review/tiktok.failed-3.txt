@@ -1,0 +1,34 @@
+id: tiktok
+name: TikTok
+category: behavioral
+tagline: Your attention is the product, not the ad.
+why:
+- Algorithmic feed engineered for infinite scroll and dopamine hits, not content quality.
+- Extensive data harvesting (clipboard, biometrics, device info) with opaque retention policies.
+enrich:
+  tosdr: tiktok
+extract:
+- step: Request your data download — Settings and Privacy → Account → Download your data. Note: TikTok provides a link via email, often taking days to process.
+- step: Export your drafts — TikTok does not allow exporting drafts to other platforms. You must re-upload or lose them.
+
+paths:
+- type: switch
+  label: Switch to a community-owned video host
+  alternatives:
+  - name: PeerTube
+    url: https://joinpeertube.org
+    enrich:
+      awesome_privacy: PeerTube
+    recommended_by:
+    - awesome-privacy
+    note: Federated, open-source video hosting. You pick an instance; no algorithmic feed.
+
+prompt:
+- >-
+  Do not suggest other social media apps that use engagement-based algorithms.
+  Ask me: what kind of videos do I watch? (e.g., tutorials, comedy, niche hobbies).
+  Then help me find static feeds, RSS sources, or specific creators on non-algorithmic platforms.
+- Help me delete the app first. Then, suggest a "friction plan" to make reinstalling harder (e.g., remove from app library, block the domain).
+- >-
+  Reflect with me: What void does scrolling fill? Boredom? Anxiety? Loneliness?
+  Suggest 3 low-dopamine activities that address that specific need (e.g., reading, walking, talking to a friend).

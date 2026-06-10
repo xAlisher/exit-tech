@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit TikTok — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body><header class="prompt"><a class="ptag" href="../index.html">Exit</a>&nbsp;<span class="pname">TikTok</span><span class="tcur"></span></header>
+<main>
+<p class="tagline">Three hours gone, and you can't name one video.</p>
+<h2>// why</h2><ul>
+<li>The For You page knows your psychology better than you do, and it optimizes for retention, not well-being.</li>
+<li>Terms of service among the worst graded anywhere; data practices under scrutiny on both sides of the Atlantic.</li>
+<li>Terms of service rated <strong>“E”</strong> — <a href="https://tosdr.org/en/service/1448">see the documented points at ToS;DR</a></li>
+</ul>
+<h2>// first, get your stuff out</h2><ol>
+<li>Export your data — Settings and privacy → Account → Download your data.</li>
+<li>Export your drafts — There is no bulk export for drafts; screenshot or screen-record before deletion.</li>
+</ol>
+<h2>// exit paths</h2>
+<h3><span class="ptype">[switch]</span> Switch — knowing that nothing replaces the dopamine drip, which is the point</h3>
+<div class="alt"><a class="alt-name" href="https://joinpeertube.org">PeerTube</a><p>Federated video without tracking or an addiction engine. It will feel slower. That's what video feels like without one.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a></div></div>
+<div class="alt"><a class="alt-name" href="https://exit.tech/exit/doomscrolling.html">Nothing</a><p>The honest alternative. The hours come back and they are real hours — the prompt below helps you decide what they're for.</p></div>
+<h2>// take an agent with you</h2>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit TikTok. Act as my exit guide.
+
+First, help me get my data out:
+- Export your data — Settings and privacy → Account → Download your data.
+- Export your drafts — There is no bulk export for drafts; screenshot or screen-record before deletion.
+
+Switch — knowing that nothing replaces the dopamine drip, which is the point: help me choose between PeerTube, Nothing based on my situation — ask me what matters before recommending.
+
+Ask me what I usually scroll for (humor, tutorials, politics) so I can find non-algorithmic replacements.
+Help me break the habit of mindless scrolling. Suggest a 3-day &quot;dopamine detox&quot; plan for my phone.
+Draft a message to friends explaining I'm taking a break from TikTok, without sounding preachy.
+If I'm using TikTok for news or niche hobbies, help me find RSS feeds or newsletters that serve that need without the algorithmic manipulation.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
+<script>
+const NAME = "TikTok";
+document.addEventListener('keydown', e => {
+  if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    location.href = '../index.html?q=' + encodeURIComponent(NAME.slice(0, -1));
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+  e.preventDefault();
+  location.href = '../index.html?q=' + encodeURIComponent(e.key);
+});
+</script>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+  <span class="proto">prototype</span>
+</footer>
+</body>
+</html>

@@ -50,13 +50,17 @@ def llm(messages: list, max_tokens: int = 3000) -> str:
 def build_prompt(pack: dict) -> list:
     template = (ROOT / "data/exits/_template.yaml").read_text()
     rules = (ROOT / "docs/skills/drafting-exits.md").read_text()
+    voice_path = ROOT / "docs/skills/local-voice.md"
+    voice = (f"\n\nTaste corrections distilled from reviews of your previous "
+             f"drafts — these override your instincts:\n{voice_path.read_text()}"
+             if voice_path.exists() else "")
     examples = "\n---\n".join(
         f"# data/exits/{n}.yaml\n" + (ROOT / f"data/exits/{n}.yaml").read_text()
         for n in ("whatsapp", "spotify"))
     system = f"""You draft exit pages for exit.tech — guides for leaving dependencies.
 
 Follow these house rules:
-{rules}
+{rules}{voice}
 
 The file schema (template with comments):
 {template}
@@ -77,6 +81,8 @@ Hard rules:
   lists that alternative under that source. When in doubt, omit recommended_by.
 - If you can't name genuinely good exit routes from the research, set `stub: true`
   and put the value into the agent prompt instead.
+- YAML correctness: any string value containing ": " (colon-space) MUST be
+  single-quoted. When unsure, quote the whole string.
 - Output ONLY the YAML file content. No markdown fences, no commentary."""
     return [{"role": "system", "content": system}, {"role": "user", "content": user}]
 
@@ -179,8 +185,12 @@ def main():
             doc = yaml.safe_load(text)
             assert isinstance(doc, dict)
         except Exception as e:
+            dbg = ROOT / ".review" / f"{pack['slug']}.failed-{attempt}.txt"
+            dbg.parent.mkdir(exist_ok=True)
+            dbg.write_text(raw)
+            print(f"  not valid YAML ({e}) — raw saved to {dbg.relative_to(ROOT)}")
             messages += [{"role": "assistant", "content": raw},
-                         {"role": "user", "content": f"That was not valid YAML ({e}). Output only the corrected YAML file."}]
+                         {"role": "user", "content": f"That was not valid YAML ({e}). Most likely an unquoted string containing ': ' — single-quote every string value that contains a colon. Output only the corrected full YAML file."}]
             continue
 
         doc["id"] = pack["slug"]
@@ -192,7 +202,13 @@ def main():
 
         ok, log = validate()
         if ok:
+            # pre-review snapshot — the review diff against this is what
+            # feeds docs/skills/local-voice.md
+            snap = ROOT / ".review" / f"{pack['slug']}.draft.yaml"
+            snap.parent.mkdir(exist_ok=True)
+            snap.write_text(out_text)
             print(f"\n✓ draft written: {target.relative_to(ROOT)}")
+            print(f"  pre-review snapshot: {snap.relative_to(ROOT)}")
             if all_notes:
                 print("\ntruth-check strips (reviewer: investigate/restore with evidence):")
                 for n in all_notes:

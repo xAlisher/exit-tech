@@ -36,3 +36,16 @@ Used by the draft workflow (CI) and by local Claude Code sessions alike.
   not where its app lives.
 - **Found gaps?** If research shows a source we don't aggregate yet, note it
   in the PR body — don't wedge it into this PR.
+
+## The taste loop (local drafts)
+
+`draft_local.py` snapshots every accepted draft to `.review/<slug>.draft.yaml`
+before review. After reviewing, the reviewer MUST close the loop:
+
+1. Diff the snapshot against the final merged file.
+2. Distill what changed into `docs/skills/local-voice.md` — generalized rules
+   with the concrete example, citing the review. Merge near-duplicates.
+3. Commit the skill update with the review.
+
+The voice skill is injected into every subsequent local drafting prompt — this
+is how the local model inherits taste it can't learn any other way.
