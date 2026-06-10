@@ -180,6 +180,7 @@ def page(title: str, body: str, depth: int = 0, header_html: str | None = None,
   <a href="{pre}sources.html">sources &amp; credits</a> ·
   <a href="{pre}exits.json">open data</a> ·
   <a href="https://github.com/xAlisher/exit-tech">github</a>
+  <span class="proto">prototype</span>
 </footer>
 </body>
 </html>"""
@@ -509,6 +510,9 @@ footer { max-width: 720px; margin: 0; padding: 0 40px 48px; color: #444;
   font-size: 12px; }
 footer a { color: #444; }
 footer a:hover { color: var(--dim); }
+.proto { border: 1px solid #333; color: #555; font-size: 10px; padding: 1px 6px;
+  margin-left: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+  vertical-align: 1px; }
 """
 
 
