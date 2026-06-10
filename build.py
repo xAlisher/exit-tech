@@ -157,8 +157,10 @@ def esc(s) -> str:
             .replace('"', "&quot;"))
 
 
-def page(title: str, body: str, depth: int = 0) -> str:
+def page(title: str, body: str, depth: int = 0, header: bool = True) -> str:
     pre = "../" * depth
+    header_html = (f'\n<header><a class="tag" href="{pre}index.html">Exit is culture'
+                   '<span class="cursor"></span></a></header>') if header else ""
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,8 +169,7 @@ def page(title: str, body: str, depth: int = 0) -> str:
 <title>{esc(title)}</title>
 <link rel="stylesheet" href="{pre}style.css">
 </head>
-<body>
-<header><a class="tag" href="{pre}index.html">Exit is culture<span class="cursor"></span></a></header>
+<body>{header_html}
 <main>
 {body}
 </main>
@@ -245,15 +246,6 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
 
 
 def render_index(exits: list) -> str:
-    cards = []
-    for ex in exits:
-        n_alts = sum(len(p["alternatives"]) for p in ex.get("paths", []))
-        types = ", ".join(sorted({p["type"] for p in ex.get("paths", [])}))
-        cards.append(f'''<a class="card" href="exit/{esc(ex["id"])}.html" data-name="{esc(ex["name"].lower())}">
-<span class="card-cat">[{esc(ex["category"])}]</span>
-<span class="card-name">{esc(ex["name"])}</span>
-<span class="card-meta">{n_alts} exit routes · {esc(types)}</span>
-</a>''')
     targets = json.dumps([{"id": ex["id"], "name": ex["name"]} for ex in exits])
     body = f'''<div class="hero">
 <label for="q" class="promptline">&gt; I want to exit&nbsp;</label><span class="wrap">
@@ -261,8 +253,7 @@ def render_index(exits: list) -> str:
 <input id="q" autocomplete="off" autofocus placeholder="_" spellcheck="false">
 </span>
 </div>
-<div id="cards">{"".join(cards)}</div>
-<p id="nohit" hidden>Nothing here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
+<p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
 <script>
 const EXITS = {targets};
 const q = document.getElementById('q'),
@@ -272,15 +263,9 @@ let match = null;
 
 function update() {{
   const v = q.value.trim().toLowerCase();
-  let hits = 0;
-  document.querySelectorAll('.card').forEach(c => {{
-    const show = !v || c.dataset.name.includes(v);
-    c.hidden = !show; if (show) hits++;
-  }});
-  document.getElementById('nohit').hidden = hits > 0;
-
   match = v ? (EXITS.find(e => e.name.toLowerCase().startsWith(v))
             || EXITS.find(e => e.name.toLowerCase().includes(v))) : null;
+  document.getElementById('nohit').hidden = !(v && !match);
   gpad.textContent = ''; grest.textContent = '';
   if (match) {{
     if (match.name.toLowerCase().startsWith(v)) {{
@@ -308,7 +293,7 @@ q.addEventListener('keydown', e => {{
   }}
 }});
 </script>'''
-    return page("exit.tech — exit as culture", body)
+    return page("exit.tech", body, header=False)
 
 
 def render_sources(sources: list) -> str:
@@ -349,7 +334,7 @@ h3 { font-size: 14px; margin: 24px 0 8px; font-weight: 600; }
 .tagline { color: var(--dim); margin-bottom: 8px; }
 ul, ol { padding-left: 20px; }
 li { margin: 6px 0; }
-.hero { margin: 18vh 0 64px; font-size: 20px; display: flex; align-items: baseline; }
+.hero { margin: 38vh 0 24px; font-size: 20px; display: flex; align-items: baseline; }
 .promptline { white-space: pre; }
 .wrap { position: relative; flex: 1; }
 #q { background: none; border: none; outline: none; color: var(--acc);
@@ -357,13 +342,6 @@ li { margin: 6px 0; }
 .ghost { position: absolute; left: 0; top: 0; color: var(--dim); pointer-events: none;
   white-space: pre; }
 .ghost i { visibility: hidden; font-style: normal; }
-.card { display: block; border: 1px solid var(--line); padding: 16px 20px; margin: 12px 0;
-  color: var(--fg); }
-.card:hover { border-color: var(--acc); text-decoration: none; }
-.card[hidden] { display: none; }
-.card-cat { color: var(--dim); font-size: 12px; margin-right: 8px; }
-.card-name { font-weight: 600; }
-.card-meta { display: block; color: var(--dim); font-size: 12px; margin-top: 4px; }
 .alt { border: 1px solid var(--line); padding: 14px 18px; margin: 10px 0; }
 .alt-name { font-weight: 600; color: var(--fg); }
 .alt p { color: var(--dim); margin: 4px 0; }

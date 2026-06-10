@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>exit.tech — exit as culture</title>
+<title>exit.tech</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header><a class="tag" href="index.html">Exit is culture<span class="cursor"></span></a></header>
 <main>
 <div class="hero">
 <label for="q" class="promptline">&gt; I want to exit&nbsp;</label><span class="wrap">
@@ -15,20 +14,7 @@
 <input id="q" autocomplete="off" autofocus placeholder="_" spellcheck="false">
 </span>
 </div>
-<div id="cards"><a class="card" href="exit/whatsapp.html" data-name="whatsapp">
-<span class="card-cat">[digital]</span>
-<span class="card-name">WhatsApp</span>
-<span class="card-meta">3 exit routes · switch</span>
-</a><a class="card" href="exit/google-photos.html" data-name="google photos">
-<span class="card-cat">[digital]</span>
-<span class="card-name">Google Photos</span>
-<span class="card-meta">3 exit routes · self-host, switch</span>
-</a><a class="card" href="exit/supermarket-herbs.html" data-name="supermarket herbs">
-<span class="card-cat">[food]</span>
-<span class="card-name">Supermarket herbs</span>
-<span class="card-meta">3 exit routes · grow</span>
-</a></div>
-<p id="nohit" hidden>Nothing here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
+<p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
 <script>
 const EXITS = [{"id": "whatsapp", "name": "WhatsApp"}, {"id": "google-photos", "name": "Google Photos"}, {"id": "supermarket-herbs", "name": "Supermarket herbs"}];
 const q = document.getElementById('q'),
@@ -38,15 +24,9 @@ let match = null;
 
 function update() {
   const v = q.value.trim().toLowerCase();
-  let hits = 0;
-  document.querySelectorAll('.card').forEach(c => {
-    const show = !v || c.dataset.name.includes(v);
-    c.hidden = !show; if (show) hits++;
-  });
-  document.getElementById('nohit').hidden = hits > 0;
-
   match = v ? (EXITS.find(e => e.name.toLowerCase().startsWith(v))
             || EXITS.find(e => e.name.toLowerCase().includes(v))) : null;
+  document.getElementById('nohit').hidden = !(v && !match);
   gpad.textContent = ''; grest.textContent = '';
   if (match) {
     if (match.name.toLowerCase().startsWith(v)) {

@@ -20,7 +20,7 @@ h3 { font-size: 14px; margin: 24px 0 8px; font-weight: 600; }
 .tagline { color: var(--dim); margin-bottom: 8px; }
 ul, ol { padding-left: 20px; }
 li { margin: 6px 0; }
-.hero { margin: 18vh 0 64px; font-size: 20px; display: flex; align-items: baseline; }
+.hero { margin: 38vh 0 24px; font-size: 20px; display: flex; align-items: baseline; }
 .promptline { white-space: pre; }
 .wrap { position: relative; flex: 1; }
 #q { background: none; border: none; outline: none; color: var(--acc);
@@ -28,13 +28,6 @@ li { margin: 6px 0; }
 .ghost { position: absolute; left: 0; top: 0; color: var(--dim); pointer-events: none;
   white-space: pre; }
 .ghost i { visibility: hidden; font-style: normal; }
-.card { display: block; border: 1px solid var(--line); padding: 16px 20px; margin: 12px 0;
-  color: var(--fg); }
-.card:hover { border-color: var(--acc); text-decoration: none; }
-.card[hidden] { display: none; }
-.card-cat { color: var(--dim); font-size: 12px; margin-right: 8px; }
-.card-name { font-weight: 600; }
-.card-meta { display: block; color: var(--dim); font-size: 12px; margin-top: 4px; }
 .alt { border: 1px solid var(--line); padding: 14px 18px; margin: 10px 0; }
 .alt-name { font-weight: 600; color: var(--fg); }
 .alt p { color: var(--dim); margin: 4px 0; }
