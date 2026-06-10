@@ -21,7 +21,7 @@
 <h2>// burn the bridge</h2>
 <p>Delete your account (difficulty: <strong>easy</strong>) — <a href="https://instagram.com/accounts/remove/request/permanent/">direct link via JustDeleteMe</a></p>
 <h2>// take an agent with you</h2>
-<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
 <pre id="prompt">I want to exit Instagram. Act as my exit guide.
 
 When I'm ready, walk me through deleting my account (difficulty: easy): https://instagram.com/accounts/remove/request/permanent/
@@ -31,6 +31,7 @@ If I still want to share photos, suggest calmer homes for that (Pixelfed, a shar
 
 Go step by step. One thing at a time. I want to actually finish this.</pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
 <script>
 const NAME = "Instagram";
 document.addEventListener('keydown', e => {

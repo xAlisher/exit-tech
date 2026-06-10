@@ -57,6 +57,11 @@ pre { border: 1px solid var(--line); padding: 16px; white-space: pre-wrap;
 button { background: none; border: 1px solid var(--acc); color: var(--acc); font: inherit;
   padding: 6px 16px; cursor: pointer; }
 button:hover { background: var(--acc); color: #000; }
+.fnref { color: var(--acc); }
+.footnote { color: #666; font-size: 12.5px; margin-top: 20px; }
+a.door { color: #888; white-space: nowrap; }
+a.door .dg { color: var(--acc); margin-right: 1px; }
+a.door:hover { color: var(--acc); text-decoration: none; }
 footer { max-width: 720px; margin: 0; padding: 0 40px 48px; color: #444;
   font-size: 12px; }
 footer a { color: #444; }

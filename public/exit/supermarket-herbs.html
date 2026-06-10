@@ -19,7 +19,7 @@
 <div class="alt"><a class="alt-name" href="https://www.appropedia.org/Special:Search?search=growing+mint">Mint</a><p>Nearly unkillable. Grows from cuttings — one supermarket bunch can root in a glass of water.</p><div class="badges">via <a class="badge" href="../sources.html#appropedia" title="Appropedia">appropedia</a></div></div>
 <div class="alt"><a class="alt-name" href="https://www.appropedia.org/Special:Search?search=growing+chives">Chives</a><p>Perennial — cut and they regrow, for years.</p><div class="badges">via <a class="badge" href="../sources.html#appropedia" title="Appropedia">appropedia</a></div></div>
 <h2>// take an agent with you</h2>
-<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
 <pre id="prompt">I want to exit Supermarket herbs. Act as my exit guide.
 
 Grow them on a windowsill: help me choose between Basil, Mint, Chives based on my situation — ask me what matters before recommending.
@@ -29,6 +29,7 @@ Tell me which herbs I can start from supermarket cuttings this week instead of w
 
 Go step by step. One thing at a time. I want to actually finish this.</pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
 <script>
 const NAME = "Supermarket herbs";
 document.addEventListener('keydown', e => {

@@ -3,31 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Exit Toxic relationship — exit.tech</title>
+<title>Exit Claude — exit.tech</title>
 <link rel="stylesheet" href="../style.css">
 </head>
-<body><header class="prompt"><a class="ptag" href="../index.html">Exit</a>&nbsp;<span class="pname">Toxic relationship</span><span class="tcur"></span></header>
+<body><header class="prompt"><a class="ptag" href="../index.html">Exit</a>&nbsp;<span class="pname">Claude</span><span class="tcur"></span></header>
 <main>
-<p class="tagline">The exit nobody posts about.</p>
+<p class="tagline">Your second brain, rented from a first party.</p>
 <h2>// why</h2><ul>
-<li>Some dependencies are people. They are also the hardest ones to see from inside.</li>
+<li>Every conversation routes through a US cloud provider; capability you increasingly rely on, priced monthly and revocable.</li>
+<li>Full disclosure — this exit page was drafted by Claude. Exits apply to everyone.</li>
+<li>Terms of service rated <strong>“N/A”</strong> — <a href="https://tosdr.org/en/service/11619">see the documented points at ToS;DR</a></li>
 </ul>
 <h2>// exit routes</h2>
 <p>This exit is still being mapped — no curated routes yet. The prompt below already works. Want this page to exist properly? <a href="https://github.com/xAlisher/exit-tech">Help chart it.</a></p>
 <h2>// take an agent with you</h2>
 <p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
-<pre id="prompt">I want to exit Toxic relationship. Act as my exit guide.
+<pre id="prompt">I want to exit Claude. Act as my exit guide.
 
 
-Help me think clearly. Ask me gentle, concrete questions about how this relationship actually functions day to day, and reflect back what I tell you without telling me what to do.
-If anything I describe suggests my safety is at risk, stop and point me to local professional support and emergency contacts first — an AI conversation is not a safety plan.
-If I decide to leave, help me plan the practical side — living situation, money, key conversations, and who in my life I can lean on.
+Help me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.
+Check my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.
+Help me export anything I want to keep from my account before I go.
 
 Go step by step. One thing at a time. I want to actually finish this.</pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
-<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
 <script>
-const NAME = "Toxic relationship";
+const NAME = "Claude";
 document.addEventListener('keydown', e => {
   if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
   if (e.key === 'Backspace') {

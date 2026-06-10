@@ -205,6 +205,11 @@ document.addEventListener('keydown', e => {{
 </script>'''
 
 
+def door(eid: str, name: str) -> str:
+    """Site convention: green door glyph + service name linking to its exit page."""
+    return f'<a class="door" href="{esc(eid)}.html"><span class="dg">⎋</span>{esc(name)}</a>'
+
+
 def badge_row(refs: list, sources_by_id: dict) -> str:
     out = []
     for r in refs:
@@ -268,9 +273,14 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
                  f'<a href="{esc(jdm["url"])}">direct link via JustDeleteMe</a></p>')
 
     b.append("<h2>// take an agent with you</h2>")
-    b.append("<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>")
+    b.append("<p>Paste this into your agent<span class=\"fnref\">*</span> of choice and it will walk you through the exit, personalized:</p>")
     b.append(f'<pre id="prompt">{esc(ex["agent_prompt"])}</pre>')
     b.append('<button onclick="navigator.clipboard.writeText(document.getElementById(\'prompt\').innerText).then(()=>{this.innerText=\'copied ✓\'})">copy prompt</button>')
+    ai_exits = [("claude", "Claude"), ("chatgpt", "ChatGPT"), ("gemini", "Gemini")]
+    dl = [door(eid, name) for eid, name in ai_exits if eid != ex["id"]]
+    doors = " or ".join([", ".join(dl[:-1]), dl[-1]]) if len(dl) > 1 else dl[0]
+    b.append(f'<p class="footnote">* Just a reminder — you can also exit {doors} '
+             'in favor of locally hosted agents.</p>')
     b.append(type_anywhere(depth=1, name=ex["name"]))
     return page(f"Exit {ex['name']} — exit.tech", "\n".join(b), depth=1, header_html=head)
 
@@ -490,6 +500,11 @@ pre { border: 1px solid var(--line); padding: 16px; white-space: pre-wrap;
 button { background: none; border: 1px solid var(--acc); color: var(--acc); font: inherit;
   padding: 6px 16px; cursor: pointer; }
 button:hover { background: var(--acc); color: #000; }
+.fnref { color: var(--acc); }
+.footnote { color: #666; font-size: 12.5px; margin-top: 20px; }
+a.door { color: #888; white-space: nowrap; }
+a.door .dg { color: var(--acc); margin-right: 1px; }
+a.door:hover { color: var(--acc); text-decoration: none; }
 footer { max-width: 720px; margin: 0; padding: 0 40px 48px; color: #444;
   font-size: 12px; }
 footer a { color: #444; }

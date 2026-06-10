@@ -15,7 +15,7 @@
 <h2>// exit routes</h2>
 <p>This exit is still being mapped — no curated routes yet. The prompt below already works. Want this page to exist properly? <a href="https://github.com/xAlisher/exit-tech">Help chart it.</a></p>
 <h2>// take an agent with you</h2>
-<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
 <pre id="prompt">I want to exit Smoking. Act as my exit guide.
 
 
@@ -24,6 +24,7 @@ Be honest that relapse is part of most successful quits, and help me plan for it
 
 Go step by step. One thing at a time. I want to actually finish this.</pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
 <script>
 const NAME = "Smoking";
 document.addEventListener('keydown', e => {

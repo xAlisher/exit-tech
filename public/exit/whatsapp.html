@@ -27,7 +27,7 @@
 <h2>// burn the bridge</h2>
 <p>Delete your account (difficulty: <strong>medium</strong>) — <a href="https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&amp;p=desktop">direct link via JustDeleteMe</a></p>
 <h2>// take an agent with you</h2>
-<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
 <pre id="prompt">I want to exit WhatsApp. Act as my exit guide.
 
 First, help me get my data out:
@@ -42,6 +42,7 @@ Help me decide between Signal, SimpleX and Session based on who I actually talk 
 
 Go step by step. One thing at a time. I want to actually finish this.</pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
 <script>
 const NAME = "WhatsApp";
 document.addEventListener('keydown', e => {

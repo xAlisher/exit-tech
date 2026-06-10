@@ -184,6 +184,48 @@
     - If anything I describe suggests my safety is at risk, stop and point me to local professional support and emergency contacts first — an AI conversation is not a safety plan.
     - If I decide to leave, help me plan the practical side — living situation, money, key conversations, and who in my life I can lean on.
 
+- id: claude
+  name: Claude
+  category: digital
+  stub: true
+  tagline: Your second brain, rented from a first party.
+  why:
+    - Every conversation routes through a US cloud provider; capability you increasingly rely on, priced monthly and revocable.
+    - Full disclosure — this exit page was drafted by Claude. Exits apply to everyone.
+  enrich:
+    tosdr: anthropic
+  prompt:
+    - Help me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.
+    - Check my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.
+    - Help me export anything I want to keep from my account before I go.
+
+- id: chatgpt
+  name: ChatGPT
+  category: digital
+  stub: true
+  tagline: The default brain. Defaults are dependencies.
+  why:
+    - The fastest-adopted consumer product in history — which is exactly what a dependency looks like from inside.
+  enrich:
+    tosdr: chatgpt
+  prompt:
+    - Help me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.
+    - Check my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.
+    - Walk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes.
+
+- id: gemini
+  name: Gemini
+  category: digital
+  stub: true
+  tagline: One more thread tying you to the Google account.
+  why:
+    - Bundled into search, mail and your phone — the exit is really from the account that holds them together.
+  enrich:
+    tosdr: google
+  prompt:
+    - Help me move my AI usage to locally hosted models — ask what I use Gemini for and how deep my Google account dependency goes, since this exit is usually part of that bigger one.
+    - Check my hardware and recommend a local stack (Ollama or llama.cpp) with a realistic starting model, and tell me honestly what I'd lose.
+
 - id: oppressive-regime
   name: Oppressive regime
   category: institutional
