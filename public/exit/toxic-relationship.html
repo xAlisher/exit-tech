@@ -26,9 +26,15 @@ If I decide to leave, help me plan the practical side — living situation, mone
 Go step by step. One thing at a time. I want to actually finish this.</pre>
 <button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
 <script>
+const NAME = "Toxic relationship";
 document.addEventListener('keydown', e => {
-  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
   if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    location.href = '../index.html?q=' + encodeURIComponent(NAME.slice(0, -1));
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
   e.preventDefault();
   location.href = '../index.html?q=' + encodeURIComponent(e.key);
 });

@@ -185,13 +185,20 @@ def page(title: str, body: str, depth: int = 0, header_html: str | None = None,
 </html>"""
 
 
-def type_anywhere(depth: int) -> str:
-    """Typing on a non-landing page jumps to the landing with the char as query."""
+def type_anywhere(depth: int, name: str = "") -> str:
+    """Typing on a non-landing page jumps to the landing with the char as query.
+    Backspace jumps back with the current name minus its last character."""
     pre = "../" * depth
     return f'''<script>
+const NAME = {json.dumps(name)};
 document.addEventListener('keydown', e => {{
-  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
   if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === 'Backspace') {{
+    e.preventDefault();
+    location.href = '{pre}index.html?q=' + encodeURIComponent(NAME.slice(0, -1));
+    return;
+  }}
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
   e.preventDefault();
   location.href = '{pre}index.html?q=' + encodeURIComponent(e.key);
 }});
@@ -264,7 +271,7 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
     b.append("<p>Paste this into Claude, ChatGPT or your agent of choice and it will walk you through the exit, personalized:</p>")
     b.append(f'<pre id="prompt">{esc(ex["agent_prompt"])}</pre>')
     b.append('<button onclick="navigator.clipboard.writeText(document.getElementById(\'prompt\').innerText).then(()=>{this.innerText=\'copied ✓\'})">copy prompt</button>')
-    b.append(type_anywhere(depth=1))
+    b.append(type_anywhere(depth=1, name=ex["name"]))
     return page(f"Exit {ex['name']} — exit.tech", "\n".join(b), depth=1, header_html=head)
 
 
@@ -362,11 +369,13 @@ if (seed) {{
   update();
 }}
 q.focus();
+q.setSelectionRange(q.value.length, q.value.length);
 
 document.addEventListener('keydown', e => {{
   if (document.activeElement === q) return;
   if ((e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) || e.key === 'Backspace') {{
     q.focus();
+    q.setSelectionRange(q.value.length, q.value.length);
   }}
 }});
 

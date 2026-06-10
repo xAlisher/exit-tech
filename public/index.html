@@ -100,11 +100,13 @@ if (seed) {
   update();
 }
 q.focus();
+q.setSelectionRange(q.value.length, q.value.length);
 
 document.addEventListener('keydown', e => {
   if (document.activeElement === q) return;
   if ((e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) || e.key === 'Backspace') {
     q.focus();
+    q.setSelectionRange(q.value.length, q.value.length);
   }
 });
 

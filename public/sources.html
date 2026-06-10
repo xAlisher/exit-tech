@@ -82,9 +82,15 @@
 <div class="badges">license: site content · <a href="https://european-alternatives.eu">data</a></div>
 </div>
 <script>
+const NAME = "";
 document.addEventListener('keydown', e => {
-  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
   if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    location.href = 'index.html?q=' + encodeURIComponent(NAME.slice(0, -1));
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
   e.preventDefault();
   location.href = 'index.html?q=' + encodeURIComponent(e.key);
 });
