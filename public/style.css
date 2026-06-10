@@ -35,7 +35,7 @@ body.home footer { padding-bottom: 32px; }
 .ghost { position: absolute; left: 0; top: 0; color: var(--dim); pointer-events: none;
   white-space: pre; line-height: 28px; }
 .ghost i { visibility: hidden; font-style: normal; }
-#gcur { display: inline-block; width: 10px; height: 19px; background: var(--acc);
+#gcur { display: inline-block; width: 3px; height: 19px; background: var(--acc);
   animation: blink 1s step-end infinite; vertical-align: -2px; margin-right: 3px; }
 #gcur[hidden] { display: none; }
 #q.empty { caret-color: transparent; }

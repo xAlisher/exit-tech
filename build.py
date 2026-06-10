@@ -249,7 +249,7 @@ def render_exit(ex: dict, sources_by_id: dict) -> str:
 def render_index(exits: list) -> str:
     targets = json.dumps([{"id": ex["id"], "name": ex["name"]} for ex in exits])
     body = f'''<div class="hero">
-<label for="q" class="promptline">Exit&nbsp;&nbsp;</label><span class="wrap">
+<label for="q" class="promptline">Exit&nbsp;</label><span class="wrap">
 <span class="ghost" aria-hidden="true"><span id="gcur"></span><i id="gpad"></i><span id="grest"></span></span>
 <input id="q" class="empty" autocomplete="off" spellcheck="false" aria-label="what do you want to exit">
 </span>
@@ -403,7 +403,7 @@ body.home footer { padding-bottom: 32px; }
 .ghost { position: absolute; left: 0; top: 0; color: var(--dim); pointer-events: none;
   white-space: pre; line-height: 28px; }
 .ghost i { visibility: hidden; font-style: normal; }
-#gcur { display: inline-block; width: 10px; height: 19px; background: var(--acc);
+#gcur { display: inline-block; width: 3px; height: 19px; background: var(--acc);
   animation: blink 1s step-end infinite; vertical-align: -2px; margin-right: 3px; }
 #gcur[hidden] { display: none; }
 #q.empty { caret-color: transparent; }
