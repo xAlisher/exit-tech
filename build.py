@@ -250,8 +250,8 @@ def render_index(exits: list) -> str:
     targets = json.dumps([{"id": ex["id"], "name": ex["name"]} for ex in exits])
     body = f'''<div class="hero">
 <label for="q" class="promptline">Exit&nbsp;&nbsp;</label><span class="wrap">
-<span class="ghost" aria-hidden="true"><i id="gpad"></i><span id="grest"></span></span>
-<input id="q" autocomplete="off" spellcheck="false" aria-label="what do you want to exit">
+<span class="ghost" aria-hidden="true"><span id="gcur"></span><i id="gpad"></i><span id="grest"></span></span>
+<input id="q" class="empty" autocomplete="off" spellcheck="false" aria-label="what do you want to exit">
 </span>
 </div>
 <p id="nohit" hidden>No exit here yet. That's the point of the prototype — <a href="https://github.com/xAlisher/exit-tech">ask for it</a>.</p>
@@ -259,10 +259,14 @@ def render_index(exits: list) -> str:
 const EXITS = {targets};
 const q = document.getElementById('q'),
       gpad = document.getElementById('gpad'),
-      grest = document.getElementById('grest');
+      grest = document.getElementById('grest'),
+      gcur = document.getElementById('gcur');
 let match = null;
 
 function update() {{
+  const empty = !q.value;
+  gcur.hidden = !empty;
+  q.classList.toggle('empty', empty);
   const v = q.value.trim().toLowerCase();
   match = v ? (EXITS.find(e => e.name.toLowerCase().startsWith(v))
             || EXITS.find(e => e.name.toLowerCase().includes(v))) : null;
@@ -291,20 +295,21 @@ function stopGlitch() {{
   if (!q.value) {{ gpad.textContent = ''; grest.textContent = ''; }}
 }}
 
+
 function scheduleGlitch(delay) {{
   clearTimeout(glitchTimer);
   glitchTimer = setTimeout(fireGlitch, delay);
 }}
 
 function fireGlitch() {{
-  if (document.activeElement === q || q.value) return;
+  if (q.value) return;
   const name = EXITS[Math.random() * EXITS.length | 0].name;
   const locks = [...name].map(() => 6 + (Math.random() * 14 | 0));
   const hold = 34, fadeStart = Math.max(...locks) + hold;
   let f = 0;
   clearInterval(glitchAnim);
   glitchAnim = setInterval(() => {{
-    if (document.activeElement === q || q.value) {{ stopGlitch(); return; }}
+    if (q.value) {{ stopGlitch(); return; }}
     let out = '';
     [...name].forEach((ch, i) => {{
       if (f >= fadeStart) out += (f - fadeStart > locks[i]) ? '' : (Math.random() < 0.4 ? glyph() : ch);
@@ -321,11 +326,13 @@ function fireGlitch() {{
   }}, 40);
 }}
 
-q.addEventListener('focus', stopGlitch);
-q.addEventListener('blur', () => {{ if (!q.value) scheduleGlitch(2000 + Math.random() * 3000); }});
 scheduleGlitch(1200);
 
-q.addEventListener('input', () => {{ stopGlitch(); update(); }});
+q.addEventListener('input', () => {{
+  if (q.value) stopGlitch();
+  else scheduleGlitch(1500 + Math.random() * 2500);
+  update();
+}});
 q.addEventListener('keydown', e => {{
   const caretAtEnd = q.selectionStart === q.value.length && q.selectionEnd === q.value.length;
   if ((e.key === 'Tab' || (e.key === 'ArrowRight' && caretAtEnd)) && match && q.value) {{
@@ -386,18 +393,20 @@ body.home main { flex: 1; display: flex; flex-direction: column; justify-content
   width: 100%; padding: 20px; }
 body.home footer { padding-bottom: 32px; }
 .hero { font-size: 20px; display: flex; align-items: center; justify-content: center; }
-.hero .wrap { flex: 0 0 20ch; border: 1px solid var(--line); padding: 9px 13px;
-  transition: border-color 0.25s; }
-.hero .wrap:focus-within { border-color: #888; }
+.hero .wrap { flex: 0 0 20ch; }
 #nohit { margin-top: 16px; color: var(--dim); text-align: center; }
 .promptline { white-space: pre; }
 .wrap { position: relative; flex: 1; }
 #q { background: none; border: none; outline: none; color: var(--acc);
   font: inherit; caret-color: var(--acc); width: 100%; position: relative;
   padding: 0; line-height: 28px; height: 28px; display: block; }
-.ghost { position: absolute; left: 13px; top: 9px; color: var(--dim); pointer-events: none;
+.ghost { position: absolute; left: 0; top: 0; color: var(--dim); pointer-events: none;
   white-space: pre; line-height: 28px; }
 .ghost i { visibility: hidden; font-style: normal; }
+#gcur { display: inline-block; width: 10px; height: 19px; background: var(--acc);
+  animation: blink 1s step-end infinite; vertical-align: -2px; margin-right: 3px; }
+#gcur[hidden] { display: none; }
+#q.empty { caret-color: transparent; }
 .alt { border: 1px solid var(--line); padding: 14px 18px; margin: 10px 0; }
 .alt-name { font-weight: 600; color: var(--fg); }
 .alt p { color: var(--dim); margin: 4px 0; }
