@@ -314,13 +314,25 @@ function update() {{
 
 // --- idle glitch: random service names scramble in and dissolve ---
 const GLYPHS = "!<>-_\\\\/[]{{}}=+*^?#░▒▓";
-let glitchTimer = null, glitchAnim = null;
+let glitchTimer = null, glitchAnim = null, glitchTarget = null;
+
+function acceptGlitch() {{
+  if (!glitchTarget || q.value) return false;
+  const t = glitchTarget;
+  stopGlitch();
+  q.value = t.name;
+  q.focus();
+  q.setSelectionRange(t.name.length, t.name.length);
+  update();
+  setTimeout(() => {{ location.href = 'exit/' + t.id + '.html'; }}, 250);
+  return true;
+}}
 
 function glyph() {{ return GLYPHS[Math.random() * GLYPHS.length | 0]; }}
 
 function stopGlitch() {{
   clearTimeout(glitchTimer); clearInterval(glitchAnim);
-  glitchTimer = glitchAnim = null;
+  glitchTimer = glitchAnim = glitchTarget = null;
   if (!q.value) {{ gpad.textContent = ''; grest.textContent = ''; }}
 }}
 
@@ -332,7 +344,8 @@ function scheduleGlitch(delay) {{
 
 function fireGlitch() {{
   if (q.value) return;
-  const name = EXITS[Math.random() * EXITS.length | 0].name;
+  glitchTarget = EXITS[Math.random() * EXITS.length | 0];
+  const name = glitchTarget.name;
   const locks = [...name].map(() => 6 + (Math.random() * 14 | 0));
   const hold = 34, fadeStart = Math.max(...locks) + hold;
   let f = 0;
@@ -348,7 +361,7 @@ function fireGlitch() {{
     grest.textContent = out;
     f++;
     if (f > fadeStart + 3) {{
-      clearInterval(glitchAnim); glitchAnim = null;
+      clearInterval(glitchAnim); glitchAnim = null; glitchTarget = null;
       grest.textContent = '';
       scheduleGlitch(200 + Math.random() * 500);
     }}
@@ -373,6 +386,7 @@ q.setSelectionRange(q.value.length, q.value.length);
 
 document.addEventListener('keydown', e => {{
   if (document.activeElement === q) return;
+  if (e.key === 'ArrowRight' && acceptGlitch()) {{ e.preventDefault(); return; }}
   if ((e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) || e.key === 'Backspace') {{
     q.focus();
     q.setSelectionRange(q.value.length, q.value.length);
@@ -380,6 +394,10 @@ document.addEventListener('keydown', e => {{
 }});
 
 q.addEventListener('keydown', e => {{
+  if ((e.key === 'ArrowRight' || e.key === 'Tab') && !q.value && acceptGlitch()) {{
+    e.preventDefault();
+    return;
+  }}
   const caretAtEnd = q.selectionStart === q.value.length && q.selectionEnd === q.value.length;
   if ((e.key === 'Tab' || (e.key === 'ArrowRight' && caretAtEnd)) && match && q.value) {{
     e.preventDefault();
