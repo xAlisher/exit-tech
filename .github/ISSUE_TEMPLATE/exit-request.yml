@@ -1,0 +1,92 @@
+name: Request / contribute an exit
+description: Suggest a dependency worth leaving — or draft the whole exit page
+title: "exit: "
+labels: [exit-request]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Thanks for contributing. **Put the service/dependency name in the issue
+        title** after `exit:` (e.g. `exit: spotify`) — that's how requests get
+        deduped and weighted.
+
+
+        Only the name and category are required. Fill in as much of the rest as
+        you can — the sections below mirror an exit page, so a complete answer
+        becomes the page almost verbatim. An empty draft is still a useful vote.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: What people type to find it (also goes in the title).
+      placeholder: Spotify
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - digital
+        - physical
+        - food
+        - financial
+        - relational
+        - institutional
+        - substance
+        - behavioral
+    validations:
+      required: true
+  - type: input
+    id: tagline
+    attributes:
+      label: Tagline
+      description: One sharp line on why this exit matters.
+      placeholder: You rent your music taste back from an algorithm.
+  - type: textarea
+    id: why
+    attributes:
+      label: Why leave?
+      description: One reason per line — what makes this a dependency worth leaving.
+      placeholder: |
+        - Nothing you "save" is yours; the catalog rotates beneath you.
+        - The recommendation engine optimizes for retention, not for you.
+  - type: textarea
+    id: extract
+    attributes:
+      label: How to get your data/assets out (before exiting)
+      description: One step per line — where the export lives and what to expect.
+      placeholder: |
+        - Privacy settings → Download your data; arrives by email as a zip.
+  - type: textarea
+    id: paths
+    attributes:
+      label: Where to go — alternatives
+      description: >
+        Switch / self-host / grow / print / repair. For each alternative give a
+        name, a link, and one line on when it's the right pick.
+      placeholder: |
+        - Navidrome (self-host) — https://navidrome.org — your own library, streamed to any device.
+        - Bandcamp (switch) — https://bandcamp.com — buy the music, keep the files, pay the artist.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources that recommend these
+      description: >
+        Credits on this site are load-bearing — we only claim recommendations a
+        source actually makes. Link the source (a review, an awesome-list entry,
+        a privacy guide) for each alternative above. See exit.tech/sources.html
+        for sources already wired in.
+      placeholder: |
+        Navidrome — listed on awesome-selfhosted: https://github.com/awesome-selfhosted/awesome-selfhosted
+  - type: textarea
+    id: prompt
+    attributes:
+      label: Agent prompt notes (optional)
+      description: >
+        Exit-specific guidance for the copy-paste agent prompt — what it should
+        ask or check. For sensitive topics (addiction, relationships, leaving an
+        oppressive situation), it must defer to professional/emergency help and
+        never play expert.
+      placeholder: |
+        Ask me which playlists I actually replay before recommending a migration path.
