@@ -133,6 +133,9 @@ def validate_exit(ex: dict, fname: str, source_ids: set) -> list[str]:
     for s in ex.get("extract") or []:
         if not isinstance(s, dict) or "step" not in s:
             err("extract entries must be {step: ...}")
+    for line in ex.get("prompt") or []:
+        if not isinstance(line, str):
+            err(f"prompt entries must be plain strings, got {type(line).__name__}: {line!r}")
     for p in ex.get("paths") or []:
         if p.get("type") not in PATH_TYPES:
             err(f"unknown path type '{p.get('type')}' (allowed: {sorted(PATH_TYPES)})")
