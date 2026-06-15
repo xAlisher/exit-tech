@@ -1,4 +1,4 @@
-# drafted by qwen3.6-27b (local, Sneg) — reviewed by Claude
+# drafted by qwen3.6-27b (local, Sneg) — reviewed by Claude; routes added from manual source recheck
 id: google-docs
 name: Google Docs
 category: digital
@@ -7,17 +7,74 @@ why:
 - Nothing lives on your disk — your work is a link, and the link's owner isn't you.
 - 'Export never round-trips: download to .docx or .odt and the comments, suggestions, and edit history
   stay behind.'
+enrich:
+  tosdr: google
 extract:
 - step: File → Download keeps a local copy (.docx, .odt, or PDF) — do it per document for the ones you
     care about.
 - step: For everything at once, use takeout.google.com — select Drive and set the Docs format to .docx
     or .odt.
-stub: true
+paths:
+- type: self-host
+  label: Self-host a collaborative editor
+  alternatives:
+  - name: Docs (La Suite Numérique)
+    url: https://docs.numerique.gouv.fr
+    enrich:
+      awesome_selfhosted: docs
+    recommended_by: [awesome-selfhosted]
+    note: Built by the French and German governments, MIT-licensed — the closest like-for-like that no
+      company can buy or shut down. Realistically a hosted instance unless you can run the server yourself.
+  - name: CryptPad
+    url: https://cryptpad.org
+    enrich:
+      awesome_selfhosted: cryptpad
+    recommended_by: [awesome-privacy, awesome-selfhosted, switching-software]
+    note: End-to-end encrypted and account-free — the right pick when the document's privacy matters most;
+      the editor is lighter than Google's.
+  - name: Nextcloud + Collabora Online
+    url: https://nextcloud.com/office
+    enrich:
+      awesome_selfhosted: nextcloud
+    recommended_by: [awesome-privacy, awesome-selfhosted, switching-software]
+    note: The fullest Drive-plus-Office replacement with real-time co-editing — but someone has to run and
+      maintain the server.
+  - name: Etherpad
+    url: https://etherpad.org
+    enrich:
+      awesome_selfhosted: etherpad
+    recommended_by: [awesome-selfhosted, switching-software]
+    note: A dead-simple shared pad — paste a link and write together. Great for quick collaboration, not
+      for formatted documents or spreadsheets.
+- type: switch
+  label: Own your keys, not just an account
+  alternatives:
+  - name: dDocs (Fileverse)
+    url: https://ddocs.new
+    enrich:
+      web3privacy: fileverse
+    recommended_by: [web3privacy]
+    note: Documents keyed to you instead of an account — encrypted and peer-to-peer. The most sovereign
+      option, but the wallet-based setup is a wall if you're not in crypto, and losing your keys loses
+      your docs.
+- type: switch
+  label: Go local — own the files, drop the cloud
+  alternatives:
+  - name: LibreOffice
+    url: https://www.libreoffice.org
+    recommended_by: [european-alternatives]
+    note: If real-time collaboration isn't what you actually need, this owns the files outright on your
+      disk — no cloud, no link. You lose live co-editing.
+  - name: Obsidian
+    url: https://obsidian.md
+    enrich:
+      awesome_privacy: Obsidian
+    recommended_by: [awesome-privacy]
+    note: For solo writing and notes meant to outlive any app — local Markdown files you keep forever. Not
+      a fit if co-authoring is your core need.
 prompt:
 - 'Before recommending anything, interview me: do I co-author in real time, lean on add-ons or Apps
   Script, and how sensitive is the content?'
-- Help me decide between a local-first editor (Obsidian, Logseq, Zettlr), a self-hosted suite (Nextcloud
-  with Collabora, or CryptPad), or just a different cloud provider — based on the answers above.
 - If I work alone, walk me through a local markdown workflow with Git for version history, so ownership
   comes back to my disk.
 - If I collaborate, be honest about the cost of moving everyone versus keeping Docs for shared work and
