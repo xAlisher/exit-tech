@@ -1,0 +1,25 @@
+# drafted by qwen3.6-27b (local, Sneg) — pending review
+id: google-docs
+name: Google Docs
+category: digital
+tagline: Your draft is their training data.
+why:
+- Your documents, style, and corrections train the models that optimize retention for everyone else.
+- Cloud-only default locks you into an ecosystem where "export" means losing formatting and collaboration
+  history.
+- The edit history is a behavioral fingerprint you can't easily wipe.
+extract:
+- step: File → Download to get a local copy (PDF, DOCX, or ODT).
+- step: Go to One Google > Data & personalization > Download your data to request a full archive including
+    Drive contents.
+stub: true
+prompt:
+- I need to move my documents out of Google Docs. Help me decide whether to switch to a local-first editor
+  (like Obsidian, Logseq, or Zettlr), a self-hosted suite (like Nextcloud or Collabora), or a different
+  cloud provider.
+- 'Ask me about my current workflow: Do I co-author in real-time with others? Do I rely on Google''s add-ons
+  or scripts? How sensitive is the content?'
+- If I work alone, recommend a local markdown workflow with Git for version control to regain ownership.
+- If I need collaboration, explain the trade-offs of inviting others to a new platform versus keeping
+  Docs for them and exporting for me.
+- Help me write a transition message to my collaborators if I am switching a shared drive.
