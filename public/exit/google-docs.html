@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit Google Docs — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body><header class="prompt"><a class="ptag" href="../index.html">Exit</a>&nbsp;<span class="pname">Google Docs</span><span class="tcur"></span></header>
+<main>
+<p class="tagline">You don't have a file. You have a link.</p>
+<h2>// why</h2><ul>
+<li>Nothing lives on your disk — your work is a link, and the link's owner isn't you.</li>
+<li>Export never round-trips: download to .docx or .odt and the comments, suggestions, and edit history stay behind.</li>
+<li>Terms of service rated <strong>“E”</strong> — <a href="https://tosdr.org/en/service/217">see the documented points at ToS;DR</a></li>
+</ul>
+<h2>// first, get your stuff out</h2><ol>
+<li>File → Download keeps a local copy (.docx, .odt, or PDF) — do it per document for the ones you care about.</li>
+<li>For everything at once, use takeout.google.com — select Drive and set the Docs format to .docx or .odt.</li>
+</ol>
+<h2>// exit paths</h2>
+<h3><span class="ptype">[self-host]</span> Self-host a collaborative editor</h3>
+<div class="alt"><a class="alt-name" href="https://docs.numerique.gouv.fr">Docs (La Suite Numérique)</a><p>Built by the French and German governments, MIT-licensed — the closest like-for-like that no company can buy or shut down. Realistically a hosted instance unless you can run the server yourself.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-selfhosted" title="awesome-selfhosted">awesome-selfhosted</a></div></div>
+<div class="alt"><a class="alt-name" href="https://cryptpad.org">CryptPad</a><p>End-to-end encrypted and account-free — the right pick when the document's privacy matters most; the editor is lighter than Google's.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a> <a class="badge" href="../sources.html#awesome-selfhosted" title="awesome-selfhosted">awesome-selfhosted</a> <a class="badge" href="../sources.html#switching-software" title="switching.software">switching-software</a></div></div>
+<div class="alt"><a class="alt-name" href="https://nextcloud.com/office">Nextcloud + Collabora Online</a><p>The fullest Drive-plus-Office replacement with real-time co-editing — but someone has to run and maintain the server.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a> <a class="badge" href="../sources.html#awesome-selfhosted" title="awesome-selfhosted">awesome-selfhosted</a> <a class="badge" href="../sources.html#switching-software" title="switching.software">switching-software</a></div></div>
+<div class="alt"><a class="alt-name" href="https://etherpad.org">Etherpad</a><p>A dead-simple shared pad — paste a link and write together. Great for quick collaboration, not for formatted documents or spreadsheets.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-selfhosted" title="awesome-selfhosted">awesome-selfhosted</a> <a class="badge" href="../sources.html#switching-software" title="switching.software">switching-software</a></div></div>
+<h3><span class="ptype">[switch]</span> Own your keys, not just an account</h3>
+<div class="alt"><a class="alt-name" href="https://ddocs.new">dDocs (Fileverse)</a> <span class="flags">open source</span><p>Documents keyed to you instead of an account — encrypted and peer-to-peer. The most sovereign option, but the wallet-based setup is a wall if you're not in crypto, and losing your keys loses your docs.</p><div class="badges">via <a class="badge" href="../sources.html#web3privacy" title="Web3Privacy Now Explorer">web3privacy</a></div></div>
+<h3><span class="ptype">[switch]</span> Go local — own the files, drop the cloud</h3>
+<div class="alt"><a class="alt-name" href="https://www.libreoffice.org">LibreOffice</a><p>If real-time collaboration isn't what you actually need, this owns the files outright on your disk — no cloud, no link. You lose live co-editing.</p><div class="badges">via <a class="badge" href="../sources.html#european-alternatives" title="European Alternatives">european-alternatives</a></div></div>
+<div class="alt"><a class="alt-name" href="https://obsidian.md">Obsidian</a> <span class="flags">audited</span><p>For solo writing and notes meant to outlive any app — local Markdown files you keep forever. Not a fit if co-authoring is your core need.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a></div></div>
+<h2>// take an agent with you</h2>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit Google Docs. Act as my exit guide.
+
+First, help me get my data out:
+- File → Download keeps a local copy (.docx, .odt, or PDF) — do it per document for the ones you care about.
+- For everything at once, use takeout.google.com — select Drive and set the Docs format to .docx or .odt.
+
+Self-host a collaborative editor: help me choose between Docs (La Suite Numérique), CryptPad, Nextcloud + Collabora Online, Etherpad based on my situation — ask me what matters before recommending.
+Own your keys, not just an account: help me choose between dDocs (Fileverse) based on my situation — ask me what matters before recommending.
+Go local — own the files, drop the cloud: help me choose between LibreOffice, Obsidian based on my situation — ask me what matters before recommending.
+
+Before recommending anything, interview me: do I co-author in real time, lean on add-ons or Apps Script, and how sensitive is the content?
+If I work alone, walk me through a local markdown workflow with Git for version history, so ownership comes back to my disk.
+If I collaborate, be honest about the cost of moving everyone versus keeping Docs for shared work and exporting clean copies for myself.
+Help me write a short transition message to my collaborators if I move a shared drive.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
+<h2>// are we missing something?</h2>
+<p>Wrong facts, missed alternative, better sources?</p>
+<a class="btn" href="https://github.com/xAlisher/exit-tech/issues/new?template=page-feedback.yml&amp;title=feedback%3A%20Google%20Docs&amp;page=https%3A//exit.tech/exit/google-docs.html">contribute</a>
+<script>
+const NAME = "Google Docs";
+document.addEventListener('keydown', e => {
+  if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    location.href = '../index.html?q=' + encodeURIComponent(NAME.slice(0, -1));
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+  e.preventDefault();
+  location.href = '../index.html?q=' + encodeURIComponent(e.key);
+});
+</script>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+  <span class="proto">prototype</span>
+</footer>
+</body>
+</html>
