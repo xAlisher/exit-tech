@@ -2,6 +2,147 @@
   "about": "exit.tech merged exit dataset. Aggregated from credited open sources — see /sources.html.",
   "exits": [
     {
+      "id": "gmail",
+      "name": "Gmail",
+      "category": "digital",
+      "tagline": "The address every other account resets to — owned by someone else.",
+      "why": [
+        "Email is your master key: every other account resets through it, so whoever runs your inbox holds the root of your online identity.",
+        "Your address is the lock-in: leaving means re-pointing every service, contact, and 2FA that depends on it — by hand."
+      ],
+      "enrich": {
+        "tosdr": "Google",
+        "justdeleteme": "Gmail"
+      },
+      "extract": [
+        {
+          "step": "Export everything via takeout.google.com — select Mail (as MBOX) and Contacts (as vCard)."
+        },
+        {
+          "step": "Import that archive into your new provider over IMAP, or keep the MBOX as an offline backup you fully control."
+        }
+      ],
+      "paths": [
+        {
+          "type": "switch",
+          "label": "Switch to private email",
+          "alternatives": [
+            {
+              "name": "Proton Mail",
+              "url": "https://proton.me/mail",
+              "enrich": {
+                "awesome_privacy": "ProtonMail"
+              },
+              "recommended_by": [
+                "privacy-guides",
+                "awesome-privacy",
+                "switching-software"
+              ],
+              "note": "The default like-for-like — end-to-end encrypted, Swiss-based, full webmail/app/calendar. Easiest landing if you want everything in one place.",
+              "live": {
+                "description": "An end-to-end encrypted anonymous email service. ProtonMail has a\nmodern easy-to-use and customizable UI, as well as fast, secure native mobile\napps. ProtonMail has all the features that you'd expect from a modern email\nservice and is based on simplicity without sacrificing security. It has a free\nplan or a premium option for using custom domains (starting at $5/month).\nProtonMail requires no personally identifiable information for signup, they have\na [.onion](https://protonirockerxow.onion) server, for access via Tor, and they\naccept anonymous payment: BTC and cash (as well as the normal credit card and PayPal).\n",
+                "openSource": false,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Tuta",
+              "url": "https://tuta.com",
+              "enrich": {
+                "awesome_privacy": "Tuta"
+              },
+              "recommended_by": [
+                "privacy-guides",
+                "awesome-privacy",
+                "switching-software"
+              ],
+              "note": "Encrypts more of the mailbox than most (subject lines, contacts) — the pick when maximal encryption matters, at the cost of no standard IMAP/PGP interop.",
+              "live": {
+                "description": "Free and open source email service based in Germany. It has a basic intuitive UI,\nsecure native mobile apps and desktop email clients, anonymous signup, and an encrypted calendar. Tuta has a\nfull-featured free plan and premium subscription plans allowing for\ncustom domains (starting at $3/month). Tuta\n[does not use OpenPGP](https://tuta.com/blog/posts/differences-email-encryption/)\nlike other encrypted mail providers, instead they use a standardized, hybrid method\nconsisting of symmetrical and asymmetrical algorithms (with AES256, and RSA 2048\nor ECC (x25519) and Kyber-1024). This causes compatibility issues when communicating with contacts\nusing PGP. But it does allow them to encrypt much more of the header data (body,\nattachments, subject lines, and sender names etc) which PGP mail providers cannot do. The recent upgrades\nto Tuta's encryption algorithm makes data stored and sent with their service safe against attacks\nposed by quantum computers.\n",
+                "openSource": true,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Mailbox.org",
+              "url": "https://mailbox.org",
+              "enrich": {
+                "awesome_privacy": "MailBox.org"
+              },
+              "recommended_by": [
+                "privacy-guides",
+                "awesome-privacy",
+                "switching-software"
+              ],
+              "note": "A full Office-style suite (mail, calendar, files) on standard IMAP — best if you want a clean Google-Workspace replacement without lock-in.",
+              "live": {
+                "description": "A Berlin-based, eco-friendly secure mail provider. There is no free plan, the\nstandard service costs €12/year. You can use your own domain, with the option of\na [catch-all alias](https://kb.mailbox.org/display/MBOKBEN/Using+catch-all+alias+with+own+domain).\nThey provide good account security and email encryption, with OpenPGP, as well as\nencrypted storage. There is no dedicated app, but it works well with any standard\nmail client with SSL. There's also currently no anonymous payment option.\n",
+                "openSource": false,
+                "securityAudited": null
+              }
+            }
+          ]
+        },
+        {
+          "type": "self-host",
+          "label": "Run your own mail server",
+          "alternatives": [
+            {
+              "name": "Mailcow",
+              "url": "https://mailcow.email",
+              "enrich": {
+                "awesome_privacy": "mailcow"
+              },
+              "recommended_by": [
+                "awesome-privacy"
+              ],
+              "note": "A complete dockerized mail stack. Total ownership — but deliverability is a constant fight, and one misconfigured record sends you to everyone's spam folder. Only if you mean it.",
+              "live": {
+                "description": "A mail server with everything you need (SMTP, IMAP, webmail, NextCloud support..) using Docker.\n",
+                "openSource": null,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Mail-in-a-box",
+              "url": "https://mailinabox.email",
+              "enrich": {
+                "awesome_privacy": "Mail-in-a-box"
+              },
+              "recommended_by": [
+                "awesome-privacy"
+              ],
+              "note": "The gentlest self-host on-ramp — one script sets up the whole server. Still yours to maintain and keep off blocklists.",
+              "live": {
+                "description": "Easy-to-deploy fully-featured and pre-configured SMTP mail server. It includes everything from\nwebmail, to spam filtering and backups.\n",
+                "openSource": null,
+                "securityAudited": null
+              }
+            }
+          ]
+        }
+      ],
+      "prompt": [
+        "Before recommending anything, interview me: do I use Gmail for personal mail, a newsletter dumping ground, or mostly as a 2FA/recovery address? The answer changes the whole plan.",
+        "Help me export my mail and contacts via Google Takeout before I change anything.",
+        "Draft a low-friction transition plan: set up the new address, add forwarding from Gmail, then update critical services (banking, government, 2FA) one at a time so nothing breaks.",
+        "Help me write a short note to the contacts who need my new address — and be honest that some mail will keep arriving at Gmail for months, so don''t close it on day one."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "Google",
+          "rating": "E",
+          "url": "https://tosdr.org/en/service/217"
+        },
+        "justdeleteme": {
+          "url": "https://www.google.com/settings/datatools",
+          "difficulty": "easy",
+          "notes": "Login into your account →  Data Tools →  Delete Products →  Remove Gmail permanently "
+        }
+      },
+      "agent_prompt": "I want to exit Gmail. Act as my exit guide.\n\nFirst, help me get my data out:\n- Export everything via takeout.google.com — select Mail (as MBOX) and Contacts (as vCard).\n- Import that archive into your new provider over IMAP, or keep the MBOX as an offline backup you fully control.\n\nSwitch to private email: help me choose between Proton Mail, Tuta, Mailbox.org based on my situation — ask me what matters before recommending.\nRun your own mail server: help me choose between Mailcow, Mail-in-a-box based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: easy): https://www.google.com/settings/datatools\n\nBefore recommending anything, interview me: do I use Gmail for personal mail, a newsletter dumping ground, or mostly as a 2FA/recovery address? The answer changes the whole plan.\nHelp me export my mail and contacts via Google Takeout before I change anything.\nDraft a low-friction transition plan: set up the new address, add forwarding from Gmail, then update critical services (banking, government, 2FA) one at a time so nothing breaks.\nHelp me write a short note to the contacts who need my new address — and be honest that some mail will keep arriving at Gmail for months, so don''t close it on day one.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
       "id": "google-docs",
       "name": "Google Docs",
       "category": "digital",
@@ -270,6 +411,115 @@
         }
       },
       "agent_prompt": "I want to exit Google Photos. Act as my exit guide.\n\nFirst, help me get my data out:\n- Google Takeout — takeout.google.com → deselect all → Google Photos → export. Expect big archives; originals + metadata in JSON sidecars.\n\nSelf-host your library: help me choose between Immich, PhotoPrism based on my situation — ask me what matters before recommending.\nSwitch to an encrypted service: help me choose between Ente Photos based on my situation — ask me what matters before recommending.\nWhen I'm ready, walk me through deleting my account (difficulty: easy): https://www.google.com/accounts/Login\n\nI have a Google Takeout archive of my photo library. Walk me through importing it into my chosen alternative (immich-go for Immich, web importer for Ente), including the metadata JSON sidecars.\n\nGo step by step. One thing at a time. I want to actually finish this."
+    },
+    {
+      "id": "google-search",
+      "name": "Google Search",
+      "category": "digital",
+      "tagline": "The answer's still there — under the ads, the AI box, and the SEO sludge.",
+      "why": [
+        "Every search is logged to your profile by default; the query box is also the most honest record of what you think about.",
+        "The results decay toward whatever's monetized — ads and SEO-gamed pages sit above what you actually asked for."
+      ],
+      "enrich": {
+        "tosdr": "Google"
+      },
+      "extract": [
+        {
+          "step": "Review and delete your past searches at myactivity.google.com (filter to Search) — or pull the full history via takeout.google.com first."
+        },
+        {
+          "step": "Turn off collection going forward — myactivity.google.com → Web & App Activity → Turn off, and set auto-delete."
+        }
+      ],
+      "paths": [
+        {
+          "type": "switch",
+          "label": "Switch your default engine",
+          "alternatives": [
+            {
+              "name": "DuckDuckGo",
+              "url": "https://duckduckgo.com",
+              "enrich": {
+                "awesome_privacy": "DuckDuckGo"
+              },
+              "recommended_by": [
+                "privacy-guides",
+                "awesome-privacy"
+              ],
+              "note": "The easiest switch — no tracking, results good enough for most days. The default landing if you just want out without thinking about it.",
+              "live": {
+                "description": "DuckDuckGo is a very user-friendly, fast and secure search engine. It's totally\nprivate, with no trackers, cookies or ads. It's also highly customisable, with\ndark-mode, many languages and features. They even have a [.onion](https://3g2upl4pq6kufc4m.onion)\nURL, for use with Tor and a [no Javascript version](https://duckduckgo.com/html/)\n",
+                "openSource": true,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Startpage",
+              "url": "https://www.startpage.com",
+              "enrich": {
+                "awesome_privacy": "Startpage"
+              },
+              "recommended_by": [
+                "privacy-guides",
+                "awesome-privacy"
+              ],
+              "note": "Google's actual results, proxied so Google never sees you — the pick if you switched before and missed the result quality.",
+              "live": {
+                "description": "Dutch search engine that searches on Google and shows the results (slightly\nrearranged). It has several configurations that improve privacy during use\n(it is not open source)\n",
+                "openSource": false,
+                "securityAudited": null
+              }
+            },
+            {
+              "name": "Brave Search",
+              "url": "https://search.brave.com",
+              "enrich": {
+                "awesome_privacy": "Brave Search"
+              },
+              "recommended_by": [
+                "privacy-guides",
+                "awesome-privacy"
+              ],
+              "note": "Runs on its own independent index, not Bing or Google — the most genuinely de-Googled option, though its index is younger and occasionally thinner.",
+              "live": {
+                "description": "Brave Search is a privacy-focused search engine that does not track users or their searches, does not use secret algorithms or user profiling, and is based on its own search index.",
+                "openSource": true,
+                "securityAudited": true
+              }
+            },
+            {
+              "name": "Mojeek",
+              "url": "https://www.mojeek.com",
+              "enrich": {
+                "awesome_privacy": "Mojeek"
+              },
+              "recommended_by": [
+                "awesome-privacy"
+              ],
+              "note": "A truly independent crawler with no Big-Tech backend. Best when independence is the whole point; expect to fall back to another engine for long-tail queries.",
+              "live": {
+                "description": "British search engine providing independent and unbiased search results using\nits own crawler. Has a zero tracking policy (it is not open source)\n",
+                "openSource": false,
+                "securityAudited": null
+              }
+            }
+          ]
+        }
+      ],
+      "prompt": [
+        "Before we pick an engine, interview me: is this my browser's default search, do I need strong image/video results, and how much result quality am I willing to trade for privacy?",
+        "Switching engines doesn't erase my past data — help me review and delete my Google search history first.",
+        "Set me a one-week \"search diet\": try answering from direct knowledge, Wikipedia, or a specific site's own search before reaching for a general engine — so I'm leaving the habit, not just the brand."
+      ],
+      "live": {
+        "tosdr": {
+          "name": "Google",
+          "rating": "E",
+          "url": "https://tosdr.org/en/service/217"
+        }
+      },
+      "agent_prompt": "I want to exit Google Search. Act as my exit guide.\n\nFirst, help me get my data out:\n- Review and delete your past searches at myactivity.google.com (filter to Search) — or pull the full history via takeout.google.com first.\n- Turn off collection going forward — myactivity.google.com → Web & App Activity → Turn off, and set auto-delete.\n\nSwitch your default engine: help me choose between DuckDuckGo, Startpage, Brave Search, Mojeek based on my situation — ask me what matters before recommending.\n\nBefore we pick an engine, interview me: is this my browser's default search, do I need strong image/video results, and how much result quality am I willing to trade for privacy?\nSwitching engines doesn't erase my past data — help me review and delete my Google search history first.\nSet me a one-week \"search diet\": try answering from direct knowledge, Wikipedia, or a specific site's own search before reaching for a general engine — so I'm leaving the habit, not just the brand.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
       "id": "netflix",
@@ -591,13 +841,7 @@
         "Check my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.",
         "Walk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes."
       ],
-      "live": {
-        "tosdr": {
-          "name": "OpenAI",
-          "rating": "D",
-          "url": "https://tosdr.org/en/service/7108"
-        }
-      },
+      "live": {},
       "agent_prompt": "I want to exit ChatGPT. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use ChatGPT for, then be honest about what local open-weight models do well and where I'd feel the gap.\nCheck my hardware and recommend a stack — Ollama, llama.cpp or LM Studio, model size that fits, and one model to start with.\nWalk me through exporting my ChatGPT history before deleting, and what deleting the account actually removes.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {

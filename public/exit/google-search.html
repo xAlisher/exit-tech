@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exit Google Search — exit.tech</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body><header class="prompt"><a class="ptag" href="../index.html">Exit</a>&nbsp;<span class="pname">Google Search</span><span class="tcur"></span></header>
+<main>
+<p class="tagline">The answer's still there — under the ads, the AI box, and the SEO sludge.</p>
+<h2>// why</h2><ul>
+<li>Every search is logged to your profile by default; the query box is also the most honest record of what you think about.</li>
+<li>The results decay toward whatever's monetized — ads and SEO-gamed pages sit above what you actually asked for.</li>
+<li>Terms of service rated <strong>“E”</strong> — <a href="https://tosdr.org/en/service/217">see the documented points at ToS;DR</a></li>
+</ul>
+<h2>// first, get your stuff out</h2><ol>
+<li>Review and delete your past searches at myactivity.google.com (filter to Search) — or pull the full history via takeout.google.com first.</li>
+<li>Turn off collection going forward — myactivity.google.com → Web &amp; App Activity → Turn off, and set auto-delete.</li>
+</ol>
+<h2>// exit paths</h2>
+<h3><span class="ptype">[switch]</span> Switch your default engine</h3>
+<div class="alt"><a class="alt-name" href="https://duckduckgo.com">DuckDuckGo</a> <span class="flags">open source</span><p>The easiest switch — no tracking, results good enough for most days. The default landing if you just want out without thinking about it.</p><div class="badges">via <a class="badge" href="../sources.html#privacy-guides" title="Privacy Guides">privacy-guides</a> <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a></div></div>
+<div class="alt"><a class="alt-name" href="https://www.startpage.com">Startpage</a><p>Google's actual results, proxied so Google never sees you — the pick if you switched before and missed the result quality.</p><div class="badges">via <a class="badge" href="../sources.html#privacy-guides" title="Privacy Guides">privacy-guides</a> <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a></div></div>
+<div class="alt"><a class="alt-name" href="https://search.brave.com">Brave Search</a> <span class="flags">open source · audited</span><p>Runs on its own independent index, not Bing or Google — the most genuinely de-Googled option, though its index is younger and occasionally thinner.</p><div class="badges">via <a class="badge" href="../sources.html#privacy-guides" title="Privacy Guides">privacy-guides</a> <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a></div></div>
+<div class="alt"><a class="alt-name" href="https://www.mojeek.com">Mojeek</a><p>A truly independent crawler with no Big-Tech backend. Best when independence is the whole point; expect to fall back to another engine for long-tail queries.</p><div class="badges">via <a class="badge" href="../sources.html#awesome-privacy" title="Awesome Privacy">awesome-privacy</a></div></div>
+<h2>// take an agent with you</h2>
+<p>Paste this into your agent<span class="fnref">*</span> of choice and it will walk you through the exit, personalized:</p>
+<pre id="prompt">I want to exit Google Search. Act as my exit guide.
+
+First, help me get my data out:
+- Review and delete your past searches at myactivity.google.com (filter to Search) — or pull the full history via takeout.google.com first.
+- Turn off collection going forward — myactivity.google.com → Web &amp; App Activity → Turn off, and set auto-delete.
+
+Switch your default engine: help me choose between DuckDuckGo, Startpage, Brave Search, Mojeek based on my situation — ask me what matters before recommending.
+
+Before we pick an engine, interview me: is this my browser's default search, do I need strong image/video results, and how much result quality am I willing to trade for privacy?
+Switching engines doesn't erase my past data — help me review and delete my Google search history first.
+Set me a one-week &quot;search diet&quot;: try answering from direct knowledge, Wikipedia, or a specific site's own search before reaching for a general engine — so I'm leaving the habit, not just the brand.
+
+Go step by step. One thing at a time. I want to actually finish this.</pre>
+<button onclick="navigator.clipboard.writeText(document.getElementById('prompt').innerText).then(()=>{this.innerText='copied ✓'})">copy prompt</button>
+<p class="footnote">* Just a reminder — you can also exit <a class="door" href="claude.html"><span class="dg">⎋</span>Claude</a>, <a class="door" href="chatgpt.html"><span class="dg">⎋</span>ChatGPT</a> or <a class="door" href="gemini.html"><span class="dg">⎋</span>Gemini</a> in favor of locally hosted agents.</p>
+<h2>// are we missing something?</h2>
+<p>Wrong facts, missed alternative, better sources?</p>
+<a class="btn" href="https://github.com/xAlisher/exit-tech/issues/new?template=page-feedback.yml&amp;title=feedback%3A%20Google%20Search&amp;page=https%3A//exit.tech/exit/google-search.html">contribute</a>
+<script>
+const NAME = "Google Search";
+document.addEventListener('keydown', e => {
+  if (/^(INPUT|TEXTAREA)$/.test(document.activeElement.tagName)) return;
+  if (e.key === 'Backspace') {
+    e.preventDefault();
+    location.href = '../index.html?q=' + encodeURIComponent(NAME.slice(0, -1));
+    return;
+  }
+  if (e.ctrlKey || e.metaKey || e.altKey || e.key.length !== 1) return;
+  e.preventDefault();
+  location.href = '../index.html?q=' + encodeURIComponent(e.key);
+});
+</script>
+</main>
+<footer>
+  <a href="../sources.html">sources &amp; credits</a> ·
+  <a href="../exits.json">open data</a> ·
+  <a href="https://github.com/xAlisher/exit-tech">github</a>
+  <span class="proto">prototype</span>
+</footer>
+</body>
+</html>
