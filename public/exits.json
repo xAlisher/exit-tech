@@ -27,33 +27,13 @@
           "label": "Self-host a collaborative editor",
           "alternatives": [
             {
-              "name": "Docs (La Suite Numérique)",
-              "url": "https://docs.numerique.gouv.fr",
-              "enrich": {
-                "awesome_selfhosted": "docs"
-              },
-              "recommended_by": [
-                "awesome-selfhosted"
-              ],
-              "note": "Built by the French and German governments, MIT-licensed — the closest like-for-like that no company can buy or shut down. Realistically a hosted instance unless you can run the server yourself.",
-              "live": {
-                "description": "Collaborative note taking, wiki and documentation platform that scales.",
-                "license": [
-                  "MIT"
-                ],
-                "language": [
-                  "K8S"
-                ],
-                "source": "https://github.com/suitenumerique/docs"
-              }
-            },
-            {
               "name": "CryptPad",
               "url": "https://cryptpad.org",
               "enrich": {
                 "awesome_selfhosted": "cryptpad"
               },
               "recommended_by": [
+                "privacy-guides",
                 "awesome-privacy",
                 "awesome-selfhosted",
                 "switching-software"
@@ -185,7 +165,7 @@
           "url": "https://tosdr.org/en/service/217"
         }
       },
-      "agent_prompt": "I want to exit Google Docs. Act as my exit guide.\n\nFirst, help me get my data out:\n- File → Download keeps a local copy (.docx, .odt, or PDF) — do it per document for the ones you care about.\n- For everything at once, use takeout.google.com — select Drive and set the Docs format to .docx or .odt.\n\nSelf-host a collaborative editor: help me choose between Docs (La Suite Numérique), CryptPad, Nextcloud + Collabora Online, Etherpad based on my situation — ask me what matters before recommending.\nOwn your keys, not just an account: help me choose between dDocs (Fileverse) based on my situation — ask me what matters before recommending.\nGo local — own the files, drop the cloud: help me choose between LibreOffice, Obsidian based on my situation — ask me what matters before recommending.\n\nBefore recommending anything, interview me: do I co-author in real time, lean on add-ons or Apps Script, and how sensitive is the content?\nIf I work alone, walk me through a local markdown workflow with Git for version history, so ownership comes back to my disk.\nIf I collaborate, be honest about the cost of moving everyone versus keeping Docs for shared work and exporting clean copies for myself.\nHelp me write a short transition message to my collaborators if I move a shared drive.\n\nGo step by step. One thing at a time. I want to actually finish this."
+      "agent_prompt": "I want to exit Google Docs. Act as my exit guide.\n\nFirst, help me get my data out:\n- File → Download keeps a local copy (.docx, .odt, or PDF) — do it per document for the ones you care about.\n- For everything at once, use takeout.google.com — select Drive and set the Docs format to .docx or .odt.\n\nSelf-host a collaborative editor: help me choose between CryptPad, Nextcloud + Collabora Online, Etherpad based on my situation — ask me what matters before recommending.\nOwn your keys, not just an account: help me choose between dDocs (Fileverse) based on my situation — ask me what matters before recommending.\nGo local — own the files, drop the cloud: help me choose between LibreOffice, Obsidian based on my situation — ask me what matters before recommending.\n\nBefore recommending anything, interview me: do I co-author in real time, lean on add-ons or Apps Script, and how sensitive is the content?\nIf I work alone, walk me through a local markdown workflow with Git for version history, so ownership comes back to my disk.\nIf I collaborate, be honest about the cost of moving everyone versus keeping Docs for shared work and exporting clean copies for myself.\nHelp me write a short transition message to my collaborators if I move a shared drive.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
       "id": "google-photos",
@@ -638,13 +618,7 @@
         "Check my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.",
         "Help me export anything I want to keep from my account before I go."
       ],
-      "live": {
-        "tosdr": {
-          "name": "Anthropic, PBC",
-          "rating": "N/A",
-          "url": "https://tosdr.org/en/service/11619"
-        }
-      },
+      "live": {},
       "agent_prompt": "I want to exit Claude. Act as my exit guide.\n\n\nHelp me move my AI usage to locally hosted models. Ask what I actually use you for (writing, code, research, conversation), then be honest about which of those local open-weight models handle well today and which will feel like a downgrade.\nCheck my hardware (ask about GPU, RAM, OS) and recommend a setup — Ollama or llama.cpp, which model sizes fit, and a realistic starting model.\nHelp me export anything I want to keep from my account before I go.\n\nGo step by step. One thing at a time. I want to actually finish this."
     },
     {
