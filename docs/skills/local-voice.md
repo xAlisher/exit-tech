@@ -10,10 +10,15 @@ merge near-duplicates; every rule cites the review that taught it.
 1. Never assert how a company uses data or makes money ("sells your viewing
    history") unless the research pack confirms it. The safe form describes what
    the product *does to the user*: "optimizes for retention, not satisfaction".
-   (netflix review: "sold to studios" was cut as an overclaim. google-docs
-   review: "Your draft is their training data" tagline and the "documents train
-   the models" why-bullet were both cut — confident, unbacked, and exactly the
-   reflex this rule guards against.)
+   This is the model's single most reliable failure — **expect a data-use
+   overclaim in the tagline AND the first why-bullet of nearly every draft**, and
+   rewrite both as a matter of course. Worse, the claim is sometimes verifiably
+   false, not just unbacked (gmail draft: "Google scans email for AI training" —
+   Gmail stopped ad-scanning in 2017). (netflix: "sold to studios" cut.
+   google-docs: "Your draft is their training data" + "documents train the
+   models" cut. gmail: "correspondence is training data" cut. google-search:
+   "Your questions are the product" + "every query builds a profile sold to
+   advertisers" cut.)
 2. In extract steps, concrete beats vague: name the exact URL or menu path
    (netflix.com/account/getmyinfo), not "request your data archive". Watch for
    the opposite failure too — the model invents plausible-but-wrong menu paths;

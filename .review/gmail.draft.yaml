@@ -1,0 +1,21 @@
+# drafted by qwen3.6-27b (local, Sneg) — pending review
+id: gmail
+name: Gmail
+category: digital
+tagline: Your correspondence is the training data for products you don't use.
+why:
+- Google indexes and processes the contents of every email for ad targeting and AI training.
+- Account deactivation is a multi-step gauntlet designed to retain you, not release your data.
+enrich:
+  tosdr: Google
+  justdeleteme: Gmail
+extract:
+- step: Use Google Takeout (takeout.google.com) to export MBOX files, or export specific labels to ZIP.
+- step: 'Before deleting: Download your data archive from Data & Privacy > Download your data.'
+prompt:
+- Ask me what I actually use Gmail for (personal correspondence, newsletter dumping ground, or 2FA recovery).
+  Then help me export that data first (Google Takeout or IMAP sync).
+- Help me decide whether to switch to an encrypted provider (Proton Mail, Tuta) or a self-hosted solution,
+  based on my technical comfort and need for end-to-end encryption.
+- 'Draft a low-friction transition plan: forwarding rules, updating critical services (banking, social),
+  and a final notice to contacts if I''m changing addresses.'

@@ -1,0 +1,24 @@
+# drafted by qwen3.6-27b (local, Sneg) — pending review
+id: google-search
+name: Google Search
+category: digital
+tagline: Your questions are the product.
+why:
+- Every query builds a profile sold to advertisers; you cannot opt out of tracking in the main product.
+- Search results are optimized for engagement and ad revenue, not accuracy or your wellbeing.
+extract:
+- step: Export your search history — visit myactivity.google.com and select "Delete activity by" -> "All
+    time" or use "Download your data" in Google Takeout.
+- step: Turn off Web & App Activity — Settings -> Privacy & personalization -> Web & App Activity -> Off.
+stub: true
+prompt:
+- 'Before we pick an engine, ask me: Do I need a default browser search, or am I okay with changing my
+  habit of searching? Do I need image/video results, or just text? Am I willing to sacrifice convenience
+  for privacy?'
+- If I want privacy without sacrificing usability, consider DuckDuckGo or Startpage. If I want to break
+  the habit of relying on a single corporate index, suggest searching Wikipedia, Hacker News, or specific
+  communities directly. If I am in a region with strict censorship, advise on Tor or specialized secure
+  search tools.
+- 'Remember: Switching search engines doesn''t erase my past data. Help me clean my history first.'
+- 'Suggest a "search diet": For the next week, I will try to answer questions using direct knowledge,
+  Wikipedia, or specific site searches before hitting the general search bar.'
