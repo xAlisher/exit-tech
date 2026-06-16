@@ -19,8 +19,9 @@ Follow all protocols in `~/fieldcraft/protocols/`. Key ones for this project:
 3. Read this file
 4. Read TASKS.md (current work items)
 5. Read relevant `docs/skills/` (prior knowledge)
-6. Read relevant `docs/plans/` (active plans)
-7. Check GitHub for recent activity
+6. `PROJECT_KNOWLEDGE.md` (if exists) — pitfalls/patterns (esp. CI deploy gotchas)
+7. Read relevant `docs/plans/` (active plans)
+8. Check GitHub for recent activity
 
 ---
 
@@ -48,8 +49,14 @@ GitHub Pages via Actions.
 python3 build.py            # validate + fetch live data + render to public/
 python3 build.py --offline  # cache/no-network build (what CI validation runs)
 python3 -m http.server 8484 -d public   # local preview
-git push                    # deploy (deploy.yml publishes public/ to Pages)
+git push                    # deploy (see caveat below)
 ```
+
+**Deploy caveat (issue #20):** a data merge does NOT reliably auto-build the new
+page — `deploy.yml` and `refresh.yml` race and the page often 404s until the
+weekly refresh. After merging a `data/**` change, run
+`gh workflow run refresh.yml --ref master` and verify the live URL. See
+`PROJECT_KNOWLEDGE.md` → CI / deploy.
 
 Verify visual changes with headless Firefox screenshots:
 `firefox --headless --screenshot /tmp/x.png --window-size=1200,700 file://$PWD/public/index.html`
@@ -61,6 +68,7 @@ Verify visual changes with headless Firefox screenshots:
 docs/decisions/    # Architecture Decision Records (ADR template: ~/fieldcraft/templates/adr-template.md)
 docs/plans/        # Active plans
 docs/skills/       # Extracted skills
+PROJECT_KNOWLEDGE.md # Accumulated pitfalls/patterns + retro log (read on re-entry)
 CHRONICLE.md       # Project narrative (how we got here)
 halt.md            # Written on pause, deleted on resume
 ```

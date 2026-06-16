@@ -56,8 +56,14 @@ merge near-duplicates; every rule cites the review that taught it.
 9. A source listing an alternative makes it *claimable*, not *good advice*.
    Only list alternatives that plausibly serve the same need — and when nothing
    does, say so: "Nothing" is a valid alternative, honestly framed. Alternatives
-   may cross-link to sibling exit pages (exit.tech/exit/<id>.html).
-   (tiktok review: DTube cut as dead-end advice; "Nothing" added)
+   may cross-link to sibling exit pages (exit.tech/exit/<id>.html). A bare
+   catalog listing (awesome-selfhosted is an inclusion list, not an endorsement)
+   is the weakest possible backing — don't stand up a dedicated route on one
+   alone; require at least one *editorial* recommender (Privacy Guides,
+   switching.software, awesome-privacy) before promoting it past the prompt.
+   (tiktok review: DTube cut as dead-end advice; "Nothing" added. google-docs
+   review: "Docs (La Suite)" pulled — only awesome-selfhosted listed it; Privacy
+   Guides recommends only CryptPad in that category.)
 10. Don't oversell the switch: if the alternative will feel worse in the way
     that matters (slower, less dopamine), the note says so plainly — that
     honesty is the brand.

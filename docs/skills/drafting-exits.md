@@ -6,14 +6,28 @@ Used by the draft workflow (CI) and by local Claude Code sessions alike.
 ## Pipeline
 
 1. **Research**: `python3 .github/scripts/research_exit.py --issue <N>` (or `<term>`).
-   The pack tells you which enrichment keys are real and which sources list
-   alternatives. Read `data/exits/_template.yaml` for the schema and 2–3
-   existing exits for voice (`whatsapp.yaml` full, `smoking.yaml` sensitive
-   stub, `spotify.yaml` enriched stub).
-2. **Draft** `data/exits/<id>.yaml`.
-3. **Validate**: `python3 build.py --offline` must pass.
-4. **PR**: branch `draft/<id>`, commit only the data file, body `Closes #<N>`.
-   Never commit `public/` in a draft PR — master rebuilds automatically.
+   The pack confirms which enrichment keys are real (ToS;DR rating, JustDeleteMe
+   entry) for the *dependency itself*. **It does NOT surface alternatives** — it
+   matches every source by the dependency's own name, but awesome-privacy /
+   awesome-selfhosted / web3privacy are alternatives-catalogs that never contain
+   that name, so they come back empty by construction (issue #19). An empty pack
+   is NOT "no alternatives exist". Read `data/exits/_template.yaml` for the schema
+   and 2–3 existing exits for voice (`whatsapp.yaml` full, `smoking.yaml`
+   sensitive stub, `spotify.yaml` enriched stub).
+2. **Recheck sources by hand** (mandatory until #19 lands). The dependency has a
+   *category* (docs, music, email…); find the matching section in each wired
+   source and read off the alternatives it actually recommends — awesome-privacy
+   YAML sections, awesome-selfhosted tags, switching.software/european-alternatives
+   `/replace/<x>/` pages, Privacy Guides categories, web3privacy. Only those give
+   you real `recommended_by` credits. A bare catalog listing is weak backing
+   (see local-voice rule 9).
+3. **Draft** `data/exits/<id>.yaml`.
+4. **Validate**: `python3 build.py --offline` must pass.
+5. **PR**: branch `draft/<id>`, commit only the data file, body `Closes #<N>`.
+   Never commit `public/` in a draft PR. NOTE: master does **not** auto-rebuild
+   reliably — after merge, `deploy.yml` and `refresh.yml` race and the new page
+   often 404s (issue #20). Run `gh workflow run refresh.yml --ref master` and
+   verify the live URL.
 
 ## House rules (the taste part)
 
