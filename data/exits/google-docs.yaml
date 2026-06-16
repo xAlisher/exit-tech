@@ -18,18 +18,11 @@ paths:
 - type: self-host
   label: Self-host a collaborative editor
   alternatives:
-  - name: Docs (La Suite Numérique)
-    url: https://docs.numerique.gouv.fr
-    enrich:
-      awesome_selfhosted: docs
-    recommended_by: [awesome-selfhosted]
-    note: Built by the French and German governments, MIT-licensed — the closest like-for-like that no
-      company can buy or shut down. Realistically a hosted instance unless you can run the server yourself.
   - name: CryptPad
     url: https://cryptpad.org
     enrich:
       awesome_selfhosted: cryptpad
-    recommended_by: [awesome-privacy, awesome-selfhosted, switching-software]
+    recommended_by: [privacy-guides, awesome-privacy, awesome-selfhosted, switching-software]
     note: End-to-end encrypted and account-free — the right pick when the document's privacy matters most;
       the editor is lighter than Google's.
   - name: Nextcloud + Collabora Online
