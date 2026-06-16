@@ -1,0 +1,67 @@
+# drafted by qwen3.6-27b (local, Sneg) — reviewed by Claude; routes from manual source recheck
+id: gmail
+name: Gmail
+category: digital
+tagline: The address every other account resets to — owned by someone else.
+why:
+- 'Email is your master key: every other account resets through it, so whoever runs your inbox holds the
+  root of your online identity.'
+- 'Your address is the lock-in: leaving means re-pointing every service, contact, and 2FA that depends on
+  it — by hand.'
+enrich:
+  tosdr: Google
+  justdeleteme: Gmail
+extract:
+- step: Export everything via takeout.google.com — select Mail (as MBOX) and Contacts (as vCard).
+- step: Import that archive into your new provider over IMAP, or keep the MBOX as an offline backup you
+    fully control.
+paths:
+- type: switch
+  label: Switch to private email
+  alternatives:
+  - name: Proton Mail
+    url: https://proton.me/mail
+    enrich:
+      awesome_privacy: ProtonMail
+    recommended_by: [privacy-guides, awesome-privacy, switching-software]
+    note: The default like-for-like — end-to-end encrypted, Swiss-based, full webmail/app/calendar. Easiest
+      landing if you want everything in one place.
+  - name: Tuta
+    url: https://tuta.com
+    enrich:
+      awesome_privacy: Tuta
+    recommended_by: [privacy-guides, awesome-privacy, switching-software]
+    note: Encrypts more of the mailbox than most (subject lines, contacts) — the pick when maximal
+      encryption matters, at the cost of no standard IMAP/PGP interop.
+  - name: Mailbox.org
+    url: https://mailbox.org
+    enrich:
+      awesome_privacy: MailBox.org
+    recommended_by: [privacy-guides, awesome-privacy, switching-software]
+    note: A full Office-style suite (mail, calendar, files) on standard IMAP — best if you want a clean
+      Google-Workspace replacement without lock-in.
+- type: self-host
+  label: Run your own mail server
+  alternatives:
+  - name: Mailcow
+    url: https://mailcow.email
+    enrich:
+      awesome_privacy: mailcow
+    recommended_by: [awesome-privacy]
+    note: A complete dockerized mail stack. Total ownership — but deliverability is a constant fight, and
+      one misconfigured record sends you to everyone's spam folder. Only if you mean it.
+  - name: Mail-in-a-box
+    url: https://mailinabox.email
+    enrich:
+      awesome_privacy: Mail-in-a-box
+    recommended_by: [awesome-privacy]
+    note: The gentlest self-host on-ramp — one script sets up the whole server. Still yours to maintain
+      and keep off blocklists.
+prompt:
+- 'Before recommending anything, interview me: do I use Gmail for personal mail, a newsletter dumping
+  ground, or mostly as a 2FA/recovery address? The answer changes the whole plan.'
+- Help me export my mail and contacts via Google Takeout before I change anything.
+- 'Draft a low-friction transition plan: set up the new address, add forwarding from Gmail, then update
+  critical services (banking, government, 2FA) one at a time so nothing breaks.'
+- Help me write a short note to the contacts who need my new address — and be honest that some mail will
+  keep arriving at Gmail for months, so don''t close it on day one.

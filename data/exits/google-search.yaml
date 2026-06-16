@@ -1,0 +1,55 @@
+# drafted by qwen3.6-27b (local, Sneg) — reviewed by Claude; routes from manual source recheck
+id: google-search
+name: Google Search
+category: digital
+tagline: The answer's still there — under the ads, the AI box, and the SEO sludge.
+why:
+- Every search is logged to your profile by default; the query box is also the most honest record of what
+  you think about.
+- The results decay toward whatever's monetized — ads and SEO-gamed pages sit above what you actually
+  asked for.
+enrich:
+  tosdr: Google
+extract:
+- step: Review and delete your past searches at myactivity.google.com (filter to Search) — or pull the
+    full history via takeout.google.com first.
+- step: Turn off collection going forward — myactivity.google.com → Web & App Activity → Turn off, and set
+    auto-delete.
+paths:
+- type: switch
+  label: Switch your default engine
+  alternatives:
+  - name: DuckDuckGo
+    url: https://duckduckgo.com
+    enrich:
+      awesome_privacy: DuckDuckGo
+    recommended_by: [privacy-guides, awesome-privacy]
+    note: The easiest switch — no tracking, results good enough for most days. The default landing if you
+      just want out without thinking about it.
+  - name: Startpage
+    url: https://www.startpage.com
+    enrich:
+      awesome_privacy: Startpage
+    recommended_by: [privacy-guides, awesome-privacy]
+    note: Google's actual results, proxied so Google never sees you — the pick if you switched before and
+      missed the result quality.
+  - name: Brave Search
+    url: https://search.brave.com
+    enrich:
+      awesome_privacy: Brave Search
+    recommended_by: [privacy-guides, awesome-privacy]
+    note: Runs on its own independent index, not Bing or Google — the most genuinely de-Googled option,
+      though its index is younger and occasionally thinner.
+  - name: Mojeek
+    url: https://www.mojeek.com
+    enrich:
+      awesome_privacy: Mojeek
+    recommended_by: [awesome-privacy]
+    note: A truly independent crawler with no Big-Tech backend. Best when independence is the whole point;
+      expect to fall back to another engine for long-tail queries.
+prompt:
+- 'Before we pick an engine, interview me: is this my browser''s default search, do I need strong
+  image/video results, and how much result quality am I willing to trade for privacy?'
+- Switching engines doesn't erase my past data — help me review and delete my Google search history first.
+- 'Set me a one-week "search diet": try answering from direct knowledge, Wikipedia, or a specific site''s
+  own search before reaching for a general engine — so I''m leaving the habit, not just the brand.'
