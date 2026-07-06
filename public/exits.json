@@ -449,8 +449,8 @@
               ],
               "note": "The easiest switch — no tracking, results good enough for most days. The default landing if you just want out without thinking about it.",
               "live": {
-                "description": "DuckDuckGo is a very user-friendly, fast and secure search engine. It's totally\nprivate, with no trackers, cookies or ads. It's also highly customisable, with\ndark-mode, many languages and features. They even have a [.onion](https://3g2upl4pq6kufc4m.onion)\nURL, for use with Tor and a [no Javascript version](https://duckduckgo.com/html/)\n",
-                "openSource": true,
+                "description": "DuckDuckGo is a user-friendly and fast secure search engine.\nWhile it doesn't use trackers or cookies, there are search-related ads.\nIt's also highly customisable, with theming, languages, bangs and plugins.\nThere's also an [.onion](https://3g2upl4pq6kufc4m.onion) URL,\nand a [no Javascript version](https://duckduckgo.com/html/).\nNote: Search data is primarily sourced from Bing, and DDG operates from within the US.\n",
+                "openSource": null,
                 "securityAudited": null
               }
             },
