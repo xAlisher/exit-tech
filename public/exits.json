@@ -131,7 +131,7 @@
       "live": {
         "tosdr": {
           "name": "Google",
-          "rating": "D",
+          "rating": "E",
           "url": "https://tosdr.org/en/service/217"
         },
         "justdeleteme": {
@@ -302,7 +302,7 @@
       "live": {
         "tosdr": {
           "name": "Google",
-          "rating": "D",
+          "rating": "E",
           "url": "https://tosdr.org/en/service/217"
         }
       },
@@ -398,7 +398,7 @@
       "live": {
         "tosdr": {
           "name": "Google",
-          "rating": "D",
+          "rating": "E",
           "url": "https://tosdr.org/en/service/217"
         },
         "justdeleteme": {
@@ -466,7 +466,7 @@
               ],
               "note": "Google's actual results, proxied so Google never sees you — the pick if you switched before and missed the result quality.",
               "live": {
-                "description": "Dutch search engine that searches on Google and shows the results (slightly\nrearranged). It has several configurations that improve privacy during use\n(it is not open source)\n",
+                "description": "Dutch search engine returning primarily Google results, proxied to strip IP and identifiers.\nIncludes an \"Anonymous View\" proxy for previewing results privately.\nNo third-party tracking or cookies, but does have it's own bot detection and analytics.\n",
                 "openSource": false,
                 "securityAudited": null
               }
@@ -515,7 +515,7 @@
       "live": {
         "tosdr": {
           "name": "Google",
-          "rating": "D",
+          "rating": "E",
           "url": "https://tosdr.org/en/service/217"
         }
       },
@@ -899,7 +899,7 @@
       "live": {
         "tosdr": {
           "name": "Google",
-          "rating": "D",
+          "rating": "E",
           "url": "https://tosdr.org/en/service/217"
         }
       },
