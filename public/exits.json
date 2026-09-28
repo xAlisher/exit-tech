@@ -808,11 +808,6 @@
         "Help me decide between Signal, SimpleX and Session based on who I actually talk to."
       ],
       "live": {
-        "tosdr": {
-          "name": "WhatsApp",
-          "rating": "E",
-          "url": "https://tosdr.org/en/service/198"
-        },
         "justdeleteme": {
           "url": "https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop",
           "difficulty": "medium",
