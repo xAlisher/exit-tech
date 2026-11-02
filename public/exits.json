@@ -205,7 +205,7 @@
               ],
               "note": "The fullest Drive-plus-Office replacement with real-time co-editing — but someone has to run and maintain the server.",
               "live": {
-                "description": "Access and share your files, calendars, contacts, mail and [more](https://apps.nextcloud.com/) from any device, on your terms.",
+                "description": "Access and share your files, calendars, contacts, mail and more from any device, on your terms.",
                 "license": [
                   "AGPL-3.0"
                 ],
@@ -364,7 +364,7 @@
               ],
               "note": "AI-powered library with strong search; single Docker container.",
               "live": {
-                "description": "Personal photo management powered by Go and Google TensorFlow.  Browse, organize, and share your personal photo collection, using the latest technologies to automatically tag and find pictures.",
+                "description": "Personal photo management powered by Go and Google TensorFlow. Browse, organize, and share your personal photo collection, using the latest technologies to automatically tag and find pictures.",
                 "license": [
                   "AGPL-3.0"
                 ],
@@ -808,11 +808,6 @@
         "Help me decide between Signal, SimpleX and Session based on who I actually talk to."
       ],
       "live": {
-        "tosdr": {
-          "name": "WhatsApp",
-          "rating": "E",
-          "url": "https://tosdr.org/en/service/198"
-        },
         "justdeleteme": {
           "url": "https://www.whatsapp.com/faq/search/?q=how%20do%20I%20delete%20my%20account?&p=desktop",
           "difficulty": "medium",
